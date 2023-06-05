@@ -1,0 +1,33 @@
+.productDetail {
+  &__header {
+    border-bottom: 1px solid $secondary;
+    padding: 10px 0 48px 0;
+    margin-bottom: 48px;
+
+    &-span {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-bold;
+      font-size: 1rem;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+   
+      
+    }
+  }
+  &__section {
+    
+  }
+
+  &-col {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: $fw-semi-bold;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+    color: $secondary;
+ 
+  }
+}

@@ -1,0 +1,124 @@
+.sellerReg {
+  &__div {
+    &-accType {
+      margin: 20px 0;
+    }
+  }
+  &__span {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+    color: $tertiary;
+
+    &-change {
+      padding: 12px 32px;
+      background: $accent;
+      border-radius: 8px;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-light;
+      font-size: 12px;
+      line-height: 19px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+  }
+}
+.accType {
+  margin-right: 20px;
+  text-transform: capitalize;
+}
+.sellerFC {
+  border: 1px solid rgba($secondary, 0.3);
+  border-radius: 10px;
+  padding: 30px 20px;
+  margin: 30px auto;
+  width: 80%;
+
+  &__header-status {
+    @include flex($jc: space-between, $ai: flex-start);
+    padding-bottom: 40px;
+    border-bottom: 1px solid $accent;
+  }
+  &__div-nos {
+    @include flex($jc: center, $ai: center);
+    flex-direction: column;
+    margin: 0 10px;
+    width: 155px;
+  }
+  &__p {
+    &-nos {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid $secondary;
+      @include flex($jc: center, $ai: center);
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 1rem;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+    &-text {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 17px;
+      color: $secondary;
+      margin: 10px 0;
+    }
+  }
+  &-spacer {
+    width: 200px;
+    height: 50px;
+    @include flex($jc: center, $ai: center);
+
+    & div {
+      width: 100%;
+      height: 3px;
+      background:#bababa;
+    }
+    
+  }
+  &-inactive {
+    color: #bababa;
+    &-bd {
+      border: 1px solid #bababa;
+    }
+  }
+  
+  &__p-stage{
+    background: #D5ECF4;
+    color: #19B8ED;
+    border:  none;
+  }
+  &__p-subStage{
+    color: #19B8ED;
+  }
+  &__div-liner{
+    background: #19B8ED !important;
+  }
+}
+
+.sellerRegFormMiddle {
+  &__header{
+    margin-block: 48px;
+  }
+  &__p {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    color: $ink;
+    margin-bottom: 32px;
+  }
+}

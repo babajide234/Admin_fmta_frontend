@@ -1,0 +1,36 @@
+.loginPage {
+  @include page;
+
+  display: flex;
+
+  &__div {
+    &-btn {
+      margin-bottom: 1rem;
+    }
+  }
+  &__section-create {
+    margin-right: 32px;
+  }
+  &__span {
+    &-btnText {
+      font-family: $ff-secondary-hv;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: 1px;
+
+      margin-right: 100px;
+
+      &1 {
+        color: $accent;
+        & svg {
+          color: $accent;
+        }
+      }
+      &2 {
+        color: #001973;
+      }
+    }
+  }
+}

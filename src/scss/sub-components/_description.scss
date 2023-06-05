@@ -1,0 +1,47 @@
+.description{
+    background: rgba(241, 246, 255, 0.8);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding:30px 30px;
+        &:hover{
+            cursor: pointer;
+        }
+        &_text{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &_icon{
+            height: 33px;
+            width: 33px;
+            border: 1.5px solid #001973;
+            border-radius: 10px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #001973;
+            margin-right: 11px;
+        }
+        &_title{
+            font-family: 'Manrope';
+            color: #001973;
+            font-size: 14px;
+            line-height: 34px;
+        }
+
+    }
+    &_caret{
+        font-size: 18px;
+        font-weight: 800;
+    }
+}

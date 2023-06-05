@@ -1,0 +1,41 @@
+.pagination {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 1rem;
+
+  &__arrow {
+    color: #CFCFCF;
+    background: #e6e6e6;
+    border-radius: 8px;
+    margin-inline: 10px;
+    font-size: 30px;
+    padding: 7px 10px;
+
+    &-disabled{
+        background: none;
+        color: $secondary;
+    }
+  }
+  &__number {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+    color: $secondary;
+    border-radius: 8px;
+    margin-inline: 10px;
+    padding: 5px 10px;
+    background: #f1f6ff;
+    border: 1px solid #f1f6ff;
+    transition: all 0.3s ease-in-out;
+
+    &--active {
+      color: #ffffff;
+      background: $secondary;
+    }
+  }
+}

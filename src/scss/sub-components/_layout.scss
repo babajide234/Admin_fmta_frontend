@@ -1,0 +1,44 @@
+
+@for $i from 0 through 11 {
+    .grid-#{$i + 1}{
+        display: grid;
+        column-gap:30px ;
+        row-gap: 50px;
+        grid-template-columns: repeat(#{$i + 1}, 1fr);
+    }
+}
+.search{
+    // padding: 0px 110px 0px 0px;
+    width: 45%;
+    &__form{
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+@for $var from 0 to 10 {
+    .h-#{($var + 1) * 10}{
+        height: #{($var + 1) * 10}vh;
+    }
+    .min-h-#{($var + 1) * 10}{
+        min-height: #{($var + 1) * 10}vh;
+    }
+}
+
+.flex{
+    display: flex;
+}
+.flex-row{
+    flex-direction: row;
+}
+.flex-col{
+    flex-direction: column;
+}
+
+.grid{
+    display: grid;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}

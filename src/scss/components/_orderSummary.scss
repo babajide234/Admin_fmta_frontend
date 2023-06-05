@@ -1,0 +1,126 @@
+.orderSummary {
+  width: 100%;
+  flex: 6;
+  &__btn{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+  }
+  &__data {
+    @include flex($jc: flex-start, $ai: justify-between);
+    flex-direction: column;
+
+    &-row {
+      @include flex($jc: space-between, $ai: center);
+      flex-direction: row;
+      padding: 0 10px;
+    }
+    &-span {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-semi-bold;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      margin: 24px 0;
+      
+    }
+  }
+  &__data-input {
+    @include flex($jc: center, $ai: center);
+  }
+}
+.orderRow {
+  margin-bottom: 20px;
+
+  &-p-text {
+    margin-top: 0px;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 17px;
+    color: #6f7e80;
+    max-width: 250px;
+
+    &-2 {
+      margin-top: -25px;
+      font-family: "Manrope";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 17px;
+      color: #19b8ed;
+    }
+  }
+  .doorstep {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: $fw-light;
+    font-size: 12px;
+    line-height: 17px;
+    letter-spacing: 0.5px;
+    color: #122122;
+  }
+  &-4 {
+    background: #f1f6ff;
+    border-radius: 12px;
+  }
+  &__div {
+    &-mini {
+      margin-top: -25px;
+    }
+    &-location {
+      padding: 4px 8px;
+      border: 1px solid $tertiary;
+      border-radius: 8px;
+      width: 150px;
+      @include flex($jc: center, $ai: center);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &-input {
+      width: 150px;
+      height: 49px;
+      border-style: none;
+      outline: none;
+      border: 1px solid $tertiary;
+      padding: 4px 8px;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-light;
+      font-size: 15px;
+      line-height: 17px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+
+      &::placeholder {
+        color: #bababa;
+        opacity: 1;
+        text-transform: capitalize;
+
+        text-align: center;
+      }
+    }
+  }
+  &__button {
+    &-span {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $tertiary;
+      text-transform: capitalize;
+      padding-right: 8px;
+      border-right: 1px solid $tertiary;
+    }
+    &-icon {
+      padding-left: 8px;
+      color: #001973;
+    }
+  }
+}

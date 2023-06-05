@@ -1,0 +1,25 @@
+.addressInput {
+  &__header {
+    margin: 30px 0 20px 0;
+  }
+  &__p {
+    &-main {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 51px;
+      color: $secondary;
+    }
+    &-sub {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: #6f7e80;
+    }
+  }
+  
+}

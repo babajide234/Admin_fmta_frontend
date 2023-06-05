@@ -1,0 +1,53 @@
+// mixin for responsive design
+@mixin responsive($breakpoint) {
+  @if $breakpoint == "xs" {
+    @media only screen and (max-width: 480px) {
+      @content;
+    }
+  } @else if $breakpoint == "sm" {
+    @media only screen and (min-width: 481px) and (max-width: 768px) {
+      @content;
+    }
+  } @else if $breakpoint == "md" {
+    @media only screen and (min-width: 769px) and (max-width: 1024px) {
+      @content;
+    }
+  } @else if $breakpoint == "lg" {
+      @media only screen and (min-width: 1024px){
+        @content;
+      }
+  } @else if $breakpoint == "xl" {
+      @media only screen and (min-width: 1366px) {
+        @content;
+      }
+   }
+}
+
+@mixin responsive-display($display) {
+  @if $display == "hide" {
+    display: none !important;
+  } @else if $display == "show" {
+    display: block !important;
+  }
+}
+//mixin for using flex
+@mixin flex($jc, $ai) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+//mixin for page padding and margin
+@mixin page {
+  padding: 30px 128px;
+  margin-top: 50px;
+}
+
+@mixin font($fw) {
+  font-family: "Manrope";
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 29px;
+  letter-spacing: 0.5px;
+  font-weight: $fw;
+}

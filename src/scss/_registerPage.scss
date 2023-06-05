@@ -1,0 +1,46 @@
+.registerPage {
+  &__p-intro {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+    color: $tertiary;
+  }
+  &__div-btn{
+    margin-top: 10px;
+  }
+  &__div-input {
+    margin-block: 2rem ;
+    
+  }
+  &__div-checkbox {
+    margin-left: 10px;
+    & input {
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid #bababa;
+      border-radius: 4px;
+      margin-right: 1rem;
+      margin-bottom: 0;
+      vertical-align: baseline;
+    }
+    & label {
+      @include font($fw: 500);
+      color: $secondary;
+      vertical-align: baseline;
+    }
+  }
+  &__btn{
+    @include flex($jc: center, $ai: center);
+    margin-block: 20px;
+  }
+}
+.regCongrat{
+  &__content{
+    @include flex($jc: space-between, $ai: flex-start);
+    flex-direction: row;
+    width: 100%;
+  }
+}

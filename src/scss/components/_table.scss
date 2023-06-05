@@ -1,0 +1,33 @@
+main.table {
+  width: 100% !important;
+}
+.rdt_TableCol {
+  font-family: $ff-primary;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  color: $secondary;
+}
+.rdt_TableRow {
+  padding: 25px 0;
+}
+
+.table {
+  &-container {
+    margin-top: 50px;
+  }
+  &__orderId-cell {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+    color: $secondary;
+  }
+}
+.paginationComponent {
+  justify-content: flex-start;
+}

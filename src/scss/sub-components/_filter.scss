@@ -1,0 +1,205 @@
+.filter {
+  padding-bottom: 60px;
+  &__container {
+    align-items: center;
+    border-bottom: 1.5px solid #bababa;
+    padding: 0px 0px 60px 0px;
+  }
+  &__item {
+    &__title {
+      font-family: $ff-primary;
+      display: flex;
+      flex-direction: column;
+      &__title-text {
+        //styleName: Desktop/titles/h3;
+        font-family: $ff-secondary-hv;
+        font-size: 21px;
+        font-weight: 800;
+        line-height: 34px;
+        letter-spacing: 0px;
+        text-align: left;
+        color: #001973;
+        padding-bottom: 1rem;
+      }
+      &__title-text-2 {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 22px;
+        color: #122122;
+        padding-bottom: 1rem;
+      }
+      &__title__fill {
+        display: flex;
+        align-items: center;
+        i {
+          font-size: 25px;
+          color: #bababa;
+          margin-right: 8px;
+        }
+        h3 {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 22px;
+          color: #122122;
+          margin-right: 8px;
+        }
+        a {
+          font-size: 14px;
+          font-weight: 800;
+          line-height: 22px;
+          color: #001973;
+          text-decoration: underline;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    &__icon {
+      height: 33px;
+      width: 33px;
+      border: 1.5px solid #001973;
+      border-radius: 10px;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #001973;
+      margin-right: 11px;
+    }
+    &__input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid #001973;
+      border-radius: 10px;
+      padding: 0px 10px;
+      font-family: $ff-primary;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 22px;
+      color: #001973;
+      &::placeholder {
+        color: #001973;
+      }
+    }
+  }
+}
+.filterModal {
+  &__p {
+    &-header {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 51px;
+      color: $secondary;
+    }
+    &-text {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $secondary-disabled;
+    }
+  }
+  &__content {
+    margin-block-start: 24px;
+  }
+  &__div {
+    &-checkbox {
+      padding: 1rem;
+      border: 1px solid #bababa;
+      border-radius: 10px;
+      margin-bottom: 24px;
+
+      & input {
+        width: 21px;
+        height: 21px;
+        margin-right: 1rem;
+        border-radius: 10px;
+        vertical-align: middle;
+      }
+    }
+  }
+  &__label {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+    color: $secondary;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+.filterAccordion {
+  &__div {
+    
+    &-productPrice {
+      @include flex($jc: space-between, $ai: flex-start);
+      width: 80%;
+    }
+    &-from {
+      width: 45%;
+      @include flex($jc: flex-start, $ai: flex-start);
+    }
+    &-input {
+      width: 80%;
+      margin-left: 10px;
+    }
+  }
+  &__p {
+    &-text {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-light;
+      font-size: 12px;
+      line-height: 19px;
+      letter-spacing: 0.5px;
+      color: $secondary-disabled;
+      margin-block: 5px;
+    }
+  }
+  &__ul {
+    &-radio {
+      display: flex;
+    }
+  }
+  &__li {
+    &-radio {
+      @include flex($jc: center, $ai: center);
+
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+    }
+  }
+  &__span {
+    &-radio {
+      margin-left: 5px;
+      cursor: pointer;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $tertiary;
+    }
+    &-from {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-light;
+      font-size: 12px;
+      line-height: 19px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+      margin-top: 10px;
+    }
+  }
+}

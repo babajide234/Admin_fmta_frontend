@@ -1,0 +1,51 @@
+.header {
+  &__1 {
+    //styleName: Desktop/titles/h4;
+    font-family: $ff-secondary-hv;
+    font-style: normal;
+    font-weight: $fw-semi-bold;
+    font-size: 1rem;
+    line-height: 22px;
+    letter-spacing: 1px;
+  }
+  &__2 {
+    font-family: $ff-secondary-hv;
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 52px;
+    letter-spacing: 0px;
+    text-align: left;
+    // color: #001973;
+  }
+  &__3 {
+    //styleName: Desktop/titles/h6;
+  }
+  &__caption {
+    //styleName: Desktop/paragraphs/p4;
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: $fw-light;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+  }
+}
+.product__desc {
+  &-1 {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: $fw-bold;
+    font-size: 1rem;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    // color: $secondary;
+  }
+  &-2 {
+    font-family: $ff-secondary-hv;
+    font-style: normal;
+    font-weight: $fw-semi-bold;
+    font-size: 28px;
+    line-height: 38px;
+    letter-spacing: 1px;
+  }
+}

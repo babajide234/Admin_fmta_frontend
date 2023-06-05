@@ -1,0 +1,67 @@
+.cartPage {
+  padding: 30px 128px;
+  margin-top: 50px;
+  width: 100%;
+
+  &__product {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    grid-template-rows: 1fr;
+    gap: 0px 50px;
+    grid-template-areas: ". .";
+  }
+
+  .cartPage-empty {
+    width: 50%;
+    margin: 0 auto; 
+  }
+  .cartPage-noproduct {
+    @include flex($jc: center, $ai: center);
+    flex-direction: column;
+    &__header{
+      margin-bottom: 20px;
+    }
+    &__icon {
+      svg{
+        height: 192px;
+        width: 192px;
+        font-size: 1rem;
+      }
+    }
+    &__p-empty {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 24px;
+      color: $secondary;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    &__section {
+      width: 100%;
+    }
+    &__p-mini {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      color: $secondary;
+      margin-bottom: 30px;
+    }
+  }
+  &__span-btn {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 1px;
+    &-naira {
+      margin-right: 6px;
+    }
+  }
+}

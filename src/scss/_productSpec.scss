@@ -1,0 +1,125 @@
+.productSpec {
+ // @include page;
+
+  &__section-flex {
+    display: flex;
+    margin-block: 120px;
+    gap: 10%;
+  }
+  &__div {
+    &-img {
+      width: 40%;
+    }
+
+    &-imgCont {
+      width: 430px;
+      height: 337px;
+      border-radius: 8px;
+      object-fit: cover;
+
+      & img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    &-imgCont-3 {
+      width: 634px;
+      height: 337px;
+      border-radius: 8px;
+      object-fit: cover;
+
+      & img {
+        //     width: 430px;
+        //   height: 337px;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    &-spec {
+      width: 100%;
+    }
+  }
+  &-header {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 38px;
+    color: $secondary;
+  }
+  &__ul {
+    // width: 100%;
+    &-pkg {
+      list-style: disc;
+      list-style-position: inside;
+      margin-block: 24px;
+      display: inline-block;
+    }
+    &-cont {
+      margin-block: 24px;
+    }
+  }
+  &__li {
+    &-item {
+      &:nth-child(odd) {
+        padding: 24px;
+        background: $accent;
+        border-radius: 12px;
+      }
+      &:nth-child(even) {
+        padding: 24px;
+        border-radius: 12px;
+      }
+    }
+    
+  }
+  &__span {
+    &-comp {
+      display: inline-block;
+      width: 30%;
+      margin-right: 5%;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 1rem;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+    &-spec {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: #6f7e80;
+    }
+    &-pkg {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $tertiary;
+    }
+  }
+  &__p {
+    &-spec {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $tertiary;
+      margin-block: 24px;
+    }
+  }
+}
+.productDisplay-none{
+  display: none;
+}

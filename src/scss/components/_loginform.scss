@@ -1,0 +1,104 @@
+.loginForm {
+  border-radius: 12px;
+  border: 1px solid rgba($primary, 0.3);
+  padding: 30px;
+
+  &__section {
+    &-or {
+      margin: 40px 0;
+    }
+  }
+
+  &__p-or {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    color: $secondary;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__span {
+    &-row1 {
+      margin-right: 20px;
+    }
+    &-switch {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-light;
+      font-size: 12px;
+      line-height: 19px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+      @include flex($jc: center, $ai: center);
+      background: #f1f6ff;
+      border-radius: 8px;
+      padding: 1rem 32px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  &-btn {
+    width: 35%;
+    margin-top: 10px;
+  }
+  &__header {
+    &-text {
+      font-family: $ff-secondary-hv;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 22px;
+      letter-spacing: 1px;
+      color: $secondary;
+    }
+  }
+  &__form {
+    margin-top: 40px;
+  }
+
+  &__form-row1 {
+    margin: 1rem 0;
+    @include flex($jc: space-between, $ai: flex-start);
+  }
+  &__form-row2 {
+    margin-block: 36px;
+    display: flex;
+  }
+
+  &__info {
+    margin: 36px 0;
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      display: block;
+      margin-right: 20px;
+      color: $secondary-disabled;
+    }
+    &-fPass {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+      margin-right: 5px;
+    }
+  }
+  &__p-formText {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+    color: $tertiary;
+  }
+}

@@ -1,0 +1,49 @@
+.accordion{
+    margin: 32px 0px;
+    border: 1px solid #F1F6FF;
+    border-radius: 20px;
+    height: 60px;
+    overflow: hidden;
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 11px 1rem;
+        background: #F1F6FF;
+        // border: 1.5px solid #F1F6FF;
+        border-radius: 1rem;
+        &:hover{
+            cursor: pointer;
+        }
+        &__title{
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            color: #001973;
+            padding: 0.5rem;
+        }
+        &__icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #001973;
+        }
+    }
+    &__body{
+        padding: 24px 30px;
+        p{
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            color: #122122;
+        }
+    }
+}

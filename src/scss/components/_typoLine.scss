@@ -1,0 +1,22 @@
+.typoLine {
+  &__header {
+    @include flex($jc: space-between, $ai: flex-start);
+    padding-bottom: 24px;
+
+    
+    &-p {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-bold;
+      font-size: 1rem;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+  }
+  &__hr {
+    width: 100%;
+    margin: 0 0 24px 0;
+    border: solid $secondary;
+  }
+}

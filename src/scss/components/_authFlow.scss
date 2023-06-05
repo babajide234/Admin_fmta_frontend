@@ -1,0 +1,62 @@
+.authFlow {
+  width: 60%;
+  margin: 30px auto;
+
+  &__div-icon {
+    margin: 50px 0 15px 0;
+  }
+  &__text {
+    margin: 24px 0;
+  }
+  &__p-text {
+    color: $secondary;
+    text-align: center;
+
+    &2 {
+      @include font($fw: 500);
+      color: $secondary-disabled;
+      text-align: center;
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+  &__form {
+    width: 100%;
+    margin: 24px 0;
+  }
+  &__centered {
+    @include flex($jc: center, $ai: center);
+    flex-direction: column;
+  }
+  &-form {
+    @include flex($jc: space-between, $ai: flex-start);
+    width: 80%;
+
+    &-btn {
+      width: 80%;
+      @include font($fw: 600);
+      text-align: center;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 20px;
+      padding: 1rem 32px;
+      border-radius: 48px;
+
+
+      &-1 {
+        background: $primary;
+        color: #ffffff;
+        border: 2px solid $primary;
+      }
+      &-2 {
+        color: $secondary;
+        border: 2px solid $secondary;
+      }
+    }
+  }
+  &__span-text{
+    color: $secondary;
+    font-family: $ff-primary;
+    font-weight: 500;
+  }
+}

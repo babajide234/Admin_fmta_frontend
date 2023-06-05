@@ -1,0 +1,59 @@
+.searchPage {
+  &-btm {
+    padding-bottom: 60px;
+    border-bottom: 1px solid #bababa;
+  }
+  &__div {
+    &-loadMore {
+      margin-block: 68px;
+    }
+    &-cont {
+      @include flex($jc: center, $ai: center);
+    }
+  }
+  &__p {
+    &-totalP {
+      text-align: center;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $tertiary;
+      margin-block: 24px;
+    }
+  }
+  &-goBack {
+    margin-block: 10px;
+  }
+  &__span {
+    &-load {
+      padding-inline: 10px;
+      padding-block: 5px;
+      border-bottom: 1px solid $secondary;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 19px;
+      text-align: center;
+      color: $secondary;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &-or {
+      margin-inline: 30px;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+  }
+}

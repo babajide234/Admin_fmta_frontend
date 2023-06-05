@@ -1,0 +1,119 @@
+.footer{
+    padding: 0px 32px 32px;
+    @include responsive(xs) {
+        padding: 24px;
+    }
+    &__container{
+        background: rgba(241, 246, 255, 0.8);
+        backdrop-filter: blur(15px);
+        border-radius: 17px 17px;
+        padding: 36px 64px 24px;
+        color: $secondary;
+        @include responsive(sm) {
+            width: 100%;
+        }
+        @include responsive(xs) {
+            width: 100%;
+            padding: 48px 24px;
+        }
+    }
+    &__up{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 28px 64px;
+        @include responsive(xs) {
+            flex-direction: column;
+            padding: 0;
+        }
+    }
+    &__down{
+        padding: 28px 64px;
+        &__text{
+            &__copy{
+                font-family: $ff-primary;
+                font-size: 12px;
+                font-weight: $fw-light;
+                line-height: 29px;
+                letter-spacing: 0.5px;
+                text-align: left;
+                color: $secondary;
+            }
+        }
+        @include responsive(xs) {
+            padding: 0;
+            padding-top:32px;
+        }
+    }
+    &__left{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
+        flex-basis: 30%;
+        @include responsive(xs) {
+            flex-direction: column;
+        }
+        &__title{
+            font-family: $ff-primary;
+            font-size: 1rem;
+            line-height: 34px;
+            text-align: left;
+            text-transform: capitalize;
+        }
+    }
+    &__right{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 1rem;
+        flex-basis: 65%;
+        @include responsive(xs) {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &__social{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 40px;
+        &:first-child{
+            padding-left: 0px;
+        }
+        &__icon{
+           padding: 14px;
+            &:first-of-type{
+               padding-left: 0px;
+            }
+            &:last-of-type{
+                padding-right: 0px;
+            }
+        }
+    }
+    &__menu{
+        display: flex;
+        flex-direction: column;
+        &__title{
+            font-family: $ff-primary;
+            font-size: 20px;
+            font-weight: $fw-bold;
+            text-align: left;
+            text-transform: capitalize;
+            padding-bottom: 28px;
+            @include responsive(xs) {
+                padding-bottom: 8px;
+            }
+        }
+        // &__list{}
+        // &__item{}
+        &__link{
+            font-family: 'Manrope';
+            font-size: 14px;
+            line-height: 34px;
+            text-align: left;
+            text-transform: capitalize;
+            color: $secondary;
+        }
+    }
+}

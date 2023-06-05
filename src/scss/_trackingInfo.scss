@@ -1,0 +1,30 @@
+.trackingInfo {
+  padding: 30px 128px;
+  margin-top: 50px;
+
+  &__div-heading {
+    margin-bottom: 72px;
+  }
+  
+
+  &__h2-text {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: $fw-bold;
+    font-size: 32px;
+    line-height: 51px;
+    color: $secondary;
+  }
+
+  &__delAndSummary{
+    margin-top: 100px;
+    @include flex($jc: space-between, $ai: flex-start);
+    gap: 2%;
+  }
+
+  &__goBack{
+    text-align: center;
+    margin: 100px 0 10px 0;
+  }
+  
+}

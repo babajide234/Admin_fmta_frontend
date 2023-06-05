@@ -1,0 +1,19 @@
+.otherProducts {
+  margin-top: 100px;
+  &__section-med {
+    margin-block: 80px;
+  }
+  &__header {
+    @include flex($jc: space-between, $ai: center);
+    padding-right: 20px;
+    margin-bottom: 36px;
+  }
+  &__p-header {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 38px;
+    color: $tertiary;
+  }
+}

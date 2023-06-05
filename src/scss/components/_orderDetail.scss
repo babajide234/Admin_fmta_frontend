@@ -1,0 +1,244 @@
+.orderDetail {
+  margin: 24px 0;
+  // @include flex($jc: space-between, $ai: center);
+  display: grid;
+  grid-template-columns: 80px 200px 80px 80px 70px;
+  column-gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  &__header {
+    display: grid;
+    grid-template-columns: 80px 200px 80px 80px 70px;
+    column-gap: 20px;
+    border-bottom: 2px solid $secondary;
+    padding-bottom: 24px;
+    span {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-bold;
+      font-size: 1rem;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+  }
+  // & li:not(:last-child) {
+  //   margin-right: 24px;
+  // }
+
+  &__img-container {
+    
+    // & img {
+    //   width: 70px;
+    //   border-radius: 4px;
+    //   object-fit: cover;
+    // }
+  }
+  &__price {
+    text-overflow: ellipsis; /* enables ellipsis */
+    white-space: nowrap; /* keeps the text in a single line */
+    overflow: hidden; /* keeps the element from overflowing its parent */
+  }
+  &__text {
+    font-family: $ff-primary;
+    font-style: normal;
+    width: 100%;
+    & h3 {
+      // font-weight: $fw-bold;
+      // font-size: 14px;
+      // line-height: 22px;
+      // letter-spacing: 0.5px;
+      // color: $secondary;
+      text-transform: capitalize;
+    }
+
+    & p {
+      font-weight: $fw-semi-bold;
+      font-size: 12px;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $tertiary;
+      text-transform: capitalize;
+      margin-top: 1.5px;
+    }
+    & span {
+      margin-left: 8px;
+    }
+  }
+  &__btn {
+    width: 40px;
+    height: 40px;
+    @include flex($jc: center, $ai: center);
+
+    &:hover {
+      cursor: pointer;
+      background: rgba(#bc0202, 0.2);
+      border-radius: 8px;
+    }
+  }
+  &__quantity {
+    @include flex($jc: center, $ai: center);
+    font-family: $ff-primary;
+    font-style: normal;
+    height: 96px;
+    margin: 0 auto;
+    &-div {
+      width: 30px;
+      height: 30px;
+      @include flex($jc: center, $ai: center);
+      font-weight: $fw-bold;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+    &-span {
+      width: 30px;
+      height: 30px;
+      @include flex($jc: center, $ai: center);
+      // border:1px solid #19b8ed;
+      
+      &:hover {
+        cursor: pointer;
+        background: rgba($secondary, 0.2);
+        border-radius: 8px;
+      }
+    }
+  }
+  &__process {
+    width: 100%;
+    height: 96px;
+    @include flex($jc: flex-start, $ai: flex-start);
+    flex-direction: row;
+
+    & .orderDetail__steps {
+      width: calc(100% / 4);
+      height: 100%;
+      @include flex($jc: center, $ai: center);
+      flex-direction: column;
+      position: relative;
+
+      &-step {
+        width: 100%;
+        height: 0.5px;
+        background: blue;
+      }
+    }
+  }
+  & .orderDetail__container {
+    position: absolute;
+    width: 90%;
+    @include flex($jc: center, $ai: center);
+    flex-direction: column;
+    top: 10%;
+
+    &-dot {
+      width: 8px;
+      height: 8px;
+      background-color: $secondary;
+      border-radius: 50%;
+      margin: 6px 0 4px 0;
+    }
+    &-current {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-regular;
+      font-size: 7px;
+      line-height: 17px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      text-transform: capitalize;
+    }
+  }
+  &-common {
+    margin-top: 12px;
+    height: 100%;
+    @include flex($jc: center, $ai: center);
+  }
+
+  &-sign {
+    color: #19b8ed;
+    font-size: 18px;
+
+    &:hover,
+    &:active {
+      cursor: pointer;
+    }
+  }
+  &__linkTo {
+    @include flex($jc: center, $ai: center);
+    flex-direction: column;
+  }
+}
+
+.orderInfoProduct {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-block:24px;
+
+  // & li {
+  //   border: 1px solid black;
+  // }
+  &__li {
+    &-img {
+      flex: 2;
+    }
+    &-productName {
+      flex: 3;
+    }
+    &-quantity {
+      flex: 1;
+    }
+    &-price {
+      flex: 1;
+    }
+    &-process {
+      flex: 5;
+      width: 100%;
+      height: 96px;
+      @include flex($jc: flex-start, $ai: flex-start);
+      flex-direction: row;
+
+      & .orderInfoProduct__steps {
+        width: calc(100% / 4);
+        height: 100%;
+        @include flex($jc: center, $ai: center);
+        flex-direction: column;
+        position: relative;
+
+        &-step {
+          width: 100%;
+          height: 0.5px;
+          background: blue;
+        }
+      }
+      & .orderInfoProduct__container {
+        position: absolute;
+        width: 90%;
+        @include flex($jc: center, $ai: center);
+        flex-direction: column;
+        top: 10%;
+
+        &-dot {
+          width: 8px;
+          height: 8px;
+          background-color: $secondary;
+          border-radius: 50%;
+          margin: 6px 0 4px 0;
+        }
+        &-current {
+          font-family: $ff-primary;
+          font-style: normal;
+          font-weight: $fw-light;
+          font-size: 12px;
+          line-height: 17px;
+          text-align: center;
+          letter-spacing: 0.5px;
+          color: $secondary;
+        }
+      }
+    }
+  }
+}

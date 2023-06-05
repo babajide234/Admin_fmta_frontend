@@ -1,0 +1,111 @@
+.receipt {
+  width: 50.4vw;
+  margin: 80px auto;
+
+  &__headerLinks {
+    @include flex($jc: space-between, $ai: flex-start);
+    padding: 0 22px;
+    margin: 40px 0;
+  }
+
+  .orderReceipt {
+    border: 1px solid $secondary-disabled;
+    border-radius: 20px;
+
+    &__header {
+      @include flex($jc: space-between, $ai: flex-start);
+      width: 100%;
+      padding: 30px;
+      border-bottom: 1px solid $secondary-disabled;
+
+      &-logo {
+        @include flex($jc: center, $ai: center);
+      }
+    }
+
+    &__p-row {
+      margin: 8px 0px;
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-bold;
+      font-size: 1rem;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      width: 100%;
+      @include flex($jc: space-between, $ai: flex-start);
+    }
+    &__span {
+      &-col {
+        color: $tertiary;
+        text-align: left;
+      }
+      &-col2 {
+        color: $secondary-disabled;
+        margin-left: 8px;
+        text-align: right;
+      }
+      &-shipping {
+        font-family: $ff-primary;
+        font-style: normal;
+        font-weight: $fw-bold;
+        font-size: 1rem;
+        line-height: 22px;
+        letter-spacing: 0.5px;
+        color: $secondary;
+      }
+      &-text {
+        margin-top: 0px;
+        font-family: $ff-primary;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 17px;
+        color: $primary;
+      }
+    }
+    &__content {
+      padding: 30px;
+    }
+
+    &__ul {
+      & .orderReceipt__li-shipping {
+        @include flex($jc: space-between, $ai: flex-start);
+        
+      }
+      & li:not(:last-child){
+        margin-bottom: 20px;
+      }
+    }
+    &__div{
+      &-shipping {
+        @include flex($jc: space-between, $ai: flex-start);
+        
+      }
+    }
+    &__footer {
+      border-top: 1px solid $secondary-disabled;
+
+      &-barcode {
+        @include flex($jc: center, $ai: center);
+        margin: 48px 0 40px 0;
+      }
+
+      &-textContainer {
+        margin: 0 25px;
+        background: #f1f6ff;
+        border-radius: 1rem 1rem 0px 0px;
+        padding: 48px 32px;
+      }
+      &-span {
+        font-family: $ff-primary;
+        font-style: normal;
+        font-weight: $fw-semi-bold;
+        font-size: 1rem;
+        line-height: 29px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        color: $secondary;
+      }
+    }
+  }
+}

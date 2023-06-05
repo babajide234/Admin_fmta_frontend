@@ -1,0 +1,26 @@
+.linkTo__span-text {
+  
+  font-family: $ff-primary;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  color: $secondary;
+  border-bottom: 1px solid $secondary;
+  white-space: nowrap;
+  
+
+  &:hover,
+  &:active {
+    cursor: pointer;
+  }
+}
+.linkToLine{
+  display: inline;
+
+  &-none{
+    display: none;
+  }
+}
+

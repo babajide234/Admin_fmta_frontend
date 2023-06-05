@@ -1,0 +1,14 @@
+.fmtaLogo {
+  & img {
+    height: 40px;
+    width: 200px;
+    @include responsive(xs) {
+      width: 136px;
+      height: 25px;
+    }
+    @include responsive(sm) {
+      width: 136px;
+      height: 25px;
+    }
+  }
+}

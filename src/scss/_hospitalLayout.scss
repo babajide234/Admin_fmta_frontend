@@ -1,0 +1,28 @@
+.hospitalLayout {
+  &__main {
+    margin: 100px 128px;
+    @include flex($jc: space-between, $ai: flex-start);
+  }
+  &__div {
+    &-sidenav {
+      width: 17vw;
+      position: fixed;
+      top: 10vh;
+      left: 100px;
+      bottom: 0;
+      overflow-x: hidden;
+      z-index: 9;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    &-outlet{
+        margin-left: 19vw;
+        width: 100%;
+        margin-top: 4vh;
+        padding-left:46px;
+        //border-left: 1px solid #D5ECF4;;
+    }
+  }
+}

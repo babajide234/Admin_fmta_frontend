@@ -1,0 +1,9 @@
+.ratings{
+    margin-bottom: 10px;
+    &__stars{
+        display: flex;
+        svg{
+            color:#FFC107;
+        }
+    }
+}

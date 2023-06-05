@@ -1,0 +1,32 @@
+.slide {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    // padding-top: 100px;
+
+    &-item{
+        width: 100%;
+        position: absolute;
+        z-index: 9;
+        transition: all 0.3s ease;
+        &:last-of-type{
+          right: 0px;
+          z-index: 1;
+          transform: scale(.8);
+        }
+        &:first-of-type{
+          left: 0px;
+          z-index: 1;
+          transform: scale(.8);
+        }
+    }
+
+  }
+  
+  .slide-item.active {
+    z-index: 1;
+    transform-origin: center center;
+  }
+  

@@ -1,0 +1,259 @@
+.inputIcon {
+  border-radius: 8px;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  position: relative;
+
+  &__default {
+    border: 1px solid #bababa;
+  }
+
+  &__error {
+    border: 1px solid $error;
+    .inputIcon {
+      & input {
+        color: $error !important;
+        &::placeholder {
+          color: $error;
+        }
+      }
+      &__span {
+        &-left {
+          border-color: $error;
+          svg {
+            color: $error;
+          }
+        }
+        &-right {
+          svg {
+            color: $error !important;
+          }
+        }
+      }
+    }
+  }
+
+  & input {
+    width: 100%;
+    outline: none;
+    border-style: none;
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    padding-left: 10px;
+    color: $secondary;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #bababa;
+    }
+  }
+  &__span {
+    &-left {
+      padding-inline: 1rem;
+      border-right: 2px solid #001973;
+      @include flex($jc: center, $ai: center);
+      svg {
+        color: $secondary;
+      }
+      p {
+        width: fit-content;
+        color: $secondary;
+        font-size: 14px;
+        white-space: nowrap;
+        font-weight: $fw-bold;
+      }
+    }
+    &-right {
+      padding-inline: 1rem;
+      @include flex($jc: center, $ai: center);
+    }
+    &-center {
+      width: 100%;
+      padding-inline: 10px;
+    }
+  }
+  &-select {
+    color: $secondary;
+    width: 100%;
+
+    & option {
+      color: #bababa;
+    }
+  }
+  &__label {
+    // position: absolute;
+    // top: 10px;
+    // left: 80px;
+    // font-family: $ff-primary;
+    // font-style: normal;
+    // font-weight: $fw-light;
+    // font-size: 16px;
+    // line-height: 29px;
+    // text-align: center;
+    // letter-spacing: 0.5px;
+    // color: #bababa;
+    // pointer-events: none;
+    display: none;
+    transition: 0.15s all ease;
+  }
+  // & .formik-input:focus + .inputIcon__label {
+  //   transform: translate(4px, -22px);
+  // }
+}
+
+.hospitalInput {
+  margin-top: 20px;
+  padding: 10px 0 20px 0;
+  border-bottom: 1px solid $button-disabled;
+
+  &__label {
+    display: block;
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 22px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    color: $secondary;
+    text-transform: capitalize;
+  }
+  &__pop {
+    @include flex($jc: space-between, $ai: center);
+  }
+
+  &__input {
+    outline: none;
+    border: none;
+    padding: 10px 0;
+    width: 60%;
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    padding: 10px;
+    margin: 8px 0;
+    color: $tertiary;
+    &::placeholder {
+      color: #bababa;
+    }
+    &[disabled] {
+      background: transparent;
+    }
+  }
+  &__border {
+    border: 1px solid $secondary;
+    border-radius: 5px;
+  }
+  &__err {
+    border: 1px solid $error !important;
+    color: $error;
+  }
+  &__span {
+    &-icon {
+      margin-top: 15px;
+      vertical-align: baseline;
+    }
+    &-save {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: $fw-light;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: #001973;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.textAreaIcon {
+  display: flex;
+  padding: 10px 10px 10px 0;
+  border: 1px solid #bababa;
+  border-radius: 8px;
+
+  &__input {
+    outline: none;
+    border: none;
+    padding: 10px 10px 10px 40px;
+    width: 94%;
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    color: $secondary;
+    &::placeholder {
+      color: #bababa;
+    }
+  }
+  &__span-right {
+    margin: 10px 0;
+  }
+}
+
+.customSelectIcon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #bababa;
+  border-radius: 8px;
+
+  & select {
+    width: 100%;
+    outline: none;
+    border-style: none;
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 29px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    padding-left: 10px;
+  }
+}
+.password-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.radio {
+  &__input {
+    display: none;
+  }
+  &__label {
+    @include flex($jc: center, $ai: center);
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    border: 3px solid #17a6d5;
+    background: #ffffff;
+    padding: auto;
+  }
+  &__input:checked + &__label {
+    .radio__div {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #17a6d5;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.categories{
+    padding: 30px 128px;
+    margin-top: 70px;
+    &__container{
+        display: flex;
+        flex-direction: column;
+    }
+    &__header{
+        margin-bottom: 48px;
+        p{
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: $fw-semi-bold;
+            font-size: 1rem;
+            line-height: 29px;
+            color: $secondary-disabled;
+            letter-spacing: 0.5px;
+
+        }
+    }
+    &__main{
+        display: grid;
+        grid-template-columns: repeat( 2, 1fr);
+        flex-flow: row wrap;
+        column-gap: 48px;
+        row-gap: 30px;
+    }
+}

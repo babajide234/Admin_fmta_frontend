@@ -1,0 +1,35 @@
+.productItem {
+  &__div {
+    &-productInfo {
+      @include flex($jc: space-between, $ai: center);
+      padding: 40px 56px;
+      width: 100%;
+      background: $accent;
+      border-radius: 32px;
+      margin-block: 136px;
+    }
+    &-btn{
+      width: 321px;
+    }
+  }
+  &__p {
+    &-infoText {
+      font-family: "Manrope";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 22px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      color: $secondary;
+      // width: 80%;
+
+      span{
+        font-weight: 900;
+      }
+    }
+  }
+  &__btn{
+    width: 300px;
+  }
+}

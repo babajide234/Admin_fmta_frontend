@@ -1,0 +1,31 @@
+.shippingAddress__detail {
+  @include flex($jc: flex-start, $ai: flex-start);
+  flex-direction: row;
+
+  &-span {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    color: $secondary;
+    white-space: nowrap;
+  }
+  &-list {
+    @include flex($jc: flex-start, $ai: flex-start);
+    flex-direction: column;
+    margin-left: 22px;
+
+  }
+  &-name,
+  &-phone,
+  &-email,
+  &-address {
+    margin-bottom: 8px;
+    color: $secondary;
+  }
+  &-name {
+    text-transform: capitalize;
+  }
+}

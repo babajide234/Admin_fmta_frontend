@@ -1,0 +1,137 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  @include flex($jc: center, $ai: center);
+  backdrop-filter: blur(8px);
+
+  &__container {
+    max-height: 80vh;
+    min-width: 40vw;
+    max-width: 50vw;
+    padding: 64px;
+    border-radius: 24px;
+    background-color: $neutral-white;
+    flex-direction: column;
+    position: relative;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &__inner {
+    width: 100%;
+    max-height: 500px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &__content{
+
+  }
+  &__open {
+    display: block;
+  }
+  &__close {
+    display: none;
+  }
+  &__closeBtn {
+    @include flex($jc: center, $ai: center);
+    width: 61.25px;
+    height: 61.25px;
+    position: absolute;
+    right: -2%;
+    top: -3%;
+    background: $secondary;
+    border-radius: 100px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__header {
+    font-size: 32px;
+    font-weight: $fw-bold;
+    line-height: 51px;
+    text-align: center;
+    color: $secondary;
+  }
+  &__text {
+    font-weight: $fw-regular;
+    font-size: $fs-body;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: $secondary-disabled;
+  }
+  &__redirect {
+    font-weight: $fw-regular;
+    font-size: $fs-body;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: $secondary;
+    margin-top: 20px;
+  }
+  &__btn {
+    width: 100%;
+    border: 1.5px solid $secondary;
+    border-radius: 50px;
+    font-size: $fs-body;
+    font-weight: $fw-regular;
+    line-height: 19px;
+    padding-block: 10px;
+    color: $secondary;
+    margin-top: 20px;
+    @include flex($jc: center, $ai: center);
+  }
+  &__div {
+    &-success {
+      margin-block-end: 20px;
+    }
+  }
+  &__p {
+    &-success {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 51px;
+      text-align: center;
+      color: $secondary;
+    }
+    &-text {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      color: $secondary;
+    }
+    &-caution {
+      font-family: "Manrope";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 29px;
+      letter-spacing: 0.5px;
+      color: $secondary-disabled;
+    }
+  }
+}
+.successModal-btn {
+  width: 100%;
+  @include flex($jc: space-between, $ai: center);
+
+  &-div{
+    width: 48%;
+  }
+}
