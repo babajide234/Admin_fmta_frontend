@@ -31,3 +31,55 @@ main.table {
 .paginationComponent {
   justify-content: flex-start;
 }
+
+// .adminTable__Id-cell {
+//   margin-right: 2rem;
+// }
+// .adminTable__row-cell {
+//   margin-right: 4rem;
+// }
+.orderTable {
+  &-container {
+    padding-top: 50px;
+  }
+  &__header {
+    border-block: 1px solid $secondary;
+    padding-block: 20px;
+  }
+  &__row {
+    vertical-align: center;
+    &-table {
+      color: $secondary;
+      margin-block: 33px;
+    }
+    &-cell {
+      color: $ink;
+    }
+  }
+  &__orderId-cell {
+    color: $secondary;
+
+    @include responsive(xs) {
+      white-space: nowrap;
+    }
+    @include responsive(sm) {
+      white-space: nowrap;
+    }
+    @include responsive(md) {
+      white-space: nowrap;
+    }
+  }
+  &__paginate {
+    margin-block: 100px;
+  }
+}
+
+.approved-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
