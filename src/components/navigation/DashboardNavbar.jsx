@@ -3,11 +3,12 @@
 import { ReactComponent as Notification } from "../../assets/main/icon/notification.svg";
 import { ReactComponent as Logout } from "../../assets/main/icon/logout.svg";
 import LogoComponent from "../common/LogoComponent";
+import userSlice from "../../store/userStore";
 
 const DashboardNavbar = () => {
-
+  const logout = userSlice((state) => state.logout);
   const logoutHandler = () => {
-    
+    logout();
   };
 
   return (
@@ -24,12 +25,12 @@ const DashboardNavbar = () => {
           </div>
           <div className="navbar__notification" onClick={logoutHandler}>
             <Logout />
-            <span className="navbar__span-notify" >Logout</span>
+            <span className="navbar__span-notify">Logout</span>
           </div>
         </div>
       </main>
     </nav>
-  )
-}
+  );
+};
 
-export default DashboardNavbar
+export default DashboardNavbar;

@@ -5,6 +5,7 @@ import { ReactComponent as Shopping_cart  } from "../../assets/main/icon/shoppin
 import { ReactComponent as Box  } from "../../assets/main/icon/box2.svg";
 import { ReactComponent as User  } from "../../assets/main/icon/user2.svg";
 import { ReactComponent as Heart  } from "../../assets/main/icon/Heart4.svg";
+import PropTypes from "prop-types";
 
 const Sidebar = () => {
 
@@ -14,7 +15,7 @@ const Sidebar = () => {
             <NavLink
               key={index}
               to={item.url}
-              // className={(props) => {return props.isActive ? "active-link" : "";}}
+              className={(props) => {return props.isActive ? "active-link" : "";}}
             >
               <div className={`hospitalSideNav__ul-listItem `}>
                 {item.icon === "Home" && <Home />}
@@ -36,4 +37,7 @@ const Sidebar = () => {
   )
 }
 
+Sidebar.propTypes = {
+  isActive: PropTypes.bool,
+};
 export default Sidebar

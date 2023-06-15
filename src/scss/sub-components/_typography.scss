@@ -1,51 +1,169 @@
 .header {
-  &__1 {
-    //styleName: Desktop/titles/h4;
+  &__0 {
+    /* Desktop/titles/h0 */
     font-family: $ff-secondary-hv;
     font-style: normal;
-    font-weight: $fw-semi-bold;
-    font-size: 1rem;
-    line-height: 22px;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 78px;
+    letter-spacing: 1px;
+  }
+  &__1 {
+    /* Desktop/titles/h1 */
+    font-family: $ff-secondary-hv;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 78px;
     letter-spacing: 1px;
   }
   &__2 {
+    /* Desktop/titles/h2 */
     font-family: $ff-secondary-hv;
-    font-size: 34px;
-    font-weight: 800;
-    line-height: 52px;
-    letter-spacing: 0px;
-    text-align: left;
-    // color: #001973;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 51px;
+    letter-spacing: 1px;
+
+    @include responsive(xs) {
+      font-size: 20px;
+      line-height: 28px;
+    }
+    @include responsive(sm) {
+      font-size: 20px;
+      line-height: 28px;
+    }
   }
   &__3 {
-    //styleName: Desktop/titles/h6;
-  }
-  &__caption {
-    //styleName: Desktop/paragraphs/p4;
-    font-family: $ff-primary;
+    //styleName: Desktop/titles/h3;
+    font-family: $ff-secondary-hv;
     font-style: normal;
-    font-weight: $fw-light;
-    font-size: 1rem;
-    line-height: 29px;
-    letter-spacing: 0.5px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+    letter-spacing: 1px;
   }
-}
-.product__desc {
-  &-1 {
-    font-family: $ff-primary;
+  &__4 {
+    //styleName: Desktop/titles/h4 and breadcrum hierachy-1
+    font-family: $ff-secondary-hv;
     font-style: normal;
     font-weight: $fw-bold;
     font-size: 1rem;
     line-height: 22px;
     letter-spacing: 0.5px;
-    // color: $secondary;
   }
-  &-2 {
+  &__5 {
+    /* Desktop/titles/h5 */
     font-family: $ff-secondary-hv;
     font-style: normal;
-    font-weight: $fw-semi-bold;
-    font-size: 28px;
-    line-height: 38px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 17px;
     letter-spacing: 1px;
+  }
+}
+
+.p {
+  &2 {
+    /* Desktop/paragraphs/p2 */
+    font-family: $ff-primary;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 58px;
+    letter-spacing: 1px;
+  }
+
+  &3 {
+    /* Desktop/paragraphs/p3 */
+    font-family: $ff-primary;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 43px;
+    letter-spacing: 0.5px;
+  }
+
+  &4 {
+    /* Desktop/paragraphs/p4 */
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.8125rem;
+    letter-spacing: 0.0313rem;
+  }
+
+  &5 {
+    /* Desktop/paragraphs/p5 */
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 19px;
+    letter-spacing: 0.5px;
+  }
+  &-800 {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 34px;
+
+    &-16 {
+      font-family: $ff-primary;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+  &-500 {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 29px;
+    letter-spacing: 0.5px;
+
+    @include responsive(xs) {
+      font-size: 13px;
+      line-height: 26px;
+    }
+    @include responsive(sm) {
+      font-size: 13px;
+      line-height: 26px;
+    }
+  }
+}
+.btn {
+  font-family: $ff-primary;
+
+  &__text-1 {
+    /* Desktop/buttons/b1 */
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  &__text-2 {
+    font-family: $ff-primary;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 1px;
+  }
+}
+.x {
+  &1 {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height, or 140% */
+    letter-spacing: 0.5px;
   }
 }

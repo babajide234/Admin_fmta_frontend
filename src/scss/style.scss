@@ -22,6 +22,7 @@
 @import "productSpec";
 @import "searchPage";
 @import "listPage";
+@import "dashboardProduct";
 
 @import "./components/navbar";
 @import "./components/orderDetail";
@@ -33,6 +34,7 @@
 @import "./components/modal";
 @import "./components/animations";
 @import "./components/centered";
+@import "./components/centerModal";
 @import "./components/shippingAddress";
 @import "./components/goBack";
 @import "./components/fmta-logo";
@@ -53,6 +55,7 @@
 @import "./components/checkbox";
 @import "./components/buySend";
 @import "./components/_util.scss";
+@import "./components/dashHeader";
 
 @import "./sub-components/accordion";
 @import "./sub-components/layout";
@@ -65,5 +68,7 @@
 @import "./sub-components/filter";
 @import "./sub-components/card";
 @import "./sub-components/image";
+@import "./sub-components/dropdown";
+@import "./sub-components/column";
 
-@import "./auth/auth"
+@import "./auth/auth";

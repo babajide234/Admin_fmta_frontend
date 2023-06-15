@@ -1,0 +1,22 @@
+.column {
+  &-approved {
+    color: $accent;
+    padding: 8px 1rem;
+    text-transform: capitalize;
+    border-radius: 20px;
+    font-style: italic;
+    width: 100%;
+
+    &-primary {
+      background: $primary;
+    }
+    &-disable {
+      background: $accent;
+      color: $tertiary;
+    }
+  }
+}
+
+.dataTable__input{
+  height: inherit;
+}

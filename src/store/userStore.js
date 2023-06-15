@@ -105,6 +105,7 @@ const userSlice = create(
           const response = await instance.get("logout");
           // response.then((result) => {
           // });
+          return response;
         } catch (error) {
           console.log(error);
         } finally {
