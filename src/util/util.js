@@ -24,4 +24,11 @@ export const formatDateTime = (isoDateTimeString) => {
   };
   return dateTime.toLocaleString("en-US", options);
 };
+export const size = [
+  { id: 1, name: "SM" },
+  { id: 2, name: "MD" },
+  { id: 3, name: "L" },
+  { id: 4, name: "XL" },
+  { id: 5, name: "XXL" },
+];
 

@@ -1,34 +1,38 @@
 .inputIcon {
-  border-radius: 8px;
+  border-radius: 0.5rem;
   display: flex;
-  padding: 10px;
+  padding: 0.625rem;
   justify-content: space-between;
   position: relative;
 
+  @include responsive(xs) {
+    padding: 24px 8px;
+  }
+  @include responsive(xs) {
+    padding: 24px 8px;
+  }
+  @include responsive(xs) {
+    padding: 24px 8px;
+  }
+
   &__default {
-    border: 1px solid #bababa;
+    border: 0.0625rem solid #bababa;
   }
 
   &__error {
-    border: 1px solid $error;
+    border: 0.0625rem solid $error;
     .inputIcon {
-      & input {
-        color: $error !important;
-        &::placeholder {
-          color: $error;
+      & span {
+        input {
+          color: $error !important;
+          &::placeholder {
+            color: $error !important;
+          }
         }
       }
       &__span {
         &-left {
-          border-color: $error;
-          svg {
-            color: $error;
-          }
-        }
-        &-right {
-          svg {
-            color: $error !important;
-          }
+          border-right: 2px solid $error;
         }
       }
     }
@@ -38,33 +42,49 @@
     width: 100%;
     outline: none;
     border-style: none;
-    font-family: $ff-primary;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 29px;
-    text-align: left;
-    letter-spacing: 0.5px;
-    padding-left: 10px;
+    padding-left: 0.625rem;
     color: $secondary;
+    text-align: left;
     background-color: transparent;
+    transition: 0.15s all ease;
 
     &::placeholder {
-      color: #bababa;
+      // color: #bababa;
+      color: transparent;
     }
+  }
+  &__label {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    padding-inline: 10px;
+    pointer-events: none;
+    text-transform: capitalize;
+    z-index: 1;
+    background: $neutral-white;
+    transition: 0.15s all ease;
+  }
+  input:focus + .inputIcon__label,
+  input:not(:placeholder-shown) + .inputIcon__label {
+    transform: translate(5px, -24px);
+    font-size: 12px;
+    color: $tertiary;
+    font-family: $ff-primary;
   }
   &__span {
     &-left {
       padding-inline: 1rem;
-      border-right: 2px solid #001973;
+      border-right: 0.125rem solid #001973;
       @include flex($jc: center, $ai: center);
       svg {
         color: $secondary;
+        width: 24px;
+        height: 24px;
       }
       p {
         width: fit-content;
         color: $secondary;
-        font-size: 14px;
+        font-size: 0.875rem;
         white-space: nowrap;
         font-weight: $fw-bold;
       }
@@ -72,13 +92,17 @@
     &-right {
       padding-inline: 1rem;
       @include flex($jc: center, $ai: center);
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
     &-center {
       width: 100%;
-      padding-inline: 10px;
+      padding-inline: 0.625rem;
     }
   }
-  &-select {
+  select {
     color: $secondary;
     width: 100%;
 
@@ -86,31 +110,39 @@
       color: #bababa;
     }
   }
-  &__label {
-    // position: absolute;
-    // top: 10px;
-    // left: 80px;
-    // font-family: $ff-primary;
-    // font-style: normal;
-    // font-weight: $fw-light;
-    // font-size: 16px;
-    // line-height: 29px;
-    // text-align: center;
-    // letter-spacing: 0.5px;
-    // color: #bababa;
-    // pointer-events: none;
-    display: none;
+  &-select-label {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    pointer-events: none;
+    padding-inline: 10px;
+    background: $neutral-white;
     transition: 0.15s all ease;
+    text-transform: capitalize;
   }
-  // & .formik-input:focus + .inputIcon__label {
-  //   transform: translate(4px, -22px);
-  // }
+
+  select:focus + .inputIcon-select-label,
+  select:valid  + .inputIcon-select-label {
+    transform: translate(5px, -28px);
+    // top: -30px;
+    font-size: 12px;
+    color: $tertiary;
+    font-family: $ff-primary;
+  }
+
+  &__svg-error {
+    svg {
+      path:nth-child(n) {
+        stroke: $error;
+      }
+    }
+  }
 }
 
 .hospitalInput {
-  margin-top: 20px;
-  padding: 10px 0 20px 0;
-  border-bottom: 1px solid $button-disabled;
+  margin-top: 1.25rem;
+  padding: 0.625rem 0 1.25rem 0;
+  border-bottom: 0.0625rem solid $button-disabled;
 
   &__label {
     display: block;
@@ -118,30 +150,31 @@
     font-style: normal;
     font-weight: 800;
     font-size: 1rem;
-    line-height: 22px;
+    line-height: 1.375rem;
     text-align: left;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.0313rem;
     color: $secondary;
     text-transform: capitalize;
   }
   &__pop {
     @include flex($jc: space-between, $ai: center);
+    gap: 10px;
   }
 
   &__input {
     outline: none;
     border: none;
-    padding: 10px 0;
+    padding: 0.625rem 0 0 0;
     width: 60%;
     font-family: $ff-primary;
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
-    line-height: 29px;
+    line-height: 1.8125rem;
     text-align: left;
-    letter-spacing: 0.5px;
-    padding: 10px;
-    margin: 8px 0;
+    letter-spacing: 0.0313rem;
+    padding: 0.625rem;
+    margin: 0.5rem 0;
     color: $tertiary;
     &::placeholder {
       color: #bababa;
@@ -149,18 +182,27 @@
     &[disabled] {
       background: transparent;
     }
+    @include responsive(xs) {
+      width: 100%;
+    }
+    @include responsive(sm) {
+      width: 100%;
+    }
+    @include responsive(md) {
+      width: 100%;
+    }
   }
   &__border {
-    border: 1px solid $secondary;
-    border-radius: 5px;
+    border: 0.0625rem solid $secondary;
+    border-radius: 0.3125rem;
   }
   &__err {
-    border: 1px solid $error !important;
+    border: 0.0625rem solid $error !important;
     color: $error;
   }
   &__span {
     &-icon {
-      margin-top: 15px;
+      margin-top: 0.9375rem;
       vertical-align: baseline;
     }
     &-save {
@@ -168,9 +210,10 @@
       font-style: normal;
       font-weight: $fw-light;
       font-size: 1rem;
-      line-height: 29px;
-      letter-spacing: 0.5px;
+      line-height: 1.8125rem;
+      letter-spacing: 0.0313rem;
       color: #001973;
+      white-space: nowrap;
 
       &:hover {
         cursor: pointer;
@@ -181,29 +224,52 @@
 
 .textAreaIcon {
   display: flex;
-  padding: 10px 10px 10px 0;
-  border: 1px solid #bababa;
-  border-radius: 8px;
+  padding: 0.625rem;
+  border: 0.0625rem solid #bababa;
+  border-radius: 0.5rem;
+
+  &-error {
+    border: 0.0625rem solid $error;
+
+    svg {
+      path {
+        stroke: $error;
+      }
+    }
+  }
 
   &__input {
     outline: none;
     border: none;
-    padding: 10px 10px 10px 40px;
-    width: 94%;
+    padding-left: 1.25rem;
+    width: 100%;
     font-family: $ff-primary;
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
-    line-height: 29px;
+    line-height: 1.8125rem;
     text-align: left;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.0313rem;
     color: $secondary;
     &::placeholder {
       color: #bababa;
     }
   }
-  &__span-right {
-    margin: 10px 0;
+  & span {
+    padding-inline: 1rem;
+  }
+  &__span {
+    &-left {
+      height: inherit;
+      border-right: 2px solid $secondary;
+      height: 24px;
+
+      svg {
+        path {
+          stroke: $secondary;
+        }
+      }
+    }
   }
 }
 
@@ -211,9 +277,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border: 1px solid #bababa;
-  border-radius: 8px;
+  padding: 0.625rem;
+  border: 0.0625rem solid #bababa;
+  border-radius: 0.5rem;
 
   & select {
     width: 100%;
@@ -223,10 +289,10 @@
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
-    line-height: 29px;
+    line-height: 1.8125rem;
     text-align: left;
-    letter-spacing: 0.5px;
-    padding-left: 10px;
+    letter-spacing: 0.0313rem;
+    padding-left: 0.625rem;
   }
 }
 .password-input {
@@ -241,17 +307,17 @@
   }
   &__label {
     @include flex($jc: center, $ai: center);
-    width: 21px;
-    height: 21px;
+    width: 1.3125rem;
+    height: 1.3125rem;
     border-radius: 50%;
-    border: 3px solid #17a6d5;
+    border: 0.1875rem solid #17a6d5;
     background: #ffffff;
     padding: auto;
   }
   &__input:checked + &__label {
     .radio__div {
-      width: 10px;
-      height: 10px;
+      width: 0.625rem;
+      height: 0.625rem;
       border-radius: 50%;
       background: #17a6d5;
     }

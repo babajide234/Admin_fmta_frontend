@@ -2,10 +2,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const DashHeader = ({ text, subText }) => {
+const DashHeader = ({ text, subText, small }) => {
   return (
     <header className=" __header">
-      <h2 className="header__2 secondary">{text}</h2>
+      <h2 className={`${ small ? 'header__3' : 'header__2' } secondary`}>{text}</h2>
       <p className="p4 ink">{subText}</p>
     </header>
   );
@@ -14,5 +14,6 @@ const DashHeader = ({ text, subText }) => {
 DashHeader.propTypes = {
   text: PropTypes.string,
   subText: PropTypes.string,
+  small: PropTypes.bool,
 };
 export default DashHeader;

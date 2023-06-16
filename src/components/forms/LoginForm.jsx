@@ -98,7 +98,7 @@ const LoginForm = () => {
               <InputIcons
                 type={input == 'email' ? 'email' : 'text'}
                 inputName={input == 'email' ? 'email' : 'phone'}
-                iconleft={<Sms />}
+                iconLeft={<Sms />}
                 iconRight={<Edit />}
                 placeholder={
                   input == 'email'
@@ -123,7 +123,7 @@ const LoginForm = () => {
           <InputIcons
             inputName={'password'}
             type={show_1 ? 'text' : 'password'}
-            iconleft={<Lock style={iconStyle} />}
+            iconLeft={<Lock style={iconStyle} />}
             iconRight={
               <span onClick={() => togglePasswordVisibility()}>
                 {show_1 ? (
