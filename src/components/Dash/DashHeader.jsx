@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const DashHeader = ({ text, subText, small }) => {
   return (
-    <header className=" __header">
+    <header className="dashHeader__header">
       <h2 className={`${ small ? 'header__3' : 'header__2' } secondary`}>{text}</h2>
       <p className="p4 ink">{subText}</p>
     </header>

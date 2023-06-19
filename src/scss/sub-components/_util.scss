@@ -224,6 +224,9 @@
 .secondary-disabled {
   color: $secondary-disabled;
 }
+.error{
+  color: $error;
+}
 .ink {
   color: $ink;
 }
@@ -263,4 +266,13 @@
 }
 .input-container {
   padding-block: 1rem;
+}
+.rdp{
+  &-caption_dropdowns{
+    display: flex;
+    flex-direction: row !important;
+  }
+  &-vhidden{
+    display: none !important;
+  }
 }

@@ -52,6 +52,10 @@
       // color: #bababa;
       color: transparent;
     }
+    &[type="date"]::-webkit-calendar-picker-indicator,
+    &[type="date"]::-moz-calendar-picker-indicator {
+      display: none;
+    }
   }
   &__label {
     position: absolute;
@@ -64,12 +68,24 @@
     background: $neutral-white;
     transition: 0.15s all ease;
   }
+
   input:focus + .inputIcon__label,
   input:not(:placeholder-shown) + .inputIcon__label {
     transform: translate(5px, -24px);
     font-size: 12px;
     color: $tertiary;
     font-family: $ff-primary;
+  }
+  &__label-2 {
+    font-size: 12px;
+    color: $tertiary;
+    font-family: $ff-primary;
+    text-transform: capitalize;
+    position: absolute;
+    top: -5px;
+    left: 25px;
+    background: $neutral-white;
+    padding-inline: 10px;
   }
   &__span {
     &-left {
@@ -122,7 +138,7 @@
   }
 
   select:focus + .inputIcon-select-label,
-  select:valid  + .inputIcon-select-label {
+  select:valid + .inputIcon-select-label {
     transform: translate(5px, -28px);
     // top: -30px;
     font-size: 12px;
@@ -222,11 +238,13 @@
   }
 }
 
-.textAreaIcon {
+.textArea {
   display: flex;
   padding: 0.625rem;
   border: 0.0625rem solid #bababa;
   border-radius: 0.5rem;
+  min-height: 200px;
+  position: relative;
 
   &-error {
     border: 0.0625rem solid $error;
@@ -252,9 +270,29 @@
     letter-spacing: 0.0313rem;
     color: $secondary;
     &::placeholder {
-      color: #bababa;
+      color: transparent;
     }
   }
+  &__label {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    padding-inline: 10px;
+    pointer-events: none;
+    text-transform: capitalize;
+    z-index: 1;
+    background: $neutral-white;
+    transition: 0.15s all ease;
+  }
+
+  textarea:focus + .textArea__label,
+  textarea:not(:placeholder-shown) + .textArea__label {
+    transform: translate(5px, -25px);
+    font-size: 12px;
+    color: $tertiary;
+    font-family: $ff-primary;
+  }
+
   & span {
     padding-inline: 1rem;
   }
