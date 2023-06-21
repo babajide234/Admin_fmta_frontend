@@ -9,6 +9,8 @@ import { ReactComponent as Edit } from "../../../assets/main/icon/edit-2.svg";
 import { size } from "../../../util/util";
 
 import PropTypes from "prop-types";
+import CatSelect from "../../cat-subcat/CatSelect";
+import SubCatSelect from "../../cat-subcat/SubCatSelect";
 
 const ProductNameForm = ({ values, touched, errors, handleChange }) => {
   return (
@@ -29,7 +31,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
 
         <div className="input-container grid-2">
           <div className="">
-            <CustomSelectButton
+            {/* <CustomSelectButton
               name="category"
               value={values.category}
               onChange={handleChange}
@@ -56,11 +58,17 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
                   </option>
                 </>
               ))}
-            </CustomSelectButton>
+            </CustomSelectButton> */}
+            <CatSelect
+              values={values}
+              touched={touched}
+              errors={errors}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="">
-            <CustomSelectButton
+            {/* <CustomSelectButton
               name="subCategory"
               value={values.subCategory}
               onChange={handleChange}
@@ -81,7 +89,13 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
                   </option>
                 </>
               ))}
-            </CustomSelectButton>
+            </CustomSelectButton> */}
+            <SubCatSelect
+              values={values}
+              touched={touched}
+              errors={errors}
+              handleChange={handleChange}
+            />
           </div>
         </div>
 

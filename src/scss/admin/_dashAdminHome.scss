@@ -1,0 +1,36 @@
+.dashAdminHome {
+  &__div {
+    &-header {
+      display: flex;
+      place-content: center space-between;
+    }
+  }
+  &__section {
+    &-content {
+      padding-block: 4rem;
+      div:first-of-type {
+        flex: 0.6;
+      }
+      div:last-of-type {
+        flex: 0.4;
+      }
+    }
+  }
+}
+
+.recentSales {
+  width: 100%;
+  &__div-card {
+    height: 350px;
+
+    &-item:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+}
+
+.dashOverview {
+  &__header {
+    height: 93.5px;
+  }
+}

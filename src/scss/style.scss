@@ -69,7 +69,9 @@
 @import "./sub-components/filter";
 @import "./sub-components/card";
 @import "./sub-components/image";
-@import "./sub-components/dropdown";
-@import "./sub-components/column";
+@import "./sub-components/common";
+
+@import "./admin/dashAdminHome";
+@import "./admin/dashCategories";
 
 @import "./auth/auth";

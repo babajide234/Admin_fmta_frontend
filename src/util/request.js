@@ -3,14 +3,13 @@ import userSlice from "../store/userStore";
 
 export const instance = axios.create({
   baseURL: "https://apiv2.firstmedtrade.com/api/",
-  withCredentials : true
+  withCredentials: true,
 });
 
 // instance.defaults.headers.common['Cookie'] = getCookie('cart_id');
 
 instance.interceptors.request.use(
   (config) => {
-    
     const token = userSlice.getState().token;
 
     if (token) {
@@ -24,4 +23,3 @@ instance.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-

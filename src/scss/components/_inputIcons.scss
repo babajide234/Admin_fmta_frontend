@@ -123,7 +123,8 @@
     width: 100%;
 
     & option {
-      color: #bababa;
+      color: $secondary;
+      background: $accent;
     }
   }
   &-select-label {

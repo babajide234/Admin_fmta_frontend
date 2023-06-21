@@ -31,7 +31,7 @@ const Sidebar = () => {
     }
 
   return (
-    <div className="hospitalSideNav__ul">
+    <div className="hospitalSideNav__ul box">
       {NavLinks()}
     </div>
   )

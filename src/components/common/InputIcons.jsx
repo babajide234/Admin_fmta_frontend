@@ -102,7 +102,7 @@ export const CustomSelectButton = ({
           <select
             {...field}
             {...rest}
-            className="inputIcon-select appearance-none bg-transparent block w-full px-4  rounded-md focus:outline-none  font-medium text-inherit p-500 secondary"
+            className="inputIcon-select appearance-none bg-transparent block w-full px-4  rounded-md focus:outline-none font-medium text-inherit p-500 secondary"
           >
             {children}
           </select>

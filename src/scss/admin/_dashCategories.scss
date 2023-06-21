@@ -1,0 +1,25 @@
+.dashCategories{}
+.dashCat{
+   &__div{
+    &-header{
+        border-block: 1px solid $tertiary;
+    }
+    &-table{
+        &-item:not(:last-child){
+            border-bottom: 1px solid $tertiary;
+        }
+    }
+   } 
+}
+.dashSubCat{
+   &__div{
+    &-header{
+        border-block: 1px solid $tertiary;
+    }
+    &-table{
+        &-item:not(:last-child){
+            border-bottom: 1px solid $tertiary;
+        }
+    }
+   } 
+}

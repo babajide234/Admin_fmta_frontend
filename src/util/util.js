@@ -1,17 +1,22 @@
 export const SIDEBARMENU = [
   {
-    name: 'Home',
-    url: '/',
-    icon: 'Home',
+    name: "Home",
+    url: "/",
+    icon: "Home",
   },
   {
-    name: 'Products',
-    url: '/products',
-    icon: 'Shopping_cart',
+    name: "Products",
+    url: "/products",
+    icon: "Shopping_cart",
+  },
+  {
+    name: "Categories",
+    url: "/categories",
+    icon: "Box",
   },
 ];
 
-export const iconStyle = { width: '26px', height: '20px', color: '#001973' };
+export const iconStyle = { width: "26px", height: "20px", color: "#001973" };
 export const formatDateTime = (isoDateTimeString) => {
   const dateTime = new Date(isoDateTimeString);
   const options = {
@@ -31,4 +36,3 @@ export const size = [
   { id: 4, name: "XL" },
   { id: 5, name: "XXL" },
 ];
-

@@ -215,6 +215,9 @@
 .w-60 {
   width: 60%;
 }
+.accent{
+  color: $accent;
+}
 .secondary {
   color: $secondary;
 }
@@ -224,7 +227,7 @@
 .secondary-disabled {
   color: $secondary-disabled;
 }
-.error{
+.error {
   color: $error;
 }
 .ink {
@@ -245,8 +248,14 @@
 .backg-active {
   background-color: $secondary;
 }
+.backg-accent {
+  background-color: $accent;
+}
 .backg-disable {
   background-color: $secondary-disabled;
+}
+.backg-error{
+  background-color: $error;
 }
 .svg-active {
   svg {
@@ -262,17 +271,5 @@
     path {
       stroke: $secondary-disabled;
     }
-  }
-}
-.input-container {
-  padding-block: 1rem;
-}
-.rdp{
-  &-caption_dropdowns{
-    display: flex;
-    flex-direction: row !important;
-  }
-  &-vhidden{
-    display: none !important;
   }
 }

@@ -1,0 +1,116 @@
+.dropdown {
+  &-container {
+    background: $neutral-white;
+  }
+  &-options {
+    // padding-inline: 1rem 6rem;
+    &:hover {
+      cursor: pointer;
+      background: $accent;
+    }
+  }
+}
+.column {
+  &-approved {
+    color: $accent;
+    padding: 8px 1rem;
+    text-transform: capitalize;
+    border-radius: 20px;
+    font-style: italic;
+    width: 100%;
+
+    &-primary {
+      background: $primary;
+    }
+    &-disable {
+      background: $accent;
+      color: $tertiary;
+    }
+  }
+}
+
+.dataTable__input {
+  height: inherit;
+}
+.input-container {
+  padding-block: 1rem;
+}
+.rdp {
+  &-caption_dropdowns {
+    display: flex;
+    flex-direction: row !important;
+  }
+  &-vhidden {
+    display: none !important;
+  }
+}
+// .current-date {
+//   padding-inline: 1rem;
+//   border: 1px solid $secondary-disabled;
+//   border-radius: 8px;
+// }
+
+.smallcard {
+  &__div {
+    &-container {
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      display: flex;
+      place-content: start start;
+      gap: 3rem;
+
+      div:first-of-type {
+        flex: 0.8;
+      }
+      div:last-of-type {
+        flex: 0.2;
+      }
+    }
+    &-outline {
+      svg {
+        color: $secondary;
+        width: 24px;
+        height: 24px;
+        path {
+          stroke: $secondary;
+        }
+      }
+    }
+    &-fill {
+      svg {
+        color: $accent;
+        width: 24px;
+        height: 24px;
+        path {
+          stroke: $accent;
+        }
+      }
+    }
+    &-empty {
+      svg {
+        color: $tertiary;
+        width: 24px;
+        height: 24px;
+        path {
+          stroke: $tertiary;
+        }
+      }
+    }
+  }
+  &__p {
+    &-title {
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+    }
+    &-subText {
+      white-space: nowrap;
+    }
+  }
+}
+.borderContainer {
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+}
+.box {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
