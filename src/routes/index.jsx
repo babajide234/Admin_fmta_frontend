@@ -1,36 +1,46 @@
-import { createBrowserRouter } from 'react-router-dom';
-import DashLayout from '../layouts/DashLayout';
-import DashboardHome from '../pages/DashboardHome';
-import AuthLayout from '../layouts/AuthLayout';
-import Login from '../pages/Auth/Login';
-import Products from '../pages/Products';
-import Category from '../pages/Category';
+import { createBrowserRouter } from "react-router-dom";
+import DashLayout from "../layouts/DashLayout";
+import DashboardHome from "../pages/DashboardHome";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Auth/Login";
+import Products from "../pages/Products";
+import Category from "../pages/Category";
+import Markup from "../pages/Markup";
+import Orders from "../pages/Orders";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <DashLayout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <DashboardHome />,
       },
       {
-        path: '/products',
+        path: "/products",
         element: <Products />,
       },
       {
-        path: '/categories',
+        path: "/categories",
         element: <Category />,
+      },
+      {
+        path: "/markup",
+        element: <Markup />,
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
       },
     ],
   },
   {
-    path: '/',
+    path: "/",
     element: <AuthLayout />,
     children: [
       {
-        path: '/login',
+        path: "/login",
         element: <Login />,
       },
     ],

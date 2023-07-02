@@ -7,7 +7,7 @@ import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import LoadingSpinnerComponent from "react-spinners-components";
 import { Buttons } from "../buttons/Buttons";
 import DialogContainer from "../Modal/Dialog";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import InputIcons from "../common/InputIcons";
 import { ReactComponent as Edit } from "../../assets/main/icon/edit-2.svg";
 import { DialogFooter } from "../../ui/dialog";
@@ -18,7 +18,6 @@ const DashCat = ({
   catData,
   handleCategoryChange,
 }) => {
- 
   const initialValues = {
     category: "",
   };
@@ -49,7 +48,7 @@ const DashCat = ({
                     inputName="category"
                     placeholder={"Category Name"}
                     onChange={handleChange}
-                    value={values.category && touched.category}
+                    value={values.category}
                     err={errors.category && touched.category}
                     iconRight={<Edit />}
                   />
@@ -66,7 +65,7 @@ const DashCat = ({
       </div>
       <div className="dashCat__div-body">
         <header className="dashCat__div-header grid grid-cols-7 py-2">
-          <div className="p4 col-span-1 text-left">No.</div>
+          <div className="p4 col-span-1 text-left pl-1">No.</div>
           <div className="p4 col-span-5 text-left">Name</div>
           <div className="p4 col-span-1"></div>
         </header>
@@ -83,13 +82,14 @@ const DashCat = ({
                 className="dashCat__div-table-item grid grid-cols-7 py-2"
                 key={row.id}
               >
-                <div className="p4 col-span-1 text-left">{index + 1}</div>
+                <div className="p4 col-span-1 text-left pl-1">{index + 1}</div>
                 <div className="p4 col-span-5 text-left">{row.name}</div>
                 <div className="p4 col-span-1">
                   <Actions>
                     <DropdownMenuItem className="dropdown-options p4 secondary ">
                       Edit
                     </DropdownMenuItem>
+
                     <DropdownMenuItem className="dropdown-options p4 secondary ">
                       Delete
                     </DropdownMenuItem>
@@ -119,3 +119,57 @@ DashCat.propTypes = {
   handleCategoryChange: PropTypes.any,
 };
 export default DashCat;
+
+export const EditCategory = ({ row }) => {
+  const initialValues = {
+    category: row.name,
+    categoryId: row.id,
+  };
+  const onSubmit = (values, { setSubmitting }) => {
+    console.log(values);
+    setSubmitting(false);
+  };
+  return (
+    <DialogContainer
+      trigger={
+        <DropdownMenuItem className="dropdown-options p4 secondary ">
+          Edit
+        </DropdownMenuItem>
+      }
+      title={"Edit Category"}
+    >
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {({ values, errors, touched, handleChange, submitForm }) => (
+          <Form>
+            <div className="input-container">
+              <InputIcons
+                type={"text"}
+                inputName="category"
+                placeholder={"Category Name"}
+                onChange={handleChange}
+                value={values.category}
+                err={errors.category && touched.category}
+                iconRight={<Edit />}
+              />
+            </div>
+            <Field
+              name="categoryId"
+              value={values.categoryId}
+              type="hidden"
+              onChange={handleChange}
+            />
+            <DialogFooter>
+              <Buttons color={"primary"} type={"btn"} onClick={submitForm}>
+                Submit
+              </Buttons>
+            </DialogFooter>
+          </Form>
+        )}
+      </Formik>
+    </DialogContainer>
+  );
+};
+
+EditCategory.propTypes = {
+  row: PropTypes.any,
+};

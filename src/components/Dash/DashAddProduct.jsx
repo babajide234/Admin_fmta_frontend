@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const DashAddProduct = ({ goBack }) => {
   return (
     <main className="dashAddProduct">
-      <GoBack onClick={goBack}>GoBack</GoBack>
+      <GoBack onClick={goBack}>Go back</GoBack>
       <header className="dashAddProduct__header">
         <h2 className="header__2 secondary">Add a Product</h2>
       </header>

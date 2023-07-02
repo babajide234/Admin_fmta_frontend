@@ -27,7 +27,7 @@ import { Button } from "../../ui/button";
 import PaginationControl from "./PaginationControl";
 import PropTypes from "prop-types";
 
-const DataTable = ({ columns, data }) => {
+const DataTable = ({ columns, data, filter }) => {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -57,15 +57,15 @@ const DataTable = ({ columns, data }) => {
       <div className="flex items-center">
         <div className="flex items-center my-4">
           <Input
-            placeholder="Filter by name..."
+            placeholder={`Filter by ${filter}...`}
             value={
-              (table.getColumn("name") &&
-                table.getColumn("name").getFilterValue()) ||
+              (table.getColumn(filter) &&
+                table.getColumn(filter).getFilterValue()) ||
               ""
             }
             onChange={(event) => {
-              table.getColumn("name") &&
-                table.getColumn("name").setFilterValue(event.target.value);
+              table.getColumn(filter) &&
+                table.getColumn(filter).setFilterValue(event.target.value);
             }}
             className="max-w-sm dataTable__input"
           />
@@ -165,5 +165,6 @@ const DataTable = ({ columns, data }) => {
 DataTable.propTypes = {
   columns: PropTypes.array,
   data: PropTypes.any,
+  filter: PropTypes.string,
 };
 export default DataTable;
