@@ -18,6 +18,8 @@ const AddProductForm = () => {
     price: "",
     currency: "",
     discount: "",
+    userRole: "",
+    user: "",
   };
 
   const specValues = {
@@ -84,8 +86,10 @@ const AddProductForm = () => {
     manufacturedDate: Yup.date().required(),
     expiryDate: Yup.date().required(),
     inTheBox: Yup.string().required(),
+    userRole: Yup.string().required(),
+    user: Yup.string().required(),
   });
-  
+
   const onSubmit = (values, { setSubmitting }) => {
     console.log(values);
     setSubmitting(false);
@@ -97,7 +101,14 @@ const AddProductForm = () => {
         validationSchema={AddProductSchema}
         onSubmit={onSubmit}
       >
-        {({ values, touched, errors, setFieldValue, handleChange, submitForm }) => (
+        {({
+          values,
+          touched,
+          errors,
+          setFieldValue,
+          handleChange,
+          submitForm,
+        }) => (
           <Form>
             <div className="">
               <ProductNameForm

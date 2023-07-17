@@ -17,6 +17,63 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
     <section>
       <DashHeader small={true} text={"Description"} />
       <div className="">
+        <div className="input-container grid-2">
+          <div className="">
+            <CustomSelectButton
+              name="userRole"
+              value={values.userRole}
+              onChange={handleChange}
+              err={errors.userRole && touched.userRole}
+              label={"userRole"}
+            >
+              <option
+                value=""
+                disabled
+                selected
+                hidden
+                className="secondary-disabled"
+              >
+                Product role
+              </option>
+              {/* {size.map((option) => (
+                <>
+                  <option
+                    key={option.id}
+                    value={option.name}
+                    className="py-4 text-md hover:bg-lightPrimary"
+                  >
+                    {option.name}
+                  </option>
+                </>
+              ))} */}
+            </CustomSelectButton>
+          </div>
+
+          <div className="">
+            <CustomSelectButton
+              name="user"
+              value={values.user}
+              onChange={handleChange}
+              err={errors.user && touched.user}
+              label={"Owner"}
+            >
+              <option value="" disabled selected hidden>
+                Owned by
+              </option>
+              {/* {size.map((option) => (
+                <>
+                  <option
+                    key={option.id}
+                    value={option.name}
+                    className="py-4 text-md hover:bg-lightPrimary"
+                  >
+                    {option.name}
+                  </option>
+                </>
+              ))} */}
+            </CustomSelectButton>
+          </div>
+        </div>
         <div className="input-container">
           <InputIcons
             inputName={"name"}
