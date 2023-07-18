@@ -7,6 +7,7 @@ import Products from "../pages/Products";
 import Category from "../pages/Category";
 import Markup from "../pages/Markup";
 import Orders from "../pages/Orders";
+import User from "../pages/User";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <Orders />,
+      },
+      {
+        path: "/users",
+        element: <User />,
       },
     ],
   },

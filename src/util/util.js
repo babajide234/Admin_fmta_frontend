@@ -15,6 +15,11 @@ export const SIDEBARMENU = [
     icon: "List",
   },
   {
+    name: "User",
+    url: "/users",
+    icon: "User",
+  },
+  {
     name: "Markup",
     url: "/markup",
     icon: "Plus",

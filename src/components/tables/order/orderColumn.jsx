@@ -2,31 +2,12 @@
 import React from "react";
 import { ArrowUpDown } from "lucide-react";
 import { formatDateTime } from "../../../util/util";
-import { Checkbox } from "../../../ui/checkbox";
 import CurrencyFormat from "react-currency-format";
 import Actions from "../../common/Actions";
 import { DropdownMenuItem } from "../../../ui/dropdown-menu";
 
 const orderColumn = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+  
   {
     accessorKey: "orderId",
     header: ({ column }) => (
