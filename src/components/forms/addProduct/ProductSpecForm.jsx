@@ -1,11 +1,45 @@
 //eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import DashHeader from "../../Dash/DashHeader";
 import InputIcons, { CustomSelectButton } from "../../common/InputIcons";
 import { ReactComponent as Edit } from "../../../assets/main/icon/edit-2.svg";
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
+import miscSlice from "../../../store/miscSlice";
 
 const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
+  const [countryCode, setCountryCode] = useState("");
+  const [stateCode, setStateCode] = useState("");
+  const [imported, setImported] = useState("");
+
+  const getCountry = miscSlice((state) => state.getCountry);
+  const getState = miscSlice((state) => state.getState);
+  const getCity = miscSlice((state) => state.getCity);
+  const state = miscSlice((state) => state.state);
+  const city = miscSlice((state) => state.city);
+
+  const { data: country, isLoading: countryLoading } = useQuery(
+    "getCountry",
+    () => {
+      const response = getCountry();
+      return response;
+    }
+  );
+  // const { data: state, isLoading: stateLoading } = useQuery(
+  //   ["getState", countryCode],
+  //   () => {
+  //     const response = getState(countryCode);
+  //     return response;
+  //   }
+  // );
+  // const { data: city, isLoading: cityLoading } = useQuery(
+  //   ["getCity", stateCode],
+  //   () => {
+  //     const response = getCity(stateCode);
+  //     return response;
+  //   }
+  // );
+
   return (
     <section className="productSpecForm">
       <div>
@@ -170,7 +204,10 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
           <CustomSelectButton
             name="imported"
             value={values.imported}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              setImported(e.target.value);
+            }}
             err={errors.imported && touched.imported}
             label={"imported"}
           >
@@ -182,104 +219,141 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
           </CustomSelectButton>
         </div>
 
-        <div className="input-container">
-          <CustomSelectButton
-            name="country"
-            values={values.country}
-            onChange={handleChange}
-            err={errors.country && touched.country}
-            label={"Country"}
-          >
-            <option
-              value=""
-              selected
-              disabled
-              hidden
-              className="py-4 text-md hover:bg-lightPrimary"
-            >
-              Country
-            </option>
-            <option
-              value={"adult"}
-              className="py-4 text-md hover:bg-lightPrimary"
-            >
-              Adult
-            </option>
-            <option
-              value={"child"}
-              className="py-4 text-md hover:bg-lightPrimary"
-            >
-              Child
-            </option>
-          </CustomSelectButton>
-        </div>
+        {imported === "Yes" && (
+          <>
+            <div className="input-container">
+              <CustomSelectButton
+                name="country"
+                value={values.country}
+                onChange={(e) => {
+                  handleChange(e);
+                  // setCountryCode(e.target.value);
+                  getState(e.target.value);
+                }}
+                err={errors.country && touched.country}
+                label={"Country"}
+                loading={countryLoading}
+              >
+                <option
+                  value=""
+                  disabled
+                  hidden
+                  className="py-4 text-md hover:bg-lightPrimary"
+                >
+                  Select country
+                </option>
+                {country?.map((option, index) => {
+                  <option
+                    key={index}
+                    value={option.isoCode}
+                    className="py-4 text-md hover:bg-lightPrimary"
+                  >
+                    {option.name}
+                  </option>;
+                })}
+              </CustomSelectButton>
+            </div>
+            <div className="input-container">
+              <CustomSelectButton
+                name="state"
+                value={values.state}
+                onChange={(e) => {
+                  handleChange(e);
+                  // setStateCode(e.target.value);
+                  getCity(e.target.value);
+                }}
+                err={errors.state && touched.state}
+                label={"state"}
+                // loading={stateLoading}
+              >
+                <option
+                  value=""
+                  // selected
+                  disabled
+                  hidden
+                  className="py-4 text-md hover:bg-lightPrimary"
+                >
+                  Select State
+                </option>
 
-        <div className="input-container">
-          <CustomSelectButton
-            name="city"
-            values={values.city}
-            onChange={handleChange}
-            err={errors.city && touched.city}
-            label={"City"}
-          >
-            <option
-              value=""
-              selected
-              disabled
-              className="py-4 text-md hover:bg-lightPrimary"
-            >
-              City
-            </option>
-            <option
-              value={"adult"}
-              className="py-4 text-md hover:bg-lightPrimary"
-            >
-              Adult
-            </option>
-            <option
-              value={"child"}
-              className="py-4 text-md hover:bg-lightPrimary"
-            >
-              Child
-            </option>
-          </CustomSelectButton>
-        </div>
+                {state?.map((option, index) => (
+                  <option
+                    key={index}
+                    value={option.isoCode}
+                    className="py-4 text-md hover:bg-lightPrimary"
+                  >
+                    {option.name}
+                  </option>
+                ))}
+              </CustomSelectButton>
+            </div>
 
-        <div className="input-container">
-          <InputIcons
-            inputName={"postal"}
-            type={"number"}
-            placeholder={" Postal Code"}
-            iconRight={<Edit />}
-            value={values.postal}
-            err={errors.postal && touched.postal}
-            onChange={handleChange}
-          />
-        </div>
+            <div className="input-container">
+              <CustomSelectButton
+                name="city"
+                value={values.city}
+                onChange={handleChange}
+                err={errors.city && touched.city}
+                label={"City"}
+                // loading={cityLoading}
+              >
+                <option
+                  value=""
+                  selected
+                  disabled
+                  className="py-4 text-md hover:bg-lightPrimary"
+                >
+                  Select city
+                </option>
+                {city?.map((option, index) => (
+                  <option
+                    key={index}
+                    value={option.name}
+                    className="py-4 text-md hover:bg-lightPrimary"
+                  >
+                    {option.name}
+                  </option>
+                ))}
+              </CustomSelectButton>
+            </div>
 
-        <div className="input-container">
-          <InputIcons
-            inputName={"address"}
-            type={"text"}
-            placeholder={"address"}
-            iconRight={<Edit />}
-            value={values.address}
-            err={errors.address && touched.address}
-            onChange={handleChange}
-          />
-        </div>
+            <div className="input-container">
+              <InputIcons
+                inputName={"postal"}
+                type={"number"}
+                placeholder={" Postal Code"}
+                iconRight={<Edit />}
+                value={values.postal}
+                err={errors.postal && touched.postal}
+                onChange={handleChange}
+              />
+            </div>
 
-        <div className="input-container">
-          <InputIcons
-            inputName={"hsc"}
-            type={"text"}
-            placeholder={"Customs HSC Code"}
-            iconRight={<Edit />}
-            value={values.hsc}
-            err={errors.hsc && touched.hsc}
-            onChange={handleChange}
-          />
-        </div>
+            <div className="input-container">
+              <InputIcons
+                inputName={"address"}
+                type={"text"}
+                placeholder={"address"}
+                iconRight={<Edit />}
+                value={values.address}
+                err={errors.address && touched.address}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="input-container">
+              <InputIcons
+                inputName={"hsc"}
+                type={"text"}
+                placeholder={"Customs HSC Code"}
+                iconRight={<Edit />}
+                value={values.hsc}
+                err={errors.hsc && touched.hsc}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

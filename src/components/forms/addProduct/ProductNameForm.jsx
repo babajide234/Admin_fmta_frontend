@@ -12,30 +12,31 @@ import PropTypes from "prop-types";
 import CatSelect from "../../cat-subcat/CatSelect";
 import SubCatSelect from "../../cat-subcat/SubCatSelect";
 
-const ProductNameForm = ({ values, touched, errors, handleChange }) => {
+const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
   return (
     <section>
       <DashHeader small={true} text={"Description"} />
       <div className="">
-        <div className="input-container grid-2">
-          <div className="">
-            <CustomSelectButton
-              name="userRole"
-              value={values.userRole}
-              onChange={handleChange}
-              err={errors.userRole && touched.userRole}
-              label={"userRole"}
-            >
-              <option
-                value=""
-                disabled
-                selected
-                hidden
-                className="secondary-disabled"
+        {!edit && (
+          <div className="input-container grid-2">
+            <div className="">
+              <CustomSelectButton
+                name="userRole"
+                value={values.userRole}
+                onChange={handleChange}
+                err={errors.userRole && touched.userRole}
+                label={"userRole"}
               >
-                Product role
-              </option>
-              {/* {size.map((option) => (
+                <option
+                  value=""
+                  disabled
+                  selected
+                  hidden
+                  className="secondary-disabled"
+                >
+                  Product role
+                </option>
+                {/* {size.map((option) => (
                 <>
                   <option
                     key={option.id}
@@ -46,21 +47,21 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
                   </option>
                 </>
               ))} */}
-            </CustomSelectButton>
-          </div>
+              </CustomSelectButton>
+            </div>
 
-          <div className="">
-            <CustomSelectButton
-              name="user"
-              value={values.user}
-              onChange={handleChange}
-              err={errors.user && touched.user}
-              label={"Owner"}
-            >
-              <option value="" disabled selected hidden>
-                Owned by
-              </option>
-              {/* {size.map((option) => (
+            <div className="">
+              <CustomSelectButton
+                name="user"
+                value={values.user}
+                onChange={handleChange}
+                err={errors.user && touched.user}
+                label={"Owner"}
+              >
+                <option value="" disabled selected hidden>
+                  Owned by
+                </option>
+                {/* {size.map((option) => (
                 <>
                   <option
                     key={option.id}
@@ -71,9 +72,10 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
                   </option>
                 </>
               ))} */}
-            </CustomSelectButton>
+              </CustomSelectButton>
+            </div>
           </div>
-        </div>
+        )}
         <div className="input-container">
           <InputIcons
             inputName={"name"}
@@ -288,6 +290,7 @@ ProductNameForm.propTypes = {
   values: PropTypes.any,
   touched: PropTypes.any,
   handleChange: PropTypes.any,
+  edit: PropTypes.bool,
 };
 
 export default ProductNameForm;

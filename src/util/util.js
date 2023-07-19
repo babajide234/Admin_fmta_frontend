@@ -10,9 +10,9 @@ export const SIDEBARMENU = [
     icon: "Shopping_cart",
   },
   {
-    name: "Categories",
-    url: "/categories",
-    icon: "List",
+    name: "Orders",
+    url: "/orders",
+    icon: "Box",
   },
   {
     name: "User",
@@ -20,14 +20,14 @@ export const SIDEBARMENU = [
     icon: "User",
   },
   {
+    name: "Categories",
+    url: "/categories",
+    icon: "List",
+  },
+  {
     name: "Markup",
     url: "/markup",
     icon: "Plus",
-  },
-  {
-    name: "Orders",
-    url: "/orders",
-    icon: "Box",
   },
 ];
 
@@ -80,7 +80,7 @@ export const SHIPPING = [
   {
     id: 3,
     name: "GIGM",
-  }
+  },
 ];
 export const iconStyle = { width: "26px", height: "20px", color: "#001973" };
 export const formatDateTime = (isoDateTimeString) => {
@@ -102,3 +102,8 @@ export const size = [
   { id: 4, name: "XL" },
   { id: 5, name: "XXL" },
 ];
+
+export const getNameByIsoCode = (isoCode, array) => {
+  const foundItem = array.find((item) => item.isoCode === isoCode);
+  return foundItem ? foundItem.name : "";
+};

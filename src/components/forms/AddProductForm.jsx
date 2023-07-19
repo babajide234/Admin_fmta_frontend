@@ -6,24 +6,39 @@ import ProductSpecForm from "./addProduct/ProductSpecForm";
 import OtherDetailsForm from "./addProduct/OtherDetailsForm";
 import { Buttons } from "../buttons/Buttons";
 import * as Yup from "yup";
+import PropTypes from "prop-types";
+import sanitizeHtml from "sanitize-html";
+import { useMutation } from "react-query";
+import productSlice from "../../store/productStore";
 
-const AddProductForm = () => {
+function cleanString(dirtyString) {
+  const parser = new DOMParser();
+  const decodedString = parser.parseFromString(dirtyString, "text/html")
+    .documentElement.textContent;
+  const cleanedString = sanitizeHtml(decodedString);
+  return cleanedString;
+}
+
+const AddProductForm = ({ edit = false, data = {} }) => {
+  const editProduct = productSlice.getState().editProduct;
+  const createProduct = productSlice.getState().createProduct;
+
   const nameValues = {
-    name: "",
-    moq: "",
+    name: edit ? data.name : "",
+    moq: edit ? data.moq : "",
     size: "",
-    category: "",
-    subCategory: "",
+    category: edit ? data.category_id : "",
+    subCategory: edit ? data.subcategory_id : "",
     brand: "",
-    price: "",
-    currency: "",
+    price: edit ? data.price : "",
+    currency: edit ? data.currency : "",
     discount: "",
     userRole: "",
-    user: "",
+    user: edit ? data.user.name : "",
   };
 
   const specValues = {
-    stockQuantity: "",
+    stockQuantity: edit ? data.quantity_in_stock : "",
     stockSize: "",
     length: "",
     width: "",
@@ -35,6 +50,7 @@ const AddProductForm = () => {
     modelNum: "",
     imported: "",
     country: "",
+    state: "",
     city: "",
     postal: "",
     address: "",
@@ -43,17 +59,19 @@ const AddProductForm = () => {
   };
 
   const otherValues = {
-    description: "",
+    description: edit ? cleanString(data.description) : "",
     madeIn: "",
     manufacturedDate: "",
     expiryDate: "",
     inTheBox: "",
   };
+
   const combinedInitialValues = {
     ...nameValues,
     ...specValues,
     ...otherValues,
   };
+
   const AddProductSchema = Yup.object().shape({
     name: Yup.string().required(),
     moq: Yup.number().required(),
@@ -63,7 +81,7 @@ const AddProductForm = () => {
     brand: Yup.string().required(),
     price: Yup.number().required(),
     currency: Yup.string().required(),
-    discount: Yup.number().required(),
+    discount: Yup.number(),
     stockQuantity: Yup.number().required(),
     stockSize: Yup.string().required(),
     length: Yup.number().required(),
@@ -72,22 +90,40 @@ const AddProductForm = () => {
     adultOrChild: Yup.number().required(),
     productSize: Yup.string().required(),
     productWeight: Yup.number().required(),
-    productColor: Yup.string().required(),
-    modelNum: Yup.string().required(),
-    imported: Yup.string().required(),
-    country: Yup.string().required(),
-    city: Yup.string().required(),
-    postal: Yup.number().required(),
-    address: Yup.string().required(),
-    hsc: Yup.string().required(),
-    videoLink: Yup.string().required(),
+    productColor: Yup.string(),
+    modelNum: Yup.string(),
+    imported: Yup.string(),
+    country: Yup.string(),
+    city: Yup.string(),
+    state: Yup.string(),
+    postal: Yup.number(),
+    address: Yup.string(),
+    hsc: Yup.string(),
+    videoLink: Yup.string(),
     description: Yup.string().required(),
     madeIn: Yup.string().required(),
     manufacturedDate: Yup.date().required(),
-    expiryDate: Yup.date().required(),
+    expiryDate: Yup.date(),
     inTheBox: Yup.string().required(),
     userRole: Yup.string().required(),
     user: Yup.string().required(),
+  });
+
+  const addMutation = useMutation((data) => createProduct(data), {
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+  const editMutation = useMutation((data) => editProduct(data), {
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
   const onSubmit = (values, { setSubmitting }) => {
@@ -116,6 +152,7 @@ const AddProductForm = () => {
                 touched={touched}
                 errors={errors}
                 handleChange={handleChange}
+                edit={edit}
               />
               <ProductSpecForm
                 values={values}
@@ -147,4 +184,8 @@ const AddProductForm = () => {
   );
 };
 
+AddProductForm.propTypes = {
+  data: PropTypes.object,
+  edit: PropTypes.bool,
+};
 export default AddProductForm;
