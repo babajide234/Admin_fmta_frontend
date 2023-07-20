@@ -21,7 +21,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
           <div className="input-container grid-2">
             <div className="">
               <CustomSelectButton
-                name="userRole"
+                name="user Role"
                 value={values.userRole}
                 onChange={handleChange}
                 err={errors.userRole && touched.userRole}
@@ -90,34 +90,6 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
 
         <div className="input-container grid-2">
           <div className="">
-            {/* <CustomSelectButton
-              name="category"
-              value={values.category}
-              onChange={handleChange}
-              err={errors.category && touched.category}
-              label={"Product Category"}
-            >
-              <option
-                value=""
-                disabled
-                selected
-                hidden
-                className="secondary-disabled"
-              >
-                Product Category
-              </option>
-              {size.map((option) => (
-                <>
-                  <option
-                    key={option.id}
-                    value={option.name}
-                    className="py-4 text-md hover:bg-lightPrimary"
-                  >
-                    {option.name}
-                  </option>
-                </>
-              ))}
-            </CustomSelectButton> */}
             <CatSelect
               values={values}
               touched={touched}
@@ -127,28 +99,6 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
           </div>
 
           <div className="">
-            {/* <CustomSelectButton
-              name="subCategory"
-              value={values.subCategory}
-              onChange={handleChange}
-              err={errors.subCategory && touched.subCategory}
-              label={"Product Sub-Category"}
-            >
-              <option value="" disabled selected hidden>
-                Product Sub-Category
-              </option>
-              {size.map((option) => (
-                <>
-                  <option
-                    key={option.id}
-                    value={option.name}
-                    className="py-4 text-md hover:bg-lightPrimary"
-                  >
-                    {option.name}
-                  </option>
-                </>
-              ))}
-            </CustomSelectButton> */}
             <SubCatSelect
               values={values}
               touched={touched}

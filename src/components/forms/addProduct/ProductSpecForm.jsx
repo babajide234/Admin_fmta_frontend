@@ -1,5 +1,5 @@
 //eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashHeader from "../../Dash/DashHeader";
 import InputIcons, { CustomSelectButton } from "../../common/InputIcons";
 import { ReactComponent as Edit } from "../../../assets/main/icon/edit-2.svg";
@@ -15,30 +15,28 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
   const getCountry = miscSlice((state) => state.getCountry);
   const getState = miscSlice((state) => state.getState);
   const getCity = miscSlice((state) => state.getCity);
-  const state = miscSlice((state) => state.state);
-  const city = miscSlice((state) => state.city);
 
-  const { data: country, isLoading: countryLoading } = useQuery(
+  const { data: countries, isLoading: countryLoading } = useQuery(
     "getCountry",
     () => {
       const response = getCountry();
       return response;
     }
   );
-  // const { data: state, isLoading: stateLoading } = useQuery(
-  //   ["getState", countryCode],
-  //   () => {
-  //     const response = getState(countryCode);
-  //     return response;
-  //   }
-  // );
-  // const { data: city, isLoading: cityLoading } = useQuery(
-  //   ["getCity", stateCode],
-  //   () => {
-  //     const response = getCity(stateCode);
-  //     return response;
-  //   }
-  // );
+  const { data: states, isLoading: stateLoading } = useQuery(
+    ["getStateQuery", countryCode],
+    () => getState(countryCode),
+    {
+      enabled: countryCode !== "",
+    }
+  );
+  const { data: cities, isLoading: cityLoading } = useQuery(
+    ["getCityQuery", stateCode],
+    () => getCity(stateCode),
+    {
+      enabled: stateCode !== "",
+    }
+  );
 
   return (
     <section className="productSpecForm">
@@ -227,8 +225,7 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
                 value={values.country}
                 onChange={(e) => {
                   handleChange(e);
-                  // setCountryCode(e.target.value);
-                  getState(e.target.value);
+                  setCountryCode(e.target.value);
                 }}
                 err={errors.country && touched.country}
                 label={"Country"}
@@ -236,13 +233,13 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
               >
                 <option
                   value=""
+                  selected
                   disabled
-                  hidden
                   className="py-4 text-md hover:bg-lightPrimary"
                 >
                   Select country
                 </option>
-                {country?.map((option, index) => {
+                {countries?.map((option, index) => {
                   <option
                     key={index}
                     value={option.isoCode}
@@ -259,24 +256,23 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
                 value={values.state}
                 onChange={(e) => {
                   handleChange(e);
-                  // setStateCode(e.target.value);
-                  getCity(e.target.value);
+                  setStateCode(e.target.value);
+                  // getCity(e.target.value);
                 }}
                 err={errors.state && touched.state}
                 label={"state"}
-                // loading={stateLoading}
+                loading={stateLoading}
               >
                 <option
                   value=""
-                  // selected
+                  selected
                   disabled
-                  hidden
                   className="py-4 text-md hover:bg-lightPrimary"
                 >
                   Select State
                 </option>
 
-                {state?.map((option, index) => (
+                {states?.map((option, index) => (
                   <option
                     key={index}
                     value={option.isoCode}
@@ -295,7 +291,7 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
                 onChange={handleChange}
                 err={errors.city && touched.city}
                 label={"City"}
-                // loading={cityLoading}
+                loading={cityLoading}
               >
                 <option
                   value=""
@@ -305,7 +301,7 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
                 >
                   Select city
                 </option>
-                {city?.map((option, index) => (
+                {cities?.map((option, index) => (
                   <option
                     key={index}
                     value={option.name}
