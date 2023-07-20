@@ -15,13 +15,13 @@ const DashAddProduct = ({ goBack, edit = false, data = {} }) => {
           {edit ? "Edit Product" : "Add a Product"}
         </h2>
       </header>
-      <AddProductForm edit={edit} data={data} />
+      <AddProductForm edit={edit} data={data} close={goBack} />
     </main>
   );
 };
 
 DashAddProduct.propTypes = {
-  goBack: PropTypes.any,
+  goBack: PropTypes.func,
   edit: PropTypes.bool,
   data: PropTypes.any,
 };

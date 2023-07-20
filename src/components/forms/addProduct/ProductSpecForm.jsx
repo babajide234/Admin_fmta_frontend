@@ -4,39 +4,23 @@ import DashHeader from "../../Dash/DashHeader";
 import InputIcons, { CustomSelectButton } from "../../common/InputIcons";
 import { ReactComponent as Edit } from "../../../assets/main/icon/edit-2.svg";
 import PropTypes from "prop-types";
-import { useQuery } from "react-query";
-import miscSlice from "../../../store/miscSlice";
+import { UNITS } from "../../../util/util";
 
-const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
-  const [countryCode, setCountryCode] = useState("");
-  const [stateCode, setStateCode] = useState("");
+const ProductSpecForm = ({
+  values,
+  touched,
+  errors,
+  handleChange,
+  setCountryCode = "",
+  setStateCode = "",
+  countries = [],
+  states = [],
+  cities = [],
+  countryLoading = false,
+  stateLoading = false,
+  cityLoading = false,
+}) => {
   const [imported, setImported] = useState("");
-
-  const getCountry = miscSlice((state) => state.getCountry);
-  const getState = miscSlice((state) => state.getState);
-  const getCity = miscSlice((state) => state.getCity);
-
-  const { data: countries, isLoading: countryLoading } = useQuery(
-    "getCountry",
-    () => {
-      const response = getCountry();
-      return response;
-    }
-  );
-  const { data: states, isLoading: stateLoading } = useQuery(
-    ["getStateQuery", countryCode],
-    () => getState(countryCode),
-    {
-      enabled: countryCode !== "",
-    }
-  );
-  const { data: cities, isLoading: cityLoading } = useQuery(
-    ["getCityQuery", stateCode],
-    () => getCity(stateCode),
-    {
-      enabled: stateCode !== "",
-    }
-  );
 
   return (
     <section className="productSpecForm">
@@ -65,17 +49,17 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
               <option value="" selected>
                 Sizes
               </option>
-              {/* {size.map((option) => (
-                    <>
-                      <option
-                        key={option.id}
-                        value={option.name}
-                        className="py-4 text-md hover:bg-lightPrimary"
-                      >
-                        {option.name}
-                      </option>
-                    </>
-                  ))} */}
+              {UNITS.map((option) => (
+                <>
+                  <option
+                    key={option.id}
+                    value={option.name}
+                    className="py-4 text-md hover:bg-lightPrimary"
+                  >
+                    {option.name}
+                  </option>
+                </>
+              ))}
             </CustomSelectButton>
           </div>
         </div>
@@ -128,7 +112,6 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
               value=""
               disabled
               selected
-              hidden
               className="py-4 text-md hover:bg-lightPrimary"
             >
               Adult or Children
@@ -144,6 +127,12 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
               className="py-4 text-md hover:bg-lightPrimary"
             >
               Child
+            </option>
+            <option
+              value={"both"}
+              className="py-4 text-md hover:bg-lightPrimary"
+            >
+              Both
             </option>
           </CustomSelectButton>
         </div>
@@ -209,47 +198,49 @@ const ProductSpecForm = ({ values, touched, errors, handleChange }) => {
             err={errors.imported && touched.imported}
             label={"imported"}
           >
-            <option value="" selected hidden disabled>
+            <option value="" hidden disabled>
               Imported from Abroad
             </option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            <option value={"Yes"}>Yes</option>
+            <option value={"No"}>No</option>
+          </CustomSelectButton>
+        </div>
+        <div className="input-container">
+          <CustomSelectButton
+            name="country"
+            value={values.country}
+            onChange={(e) => {
+              handleChange(e);
+              setCountryCode(e.target.value);
+            }}
+            err={errors.country && touched.country}
+            label={"Country"}
+            loading={countryLoading}
+          >
+            <option
+              value=""
+              selected
+              disabled
+              className="py-4 text-md hover:bg-lightPrimary"
+            >
+              Select country
+            </option>
+            {countries?.map((option, index) => {
+              return (
+                <option
+                  key={index}
+                  value={option.isoCode}
+                  className="py-4 text-md hover:bg-lightPrimary"
+                >
+                  {option.name}
+                </option>
+              );
+            })}
           </CustomSelectButton>
         </div>
 
         {imported === "Yes" && (
           <>
-            <div className="input-container">
-              <CustomSelectButton
-                name="country"
-                value={values.country}
-                onChange={(e) => {
-                  handleChange(e);
-                  setCountryCode(e.target.value);
-                }}
-                err={errors.country && touched.country}
-                label={"Country"}
-                loading={countryLoading}
-              >
-                <option
-                  value=""
-                  selected
-                  disabled
-                  className="py-4 text-md hover:bg-lightPrimary"
-                >
-                  Select country
-                </option>
-                {countries?.map((option, index) => {
-                  <option
-                    key={index}
-                    value={option.isoCode}
-                    className="py-4 text-md hover:bg-lightPrimary"
-                  >
-                    {option.name}
-                  </option>;
-                })}
-              </CustomSelectButton>
-            </div>
             <div className="input-container">
               <CustomSelectButton
                 name="state"
@@ -360,5 +351,13 @@ ProductSpecForm.propTypes = {
   values: PropTypes.any,
   touched: PropTypes.any,
   handleChange: PropTypes.any,
+  setCountryCode: PropTypes.string,
+  setStateCode: PropTypes.string,
+  countries: PropTypes.array,
+  states: PropTypes.array,
+  cities: PropTypes.array,
+  countryLoading: PropTypes.bool,
+  stateLoading: PropTypes.bool,
+  cityLoading: PropTypes.bool,
 };
 export default ProductSpecForm;

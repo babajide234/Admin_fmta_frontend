@@ -45,7 +45,9 @@ const InputIcons = ({
 
       <label
         htmlFor={inputName}
-        className={`inputIcon__label p-500 ${err ? 'error' : 'secondary-disabled' }`}
+        className={`inputIcon__label p-500 ${
+          err ? "error" : "secondary-disabled"
+        }`}
       >
         {placeholder}
       </label>
@@ -102,7 +104,7 @@ export const CustomSelectButton = ({
           <select
             {...field}
             {...rest}
-            className="inputIcon-select appearance-none bg-transparent block w-full px-4  rounded-md focus:outline-none font-medium text-inherit p-500 secondary"
+            className="inputIcon-select appearance-none bg-transparent block w-full px-4  rounded-md focus:outline-none font-medium text-inherit p-500 secondary capitalize"
           >
             {children}
           </select>
@@ -165,7 +167,9 @@ export const TextAreaIcon = ({
       />
       <label
         htmlFor={inputName}
-        className={`textArea__label  p-500  ${err ? 'error' : 'secondary-disabled' }`}
+        className={`textArea__label  p-500  ${
+          err ? "error" : "secondary-disabled"
+        }`}
       >
         {placeholder}
       </label>
@@ -206,7 +210,7 @@ export const DatePickerField = ({
           {iconLeft}
         </span>
       )}
-     <Field name={inputName}>
+      <Field name={inputName}>
         {({ field, form }) => (
           <DatePicker
             selected={field.value}

@@ -83,6 +83,7 @@ export const SHIPPING = [
   },
 ];
 export const iconStyle = { width: "26px", height: "20px", color: "#001973" };
+
 export const formatDateTime = (isoDateTimeString) => {
   const dateTime = new Date(isoDateTimeString);
   const options = {
@@ -96,14 +97,37 @@ export const formatDateTime = (isoDateTimeString) => {
   return dateTime.toLocaleString("en-US", options);
 };
 export const size = [
-  { id: 1, name: "SM" },
-  { id: 2, name: "MD" },
-  { id: 3, name: "L" },
-  { id: 4, name: "XL" },
-  { id: 5, name: "XXL" },
+  { id: 1, name: "Cartons" },
+  { id: 2, name: "Pieces" },
+  { id: 3, name: "Units" },
 ];
 
-export const getNameByIsoCode = (isoCode, array) => {
-  const foundItem = array.find((item) => item.isoCode === isoCode);
-  return foundItem ? foundItem.name : "";
+export const USERROLE = [
+  {
+    id: 5,
+    name: "manufacturer",
+    guard_name: "web",
+  },
+  {
+    id: 6,
+    name: "retailer",
+    guard_name: "web",
+  },
+];
+
+export const getNameByIsoCode = (isoCode = "", array = [{}]) => {
+  if (array === null || array.length === 0) {
+    return "";
+  } else {
+    const foundItem = array.find((item) => item.isoCode === isoCode);
+    return foundItem ? foundItem.name : "";
+  }
+};
+export const getNameById = (id = "", array = [{}]) => {
+  if (array === null || array.length === 0) {
+    return "";
+  } else {
+    const foundItem = array.find((item) => item.id === id);
+    return foundItem ? foundItem.name : "";
+  }
 };

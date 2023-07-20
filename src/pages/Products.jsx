@@ -13,12 +13,16 @@ import { Checkbox } from "../ui/checkbox";
 import CurrencyFormat from "react-currency-format";
 import Actions from "../components/common/Actions";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
+import Details from "../components/Product/Details";
 
 const Products = () => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [details, setDetails] = useState(false);
   const [prod, setProd] = useState({});
   const getProducts = productSlice.getState().getProducts;
+  const activateProduct = productSlice.getState().activateProduct;
+  const deactivateProduct = productSlice.getState().deactivateProduct;
 
   const handleEditClick = () => {
     setEdit(true);
@@ -148,7 +152,7 @@ const Products = () => {
               approved ? "column-approved-primary" : "column-approved-disable"
             }`}
           >
-            {approved ? "Approved" : "Waiting"}
+            {approved ? "Approved" : "Pending"}
           </div>
         );
       },
@@ -158,6 +162,8 @@ const Products = () => {
       cell: ({ row }) => {
         const action = row.original;
         const product = row.original;
+        const productId = row.original.id;
+        const status = row.original.status;
         return (
           <Actions action={action}>
             <DropdownMenuItem
@@ -169,14 +175,29 @@ const Products = () => {
             >
               Edit
             </DropdownMenuItem>
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
+                if (status === "1") {
+                  deactivateProduct(productId);
+                } else {
+                  activateProduct(productId);
+                }
+              }}
+            >
+              {status === "1" ? "Deactivate" : "Approve"}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
+                setProd(product);
+                setDetails(!details);
+              }}
+            >
+              Details
+            </DropdownMenuItem>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Delete
-            </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Approve
-            </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Details
             </DropdownMenuItem>
           </Actions>
         );
@@ -184,21 +205,20 @@ const Products = () => {
     },
   ];
 
-  
-
   return (
     <>
       {edit && (
         <div>
           <DashAddProduct
-            goBack={() => setEdit(false)}
+            goBack={() => setEdit(!edit)}
             edit={edit}
             data={prod}
           />
         </div>
       )}
-      {open && <DashAddProduct goBack={() => setOpen(false)} />}
-      {!edit && !open && (
+      {open && <DashAddProduct goBack={() => setOpen(!open)} />}
+      {details && <Details data={prod} goBack={() => setDetails(!details)} />}
+      {!edit && !open && !details && (
         <div className="dashboardProduct__div-container">
           <div className="dashboardProduct__div-header flex justify-between items-center">
             <DashHeader text="Products" />

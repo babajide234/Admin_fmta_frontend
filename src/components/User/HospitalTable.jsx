@@ -1,15 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Table from "../../components/tables/table";
+import Table from "../tables/table";
 import { ArrowUpDown } from "lucide-react";
 import { Checkbox } from "../../ui/checkbox";
 import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
+import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
 
-const UserTable = () => {
+
+
+const HospitalTable = () => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
-  const userColumn = [
+  const hospitalColumn = [
     {
       id: "select",
       header: ({ table }) => (
@@ -75,6 +78,31 @@ const UserTable = () => {
       ),
     },
     {
+      accessorKey: "verify",
+      header: () => (
+        <div className="text-left header__4 secondary flex items-center">
+          Verification code
+        </div>
+      ),
+      cell: ({ row }) => (
+        <div className="text-left p5 secondary-disabled">
+          {row.getValue("verify")}
+        </div>
+      ),
+    },
+    {
+      accessorKey: "timestamp",
+      header: () => (
+        <div className="text-left header__4 secondary flex items-center">
+          Created at
+        </div>
+      ),
+      cell: ({ row }) => {
+        const date = formatDateTime(row.getValue("timestamp"));
+        return <div className="text-left p5 secondary-disabled">{date}</div>;
+      },
+    },
+    {
       id: "actions",
       cell: ({ row }) => {
         const action = row.original;
@@ -98,13 +126,9 @@ const UserTable = () => {
 
   return (
     <div className="dashUser__div-table">
-      <Table
-        getData={() => getUsersByRole("customer")}
-        columns={userColumn}
-        filter={"name"}
-      />
+      <Table getData={() => getUsersByRole('hospital')} columns={hospitalColumn} filter={"name"} />
     </div>
   );
 };
 
-export default UserTable;
+export default HospitalTable;

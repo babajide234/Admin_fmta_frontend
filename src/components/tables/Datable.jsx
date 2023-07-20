@@ -26,6 +26,7 @@ import {
 import { Button } from "../../ui/button";
 import PaginationControl from "./PaginationControl";
 import PropTypes from "prop-types";
+import LoadingSpinnerComponent from "react-spinners-components";
 
 const DataTable = ({ columns, data, filter }) => {
   const [sorting, setSorting] = useState([]);
@@ -149,7 +150,12 @@ const DataTable = ({ columns, data, filter }) => {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {/* No results. */}
+                  <LoadingSpinnerComponent
+                    type={"Rolling"}
+                    colors={["#001973", "#E0F2F9"]}
+                    size={"100px"}
+                  />
                 </TableCell>
               </TableRow>
             )}

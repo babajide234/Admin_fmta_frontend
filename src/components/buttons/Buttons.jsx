@@ -15,7 +15,10 @@ export const Buttons = ({
     <>
       {(type == "btn" || type == "submit") && (
         <button
-          className={`btn btn__default ${ disable ? "btn-disable" : ``} ${`btn__${color}`}  ${hover ? `btn-hover` : ""}`}
+          type={type}
+          className={`btn btn__default ${
+            disable ? "btn-disable" : ``
+          } ${`btn__${color}`}  ${hover ? `btn-hover` : ""}`}
           {...rest}
         >
           {children}

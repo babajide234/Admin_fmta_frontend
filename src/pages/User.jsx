@@ -4,10 +4,8 @@ import DashHeader from "../components/Dash/DashHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import UserTable from "../components/User/UserTable";
 import VendorTable from "../components/User/VendorTable";
-import UnverifiedTable from "../components/User/UnverifiedTable";
 import ManufacturerTable from "../components/User/ManufacturerTable";
-
-
+import HospitalTable from "../components/User/HospitalTable";
 
 const User = () => {
   return (
@@ -21,14 +19,17 @@ const User = () => {
               <TabsTrigger value="users" className="p4 secondary">
                 Users
               </TabsTrigger>
-              <TabsTrigger value="vendors" className="p4 secondary">
-                Vendors
+              <TabsTrigger value="vendors" className="p4 secondary capitalize">
+                Retailers
               </TabsTrigger>
-              <TabsTrigger value="unverified" className="p4 secondary">
-                Unverified vendors
-              </TabsTrigger>
-              <TabsTrigger value="manufacturers" className="p4 secondary">
+              <TabsTrigger
+                value="manufacturers"
+                className="p4 secondary capitalize"
+              >
                 Manufacturers
+              </TabsTrigger>
+              <TabsTrigger value="hospital" className="p4 secondary capitalize">
+                hospitals
               </TabsTrigger>
             </TabsList>
 
@@ -38,11 +39,11 @@ const User = () => {
             <TabsContent value="vendors">
               <VendorTable />
             </TabsContent>
-            <TabsContent value="unverified">
-              <UnverifiedTable />
-            </TabsContent>
             <TabsContent value="manufacturers">
               <ManufacturerTable />
+            </TabsContent>
+            <TabsContent value="hospital">
+              <HospitalTable />
             </TabsContent>
           </Tabs>
         </div>
