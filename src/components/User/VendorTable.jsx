@@ -7,8 +7,9 @@ import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
+import PropTypes from "prop-types";
 
-const VendorTable = () => {
+const VendorTable = ({ setData, setName, setOpen }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
 
   const vendorColumn = [
@@ -154,17 +155,24 @@ const VendorTable = () => {
     {
       id: "actions",
       cell: ({ row }) => {
-        const action = row.original;
+        const data = row.original;
 
         return (
-          <Actions action={action}>
+          <Actions action={data}>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Verify
             </DropdownMenuItem>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Disable
             </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
+                setData(data);
+                setName("retailer");
+                setOpen(true);
+              }}
+            >
               Details
             </DropdownMenuItem>
           </Actions>
@@ -184,4 +192,9 @@ const VendorTable = () => {
   );
 };
 
+VendorTable.propTypes = {
+  setOpen: PropTypes.any,
+  setData: PropTypes.any,
+  setName: PropTypes.any,
+};
 export default VendorTable;

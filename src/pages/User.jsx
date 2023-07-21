@@ -6,8 +6,13 @@ import VendorTable from "../components/User/VendorTable";
 import ManufacturerTable from "../components/User/ManufacturerTable";
 import HospitalTable from "../components/User/HospitalTable";
 import CustomerTable from "../components/User/CustomerTable";
+import DetailsModal from "../components/Modal/DetailsModal";
 
 const User = () => {
+  const [data, setData] = useState({});
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+
   return (
     <main className="dashUser">
       <div className="dashUser__div-container">
@@ -34,20 +39,45 @@ const User = () => {
             </TabsList>
 
             <TabsContent value="customer">
-              <CustomerTable />
+              <CustomerTable
+                setOpen={setOpen}
+                setData={setData}
+                setName={setName}
+              />
             </TabsContent>
             <TabsContent value="vendors">
-              <VendorTable />
+              <VendorTable
+                setOpen={setOpen}
+                setData={setData}
+                setName={setName}
+              />
             </TabsContent>
             <TabsContent value="manufacturers">
-              <ManufacturerTable />
+              <ManufacturerTable
+                setOpen={setOpen}
+                setData={setData}
+                setName={setName}
+              />
             </TabsContent>
             <TabsContent value="hospital">
-              <HospitalTable />
+              <HospitalTable
+                setOpen={setOpen}
+                setData={setData}
+                setName={setName}
+              />
             </TabsContent>
           </Tabs>
         </div>
       </div>
+      {open && (
+        <DetailsModal
+          data={data}
+          name={name}
+          loading={true}
+          close={() => setOpen(!open)}
+          open={open}
+        />
+      )}
     </main>
   );
 };
