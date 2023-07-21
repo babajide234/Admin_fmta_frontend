@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import DashHeader from "../components/Dash/DashHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import UserTable from "../components/User/UserTable";
 import VendorTable from "../components/User/VendorTable";
 import ManufacturerTable from "../components/User/ManufacturerTable";
 import HospitalTable from "../components/User/HospitalTable";
+import CustomerTable from "../components/User/CustomerTable";
 
 const User = () => {
   return (
@@ -14,10 +14,10 @@ const User = () => {
         <DashHeader text={"Users"} />
 
         <div className="dashUser__div-body">
-          <Tabs defaultValue="users" className="w-full">
+          <Tabs defaultValue="customer" className="w-full">
             <TabsList className="dashUser__tab-container w-fit rounded-lg px-4 ">
-              <TabsTrigger value="users" className="p4 secondary">
-                Users
+              <TabsTrigger value="customer" className="p4 secondary">
+                Customers
               </TabsTrigger>
               <TabsTrigger value="vendors" className="p4 secondary capitalize">
                 Retailers
@@ -33,8 +33,8 @@ const User = () => {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="users">
-              <UserTable />
+            <TabsContent value="customer">
+              <CustomerTable />
             </TabsContent>
             <TabsContent value="vendors">
               <VendorTable />

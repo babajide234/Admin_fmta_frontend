@@ -8,9 +8,6 @@ import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
 
-
-
-
 const ManufacturerTable = () => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
   const manufacturerColumn = [
@@ -33,25 +30,25 @@ const ManufacturerTable = () => {
       enableSorting: false,
       enableHiding: false,
     },
-    {
-      accessorKey: "store",
-      header: ({ column }) => (
-        <div
-          className="text-left header__4 secondary flex items-center"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Store
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </div>
-      ),
-      cell: ({ row }) => {
-        return (
-          <div className="text-left p5 secondary capitalize">
-            {row.getValue("store")}
-          </div>
-        );
-      },
-    },
+    // {
+    //   accessorKey: "store",
+    //   header: ({ column }) => (
+    //     <div
+    //       className="text-left header__4 secondary flex items-center"
+    //       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+    //     >
+    //       Store
+    //       <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
+    //     </div>
+    //   ),
+    //   cell: ({ row }) => {
+    //     return (
+    //       <div className="text-left p5 secondary capitalize">
+    //         {row.getValue("store")}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       accessorKey: "name",
       header: ({ column }) => (
@@ -59,14 +56,15 @@ const ManufacturerTable = () => {
           className="text-left header__4 secondary flex items-center"
           onClick={() => column.toggleSorting(column.getisSorted() === "asc")}
         >
-          Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          Manufacturer Name
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => {
+        const org_name = row.original.meta.org_name
         return (
-          <div className="text-left p5 secondary-disabled">
-            {row.getValue("name")}
+          <div className="text-left header__5 secondary-disabled capitalize">
+            {org_name}
           </div>
         );
       },
@@ -97,55 +95,55 @@ const ManufacturerTable = () => {
         </div>
       ),
     },
+    // {
+    //   accessorKey: "role",
+    //   header: ({ column }) => (
+    //     <div
+    //       className="text-left header__4 secondary flex items-center"
+    //       onClick={() => column.toggleSorting(column.getisSorted() === "asc")}
+    //     >
+    //       Role
+    //       <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
+    //     </div>
+    //   ),
+    //   cell: ({ row }) => (
+    //     <div className="text-left p5 secondary-disabled">
+    //       {row.getValue("role")}
+    //     </div>
+    //   ),
+    // },
     {
-      accessorKey: "role",
+      accessorKey: "email_verified_at",
       header: ({ column }) => (
         <div
           className="text-left header__4 secondary flex items-center"
           onClick={() => column.toggleSorting(column.getisSorted() === "asc")}
         >
-          Role
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </div>
-      ),
-      cell: ({ row }) => (
-        <div className="text-left p5 secondary-disabled">
-          {row.getValue("role")}
-        </div>
-      ),
-    },
-    {
-      accessorKey: "approved",
-      header: ({ column }) => (
-        <div
-          className="text-left header__4 secondary flex items-center"
-          onClick={() => column.toggleSorting(column.getisSorted() === "asc")}
-        >
-          Approved
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          Verified
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => (
         <div
           className={`text-center p5 secondary-disabled column-approved ${
-            row.getValue("approved") === "approved"
+            row.getValue("email_verified_at")
               ? "column-approved-primary"
               : "column-approved-disable"
           }`}
         >
-          {row.getValue("approved")}
+          {row.getValue("email_verified_at") ? "Verified" : "Pending"}
         </div>
       ),
     },
     {
-      accessorKey: "timestamp",
+      accessorKey: "created_at",
       header: () => (
         <div className="text-left header__4 secondary flex items-center">
           Created at
         </div>
       ),
       cell: ({ row }) => {
-        const date = formatDateTime(row.getValue("timestamp"));
+        const date = formatDateTime(row.getValue("created_at"));
         return <div className="text-left p5 secondary-disabled">{date}</div>;
       },
     },
@@ -153,7 +151,7 @@ const ManufacturerTable = () => {
       id: "actions",
       cell: ({ row }) => {
         const action = row.original;
-  
+
         return (
           <Actions action={action}>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
@@ -173,7 +171,11 @@ const ManufacturerTable = () => {
 
   return (
     <div className="dashUser__div-table">
-      <Table getData={() => getUsersByRole('manufacturer')} columns={manufacturerColumn} filter={"name"} />
+      <Table
+        getData={() => getUsersByRole("manufacturer")}
+        columns={manufacturerColumn}
+        filter={"name"}
+      />
     </div>
   );
 };
