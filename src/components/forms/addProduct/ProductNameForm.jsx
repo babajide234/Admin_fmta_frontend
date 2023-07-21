@@ -41,7 +41,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
                   setRole(e.target.value);
                 }}
                 err={errors.userRole && touched.userRole}
-                label={"user Role"}
+                label={"Role"}
               >
                 <option
                   value=""
@@ -49,7 +49,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
                   selected
                   className="secondary-disabled"
                 >
-                  Owner&apos;s role
+                  Select role
                 </option>
                 {USERROLE.map((option, index) => (
                   <option
@@ -78,7 +78,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
                   selected
                   className="secondary-disabled"
                 >
-                  Owner&apos;s role
+                  Select a name
                 </option>
                 {data &&
                   data?.map((option, index) => (

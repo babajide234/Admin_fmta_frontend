@@ -40,12 +40,12 @@ const HospitalTable = () => {
           onClick={() => column.toggleSorting(column.getisSorted() === "asc")}
         >
           Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => {
         return (
-          <div className="text-left p5 secondary-disabled">
+          <div className="text-left header__5 secondary-disabled capitalize">
             {row.getValue("name")}
           </div>
         );
@@ -91,14 +91,14 @@ const HospitalTable = () => {
       ),
     },
     {
-      accessorKey: "timestamp",
+      accessorKey: "created_at",
       header: () => (
         <div className="text-left header__4 secondary flex items-center">
           Created at
         </div>
       ),
       cell: ({ row }) => {
-        const date = formatDateTime(row.getValue("timestamp"));
+        const date = formatDateTime(row.getValue("created_at"));
         return <div className="text-left p5 secondary-disabled">{date}</div>;
       },
     },

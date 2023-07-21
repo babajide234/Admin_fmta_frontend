@@ -58,7 +58,7 @@ const Products = () => {
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => {
@@ -73,24 +73,25 @@ const Products = () => {
       accessorKey: "price",
       header: () => <div className="text-left header__4 secondary">Price</div>,
       cell: ({ row }) => {
+        const currency = row.original.currency;
         return (
           <CurrencyFormat
             value={row.getValue("price")}
             displayType={"text"}
             thousandSeparator={true}
-            prefix={"₦"}
+            prefix={currency === "NGN" ? "₦" : "$"}
             className="text-left p5 secondary-disabled"
           />
         );
       },
     },
     {
-      accessorKey: "user",
+      accessorKey: "org_name",
       header: () => (
         <div className="text-left header__4 secondary">Vendor Name</div>
       ),
       cell: ({ row }) => {
-        const vendor = row.original.user.name;
+        const vendor = row.original.user.meta.org_name;
         return (
           <div className="text-left header__5 secondary-disabled capitalize">
             {vendor}
@@ -106,7 +107,7 @@ const Products = () => {
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Type
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => {
@@ -125,7 +126,7 @@ const Products = () => {
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Date Created
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => {
@@ -141,7 +142,7 @@ const Products = () => {
           onClick={() => !column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Approved
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => {
@@ -208,13 +209,7 @@ const Products = () => {
   return (
     <>
       {edit && (
-        <div>
-          <DashAddProduct
-            goBack={() => setEdit(!edit)}
-            edit={edit}
-            data={prod}
-          />
-        </div>
+        <DashAddProduct goBack={() => setEdit(!edit)} edit={edit} data={prod} />
       )}
       {open && <DashAddProduct goBack={() => setOpen(!open)} />}
       {details && <Details data={prod} goBack={() => setDetails(!details)} />}

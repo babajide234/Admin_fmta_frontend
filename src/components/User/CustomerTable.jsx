@@ -1,13 +1,14 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
-import Table from "../../components/tables/table";
+import React, { useState } from "react";
+import Table from "../tables/table";
 import { ArrowUpDown } from "lucide-react";
 import { Checkbox } from "../../ui/checkbox";
 import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import roleSlice from "../../store/roleSlice";
 
-const UserTable = () => {
+
+const CustomerTable = () => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
   const userColumn = [
     {
@@ -37,12 +38,12 @@ const UserTable = () => {
           onClick={() => column.toggleSorting(column.getisSorted() === "asc")}
         >
           Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer" />
         </div>
       ),
       cell: ({ row }) => {
         return (
-          <div className="text-left p5 secondary-disabled">
+          <div className="text-left header__5 secondary-disabled capitalize">
             {row.getValue("name")}
           </div>
         );
@@ -87,7 +88,14 @@ const UserTable = () => {
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Disable
             </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
+                // setData(action);
+                // setName("customer");
+                // setOpen(true);
+              }}
+            >
               Details
             </DropdownMenuItem>
           </Actions>
@@ -106,5 +114,9 @@ const UserTable = () => {
     </div>
   );
 };
-
-export default UserTable;
+// CustomerTable.propTypes = {
+//   setOpen: PropTypes.any,
+//   setData: PropTypes.any,
+//   setName: PropTypes.any,
+// };
+export default CustomerTable;

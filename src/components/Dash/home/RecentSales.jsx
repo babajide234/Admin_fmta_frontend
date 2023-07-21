@@ -16,7 +16,7 @@ const RecentSales = () => {
       <div className="recentSales">
         <div className="flex items-center justify-between gap-4">
           <DashHeader small={true} text="Recent sales" />
-          <GoForward text={"Order"} to={"/"} />
+          <GoForward text={"Order"} to={"/orders"} />
         </div>
         <div className="recentSales__div-card">
           <div className="flex items-center  recentSales__div-card-item">

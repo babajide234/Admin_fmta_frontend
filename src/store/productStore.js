@@ -7,7 +7,7 @@ const initialState = {
   subCategory: null,
   products: null,
 };
-const productSlice = create((set) => ({
+const productSlice = create((set, get) => ({
   ...initialState,
   getCategoryName: async () => {
     try {
@@ -51,6 +51,7 @@ const productSlice = create((set) => ({
     try {
       loaderSlice.setState({ loader: true });
       const response = await instance.post(`products/activate/${id}`);
+      get().getProducts();
       return response.data.data;
     } catch (error) {
       return error;
@@ -62,6 +63,7 @@ const productSlice = create((set) => ({
     try {
       loaderSlice.setState({ loader: true });
       const response = await instance.post(`products/deactivate/${id}`);
+      get().getProducts();
       return response.data.data;
     } catch (error) {
       return error;
@@ -73,7 +75,7 @@ const productSlice = create((set) => ({
     try {
       loaderSlice.setState({ loader: true });
       const response = await instance.post(`products/create`, data);
-      // console.log(response);
+      get().getProducts();
       return response.data;
     } catch (error) {
       return error;
