@@ -99,7 +99,7 @@ const DataTable = ({ columns, data, filter }) => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="flex-1 text-sm text-muted-foreground p5 ink">
+      <div className="flex-1 text-sm text-muted-foreground p5 secondary">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>

@@ -3,10 +3,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Modal from "./Modal";
 import { formatDateTime } from "../../util/util";
+import DashHeader from "../Dash/DashHeader";
 
 const DetailsModal = ({ open, close, data, loading, name }) => {
   return ReactDOM.createPortal(
     <Modal open={open} loading={loading} close={close}>
+      {name === "customer" || name === "hospital" && <DashHeader text={data.name} variant={"outline"} />
+        }
+      {name === "manufacturer" || name === "retailer" &&  <DashHeader text={data.meta.org_name} variant={"outline"} />
+        }
       <div className="productDetails__section-body">
         {name === "hospital" && (
           <>
