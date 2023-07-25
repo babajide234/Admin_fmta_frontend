@@ -26,8 +26,9 @@ import {
 import { Button } from "../../ui/button";
 import PaginationControl from "./PaginationControl";
 import PropTypes from "prop-types";
+import LoadingSpinnerComponent from "react-spinners-components";
 
-const DataTable = ({ columns, data }) => {
+const DataTable = ({ columns, data, filter }) => {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -57,15 +58,15 @@ const DataTable = ({ columns, data }) => {
       <div className="flex items-center">
         <div className="flex items-center my-4">
           <Input
-            placeholder="Filter by name..."
+            placeholder={`Filter by ${filter}...`}
             value={
-              (table.getColumn("name") &&
-                table.getColumn("name").getFilterValue()) ||
+              (table.getColumn(filter) &&
+                table.getColumn(filter).getFilterValue()) ||
               ""
             }
             onChange={(event) => {
-              table.getColumn("name") &&
-                table.getColumn("name").setFilterValue(event.target.value);
+              table.getColumn(filter) &&
+                table.getColumn(filter).setFilterValue(event.target.value);
             }}
             className="max-w-sm dataTable__input"
           />
@@ -98,7 +99,7 @@ const DataTable = ({ columns, data }) => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="flex-1 text-sm text-muted-foreground p5 ink">
+      <div className="flex-1 text-sm text-muted-foreground p5 secondary">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
@@ -147,9 +148,14 @@ const DataTable = ({ columns, data }) => {
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24 text-center pt-10"
                 >
-                  No results.
+                  {/* No results. */}
+                  <LoadingSpinnerComponent
+                    type={"Rolling"}
+                    colors={["#001973", "#E0F2F9"]}
+                    size={"100px"}
+                  />
                 </TableCell>
               </TableRow>
             )}
@@ -165,5 +171,6 @@ const DataTable = ({ columns, data }) => {
 DataTable.propTypes = {
   columns: PropTypes.array,
   data: PropTypes.any,
+  filter: PropTypes.string,
 };
 export default DataTable;

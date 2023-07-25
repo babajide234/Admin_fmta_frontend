@@ -105,7 +105,7 @@ const LoginForm = () => {
                     ? 'Enter your email address'
                     : 'Enter your phone number'
                 }
-                values={input == 'email' ? values.email : values.phone}
+                value={input == 'email' ? values.email : values.phone}
                 onChange={handleChange}
                 err={
                   (errors.email || errors.phone) &&

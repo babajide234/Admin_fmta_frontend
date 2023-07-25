@@ -1,25 +1,27 @@
-.dashCategories{}
-.dashCat{
-   &__div{
-    &-header{
-        border-block: 1px solid $tertiary;
-    }
-    &-table{
-        &-item:not(:last-child){
-            border-bottom: 1px solid $tertiary;
-        }
-    }
-   } 
+.dashCategories {
 }
-.dashSubCat{
-   &__div{
-    &-header{
-        border-block: 1px solid $tertiary;
+.dashCat {
+  &__div {
+    &-header {
+      border-block: 1px solid $tertiary;
     }
-    &-table{
-        &-item:not(:last-child){
-            border-bottom: 1px solid $tertiary;
-        }
+    &-table {
+      &-item:nth-child(even) {
+        background-color: $accent;
+      }
     }
-   } 
+  }
 }
+.dashSubCat {
+  &__div {
+    &-header {
+      border-block: 1px solid $tertiary;
+    }
+    &-table {
+      &-item:nth-child(even) {
+        background-color: $accent;
+      }
+    }
+  }
+}
+

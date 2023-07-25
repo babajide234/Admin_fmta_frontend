@@ -39,6 +39,11 @@
           color: $neutral-white;
         }
       }
+      svg{
+        color: $secondary-disabled;
+        width: 16px;
+        height: 17px;
+      }
     }
   }
 }
@@ -54,6 +59,7 @@
     color: $neutral-white;
   }
   svg {
+    color: $neutral-white;
     path {
       stroke: $neutral-white;
     }

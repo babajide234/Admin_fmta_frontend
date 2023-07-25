@@ -10,13 +10,80 @@ export const SIDEBARMENU = [
     icon: "Shopping_cart",
   },
   {
+    name: "Orders",
+    url: "/orders",
+    icon: "Box",
+  },
+  {
+    name: "User",
+    url: "/users",
+    icon: "User",
+  },
+  {
     name: "Categories",
     url: "/categories",
-    icon: "Box",
+    icon: "List",
+  },
+  {
+    name: "Markup",
+    url: "/markup",
+    icon: "Plus",
   },
 ];
 
+export const MARKUPLIST = [
+  {
+    name: "product",
+    value: 20,
+  },
+  {
+    name: "category",
+    value: 13,
+  },
+  {
+    name: "local",
+    value: 10,
+  },
+  {
+    name: "international",
+    value: 20,
+  },
+];
+
+export const UNITS = [
+  {
+    id: 1,
+    name: "Units",
+  },
+  {
+    id: 2,
+    name: "Pieces",
+  },
+  {
+    id: 3,
+    name: "Carton",
+  },
+  {
+    id: 4,
+    name: "Container",
+  },
+];
+export const SHIPPING = [
+  {
+    id: 1,
+    name: "DHL",
+  },
+  {
+    id: 2,
+    name: "FedEx",
+  },
+  {
+    id: 3,
+    name: "GIGM",
+  },
+];
 export const iconStyle = { width: "26px", height: "20px", color: "#001973" };
+
 export const formatDateTime = (isoDateTimeString) => {
   const dateTime = new Date(isoDateTimeString);
   const options = {
@@ -30,9 +97,37 @@ export const formatDateTime = (isoDateTimeString) => {
   return dateTime.toLocaleString("en-US", options);
 };
 export const size = [
-  { id: 1, name: "SM" },
-  { id: 2, name: "MD" },
-  { id: 3, name: "L" },
-  { id: 4, name: "XL" },
-  { id: 5, name: "XXL" },
+  { id: 1, name: "Cartons" },
+  { id: 2, name: "Pieces" },
+  { id: 3, name: "Units" },
 ];
+
+export const USERROLE = [
+  {
+    id: 5,
+    name: "manufacturer",
+    guard_name: "web",
+  },
+  {
+    id: 6,
+    name: "retailer",
+    guard_name: "web",
+  },
+];
+
+export const getNameByIsoCode = (isoCode = "", array = [{}]) => {
+  if (array === null || array.length === 0) {
+    return "";
+  } else {
+    const foundItem = array.find((item) => item.isoCode === isoCode);
+    return foundItem ? foundItem.name : "";
+  }
+};
+export const getNameById = (id = "", array = [{}]) => {
+  if (array === null || array.length === 0) {
+    return "";
+  } else {
+    const foundItem = array.find((item) => item.id === id);
+    return foundItem ? foundItem.name : "";
+  }
+};

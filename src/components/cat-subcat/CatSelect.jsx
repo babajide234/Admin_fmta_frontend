@@ -39,7 +39,7 @@ const CatSelect = ({ errors, values, touched, handleChange }) => {
     <>
       <CustomSelectButton
         name={"category"}
-        values={values.category}
+        value={values.category}
         onChange={(event) => {
           handleChange(event);
           handleCategoryChange(event);
@@ -57,8 +57,8 @@ const CatSelect = ({ errors, values, touched, handleChange }) => {
         >
           Select a category
         </option>
-        {data?.map((option) => (
-          <option key={option.id} value={option.id} className=" ">
+        {data?.map((option, index) => (
+          <option key={index} value={option.id} className="">
             {option.name}
           </option>
         ))}

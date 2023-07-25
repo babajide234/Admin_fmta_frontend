@@ -1,22 +1,99 @@
 //eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import DashHeader from "../../Dash/DashHeader";
 import InputIcons, {
   CustomSelectButton,
   TextAreaIcon,
 } from "../../common/InputIcons";
 import { ReactComponent as Edit } from "../../../assets/main/icon/edit-2.svg";
-import { size } from "../../../util/util";
+import { UNITS, USERROLE } from "../../../util/util";
 
 import PropTypes from "prop-types";
 import CatSelect from "../../cat-subcat/CatSelect";
 import SubCatSelect from "../../cat-subcat/SubCatSelect";
+import roleSlice from "../../../store/roleSlice";
+import { useQuery } from "react-query";
 
-const ProductNameForm = ({ values, touched, errors, handleChange }) => {
+const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
+  const [role, setRole] = useState("");
+  const getUsersByRole = roleSlice.getState().getUsersByRole;
+
+  const { data, isLoading } = useQuery(
+    ["getUsersByRole", role],
+    () => getUsersByRole(role),
+    {
+      enabled: role !== "",
+    }
+  );
+
   return (
     <section>
       <DashHeader small={true} text={"Description"} />
       <div className="">
+        {!edit && (
+          <div className="input-container grid-2">
+            <div className="">
+              <CustomSelectButton
+                name="userRole"
+                value={values.userRole}
+                onChange={(e) => {
+                  handleChange(e);
+                  setRole(e.target.value);
+                }}
+                err={errors.userRole && touched.userRole}
+                label={"Role"}
+              >
+                <option
+                  value=""
+                  disabled
+                  selected
+                  className="secondary-disabled"
+                >
+                  Select role
+                </option>
+                {USERROLE.map((option, index) => (
+                  <option
+                    key={index}
+                    value={option.name}
+                    className="py-4 text-md hover:bg-lightPrimary capitalize"
+                  >
+                    {option.name}
+                  </option>
+                ))}
+              </CustomSelectButton>
+            </div>
+
+            <div className="">
+              <CustomSelectButton
+                name="userId"
+                value={values.userId}
+                onChange={handleChange}
+                err={errors.userId && touched.userId}
+                label={"owned by"}
+                loading={isLoading}
+              >
+                <option
+                  value=""
+                  disabled
+                  selected
+                  className="secondary-disabled"
+                >
+                  Select a name
+                </option>
+                {data &&
+                  data?.map((option, index) => (
+                    <option
+                      key={index}
+                      value={option.id}
+                      className="py-4 text-md hover:bg-lightPrimary capitalize"
+                    >
+                      {option.name}
+                    </option>
+                  ))}
+              </CustomSelectButton>
+            </div>
+          </div>
+        )}
         <div className="input-container">
           <InputIcons
             inputName={"name"}
@@ -31,34 +108,6 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
 
         <div className="input-container grid-2">
           <div className="">
-            {/* <CustomSelectButton
-              name="category"
-              value={values.category}
-              onChange={handleChange}
-              err={errors.category && touched.category}
-              label={"Product Category"}
-            >
-              <option
-                value=""
-                disabled
-                selected
-                hidden
-                className="secondary-disabled"
-              >
-                Product Category
-              </option>
-              {size.map((option) => (
-                <>
-                  <option
-                    key={option.id}
-                    value={option.name}
-                    className="py-4 text-md hover:bg-lightPrimary"
-                  >
-                    {option.name}
-                  </option>
-                </>
-              ))}
-            </CustomSelectButton> */}
             <CatSelect
               values={values}
               touched={touched}
@@ -68,28 +117,6 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
           </div>
 
           <div className="">
-            {/* <CustomSelectButton
-              name="subCategory"
-              value={values.subCategory}
-              onChange={handleChange}
-              err={errors.subCategory && touched.subCategory}
-              label={"Product Sub-Category"}
-            >
-              <option value="" disabled selected hidden>
-                Product Sub-Category
-              </option>
-              {size.map((option) => (
-                <>
-                  <option
-                    key={option.id}
-                    value={option.name}
-                    className="py-4 text-md hover:bg-lightPrimary"
-                  >
-                    {option.name}
-                  </option>
-                </>
-              ))}
-            </CustomSelectButton> */}
             <SubCatSelect
               values={values}
               touched={touched}
@@ -131,10 +158,10 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
               err={errors.size && touched.size}
               label={"Value"}
             >
-              <option value="" selected hidden disabled>
+              <option value="" selected disabled>
                 Size
               </option>
-              {size.map((option) => (
+              {UNITS.map((option) => (
                 <>
                   <option
                     key={option.id}
@@ -211,6 +238,32 @@ const ProductNameForm = ({ values, touched, errors, handleChange }) => {
           />
         </div>
         <div className="input-container">
+          <CustomSelectButton
+            name="condition"
+            value={values.condition}
+            onChange={handleChange}
+            err={errors.condition && touched.condition}
+            label={"condition"}
+          >
+            <option value="" selected hidden disabled>
+              Condition of product
+            </option>
+
+            <option
+              value={"New"}
+              className="py-4 text-md hover:bg-lightPrimary"
+            >
+              new
+            </option>
+            <option
+              value={"refurbished"}
+              className="py-4 text-md hover:bg-lightPrimary"
+            >
+              refurbished
+            </option>
+          </CustomSelectButton>
+        </div>
+        <div className="input-container">
           <InputIcons
             inputName={"videoLink"}
             type={"text"}
@@ -231,6 +284,7 @@ ProductNameForm.propTypes = {
   values: PropTypes.any,
   touched: PropTypes.any,
   handleChange: PropTypes.any,
+  edit: PropTypes.bool,
 };
 
 export default ProductNameForm;

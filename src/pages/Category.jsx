@@ -35,30 +35,32 @@ const Category = () => {
   );
   return (
     <main className="dashCategories">
-      <DashHeader text={"Product Categories"} />
-      <section className="dashCategories__section-body">
-        <div className="dashCategories__div-container grid-2">
-          <div>
-            <BorderContainer variant="outline">
-              <DashCat
-                variant="outline"
-                catLoading={catLoading}
-                catData={catData}
-                handleCategoryChange={handleCategoryChange}
-              />
-            </BorderContainer>
+      <div className="dashCategories__div-container">
+        <DashHeader text={"Product Categories"} />
+        <section className="dashCategories__section-body">
+          <div className="dashCategories__div-container grid-2">
+            <div>
+              <BorderContainer variant="outline">
+                <DashCat
+                  variant="outline"
+                  catLoading={catLoading}
+                  catData={catData}
+                  handleCategoryChange={handleCategoryChange}
+                />
+              </BorderContainer>
+            </div>
+            <div>
+              <BorderContainer variant="outline">
+                <DashSubCat
+                  variant="outline"
+                  subCategoryData={subCatData}
+                  subCatLoading={subCatLoading}
+                />
+              </BorderContainer>
+            </div>
           </div>
-          <div>
-            <BorderContainer variant="outline">
-              <DashSubCat
-                variant="outline"
-                subCategoryData={subCatData}
-                subCatLoading={subCatLoading}
-              />
-            </BorderContainer>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 };

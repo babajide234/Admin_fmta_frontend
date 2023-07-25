@@ -28,17 +28,17 @@ const DashSubCat = ({
   };
   return (
     <div className="dashSubCat">
-      <div className="flex justify-between items-center gap-2">
+      <div className="flex justify-between items-center gap-4">
         <DashHeader small={true} text={"Sub-Categories"} variant={variant} />
         <DialogContainer
           trigger={
-            <div className="btn-container">
+            <div className="btn-container w-full">
               <Buttons color={"primary"} type={"btn"}>
-                Add Sub-category
+                Add
               </Buttons>
             </div>
           }
-          title={"Default Modal"}
+          title={"Add sub-category"}
         >
           <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ values, errors, touched, handleChange, submitForm }) => (
