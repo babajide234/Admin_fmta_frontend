@@ -8,13 +8,7 @@
     justify-content: center;
     align-items: flex-end;
 
-    &-h1 {
-      font-family: $ff-secondary-hv;
-      font-style: normal;
-      font-weight: $fw-bold;
-      font-size: 64px;
-      line-height: 90px;
-      color: $secondary;
+    h1 {
     }
   }
   &__content {
@@ -30,7 +24,7 @@
     }
   }
   &__div {
-    &-icon{
+    &-icon {
       width: 25%;
     }
     &-icon:not(:first-child) {
@@ -122,7 +116,7 @@
       text-transform: capitalize;
     }
     &-nos {
-      font-family: "Manrope";
+      font-family: 'Manrope';
       font-style: normal;
       font-weight: 800;
       font-size: 32px;
@@ -144,7 +138,7 @@
     }
   }
   &__li {
-    font-family: "Manrope";
+    font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
@@ -154,7 +148,7 @@
     color: $ink;
     list-style: disc;
   }
-  &-btn{
+  &-btn {
     width: 45%;
   }
 }
