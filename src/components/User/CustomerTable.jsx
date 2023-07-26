@@ -6,9 +6,9 @@ import { Checkbox } from "../../ui/checkbox";
 import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import roleSlice from "../../store/roleSlice";
+import PropTypes from "prop-types";
 
-
-const CustomerTable = () => {
+const CustomerTable = ({ setData, setOpen, setName }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
   const userColumn = [
     {
@@ -78,10 +78,10 @@ const CustomerTable = () => {
     {
       id: "actions",
       cell: ({ row }) => {
-        const action = row.original;
+        const data = row.original;
 
         return (
-          <Actions action={action}>
+          <Actions action={data}>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Verify
             </DropdownMenuItem>
@@ -91,9 +91,9 @@ const CustomerTable = () => {
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
-                // setData(action);
-                // setName("customer");
-                // setOpen(true);
+                setData(data);
+                setName("customer");
+                setOpen(true);
               }}
             >
               Details
@@ -114,9 +114,9 @@ const CustomerTable = () => {
     </div>
   );
 };
-// CustomerTable.propTypes = {
-//   setOpen: PropTypes.any,
-//   setData: PropTypes.any,
-//   setName: PropTypes.any,
-// };
+CustomerTable.propTypes = {
+  setOpen: PropTypes.any,
+  setData: PropTypes.any,
+  setName: PropTypes.any,
+};
 export default CustomerTable;

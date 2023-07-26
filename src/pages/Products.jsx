@@ -111,9 +111,10 @@ const Products = () => {
         </div>
       ),
       cell: ({ row }) => {
+        const type = row.original.user.meta.org_type;
         return (
           <div className="text-left p5 secondary-disabled capitalize">
-            {row.getValue("type")}
+            {type}
           </div>
         );
       },

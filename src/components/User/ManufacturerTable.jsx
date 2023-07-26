@@ -7,8 +7,9 @@ import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
+import PropTypes from "prop-types";
 
-const ManufacturerTable = () => {
+const ManufacturerTable = ({ setData, setName, setOpen }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
   const manufacturerColumn = [
     {
@@ -61,7 +62,7 @@ const ManufacturerTable = () => {
         </div>
       ),
       cell: ({ row }) => {
-        const org_name = row.original.meta.org_name
+        const org_name = row.original.meta.org_name;
         return (
           <div className="text-left header__5 secondary-disabled capitalize">
             {org_name}
@@ -150,17 +151,24 @@ const ManufacturerTable = () => {
     {
       id: "actions",
       cell: ({ row }) => {
-        const action = row.original;
+        const data = row.original;
 
         return (
-          <Actions action={action}>
+          <Actions action={data}>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Verify
             </DropdownMenuItem>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Disable
             </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
+                setData(data);
+                setName("manufacturer");
+                setOpen(true);
+              }}
+            >
               Details
             </DropdownMenuItem>
           </Actions>
@@ -179,5 +187,9 @@ const ManufacturerTable = () => {
     </div>
   );
 };
-
+ManufacturerTable.propTypes = {
+  setOpen: PropTypes.any,
+  setData: PropTypes.any,
+  setName: PropTypes.any,
+};
 export default ManufacturerTable;

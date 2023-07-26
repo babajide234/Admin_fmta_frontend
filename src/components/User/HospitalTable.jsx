@@ -7,10 +7,9 @@ import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
+import PropTypes from "prop-types";
 
-
-
-const HospitalTable = () => {
+const HospitalTable = ({ setData, setName, setOpen }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
   const hospitalColumn = [
     {
@@ -105,17 +104,24 @@ const HospitalTable = () => {
     {
       id: "actions",
       cell: ({ row }) => {
-        const action = row.original;
+        const data = row.original;
 
         return (
-          <Actions action={action}>
+          <Actions action={data}>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Verify
             </DropdownMenuItem>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Disable
             </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
+                setData(data);
+                setName("hospital");
+                setOpen(true);
+              }}
+            >
               Details
             </DropdownMenuItem>
           </Actions>
@@ -126,9 +132,17 @@ const HospitalTable = () => {
 
   return (
     <div className="dashUser__div-table">
-      <Table getData={() => getUsersByRole('hospital')} columns={hospitalColumn} filter={"name"} />
+      <Table
+        getData={() => getUsersByRole("hospital")}
+        columns={hospitalColumn}
+        filter={"name"}
+      />
     </div>
   );
 };
-
+HospitalTable.propTypes = {
+  setOpen: PropTypes.any,
+  setData: PropTypes.any,
+  setName: PropTypes.any,
+};
 export default HospitalTable;

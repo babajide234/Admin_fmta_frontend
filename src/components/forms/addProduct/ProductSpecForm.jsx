@@ -49,10 +49,10 @@ const ProductSpecForm = ({
               <option value="" selected>
                 Sizes
               </option>
-              {UNITS.map((option) => (
+              {UNITS.map((option, index) => (
                 <>
                   <option
-                    key={option.id}
+                    key={index}
                     value={option.name}
                     className="py-4 text-md hover:bg-lightPrimary"
                   >

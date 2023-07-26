@@ -17,7 +17,10 @@ const DashHeader = ({ text, subText, small = false, variant = "outline" }) => {
   const styles = variants[variant] || {};
   return (
     <header className="dashHeader__header">
-      <h2 className={`${small ? "header__3" : "header__2"}`} style={styles}>
+      <h2
+        className={`${small ? "header__3" : "header__2"} capitalize`}
+        style={styles}
+      >
         {text}
       </h2>
       <p className="p4 ink">{subText}</p>

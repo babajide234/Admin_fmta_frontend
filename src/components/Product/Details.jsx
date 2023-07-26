@@ -44,59 +44,59 @@ const Details = ({ data, goBack }) => {
       <section className="productDetails__section-body">
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Product Name:</p>
-          <p className="p4 secondary-disabled w-9/12">{data.name}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.name}</p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Product id:</p>
-          <p className="p4 secondary-disabled w-9/12">{data.id}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.id}</p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Category:</p>
-          <p className="p4 secondary-disabled w-9/12">
+          <p className="p4 secondary-disabled w-9/12 self-start">
             {getNameById(data.category_id, cat)}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Sub-category:</p>
-          <p className="p4 secondary-disabled w-9/12">
+          <p className="p4 secondary-disabled w-9/12 self-start">
             {getNameById(data.subcategory_id, subCat)}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Price:</p>
-          <p className="p4 secondary-disabled w-9/12">{data.price}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.price}</p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Currency:</p>
-          <p className="p4 secondary-disabled w-9/12">{data.currency}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.currency}</p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">
             Minimum Order Quantity:
           </p>
-          <p className="p4 secondary-disabled w-9/12">{data.moq}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.moq}</p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Quantity in Stock:</p>
-          <p className="p4 secondary-disabled w-9/12">
+          <p className="p4 secondary-disabled w-9/12 self-start">
             {data.quantity_in_stock}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Status:</p>
-          <p className="p4 secondary-disabled w-9/12">
+          <p className="p4 secondary-disabled w-9/12 self-start">
             {data.status === "1" ? "Approved" : "Pending"}
           </p>
         </div>
         <div className="flex  items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Description:</p>
-          <p className="p4 secondary-disabled w-9/12">
+          <p className="p4 secondary-disabled w-9/12 self-start">
             {cleanString(data.description)}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Created at:</p>
-          <p className="p4 secondary-disabled w-9/12">
+          <p className="p4 secondary-disabled w-9/12 self-start">
             {formatDateTime(data.created_at)}
           </p>
         </div>
@@ -104,208 +104,22 @@ const Details = ({ data, goBack }) => {
           <p className="header__4 ink w-3/12 self-start">
             Retailer&apos;s name:
           </p>
-          <p className="p4 secondary-disabled w-9/12">{data.user.name}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.user.name}</p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">
             Retailer&apos;s email:
           </p>
-          <p className="p4 secondary-disabled w-9/12">{data.user.email}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.user.email}</p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">
             Retailer&apos;s phone:
           </p>
-          <p className="p4 secondary-disabled w-9/12">{data.user.phone}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">{data.user.phone}</p>
         </div>
 
-        {/* {name === "hospital" && (
-          <>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Name:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.name}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Email:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.email}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Phone number:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.phone}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Id:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.id}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Registered on:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.created_at}</p>
-            </div>
-          </>
-        )}
-        {name === "manufacturer" && (
-          <>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Manufacturer&apos;s name:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_name}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Manufacturer&apos;s email:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_contact_email == null
-                  ? "Empty"
-                  : data.meta.org_contact_email}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Manufacturer&apos;s phone:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_contact_phone == null
-                  ? "Empty"
-                  : data.meta.org_contact_phone}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Address:</p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.address.address}, {data.meta.address.city},{" "}
-                {data.meta.address.country}.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Manufacturer&apos;s Reg. no.:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_regNo}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Manufacturer&apos;s Id:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">{data.id}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Description:</p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_desc}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Registered by:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.name}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Registrant&apos;s email:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">{data.email}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Registrant&apos;s phone:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">{data.phone}</p>
-            </div>
-          </>
-        )}
-        {name === "retailer" && (
-          <>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Store name:</p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_name}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Store email:</p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_contact_email == null
-                  ? "Empty"
-                  : data.meta.org_contact_email}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Store phone:</p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_contact_phone == null
-                  ? "Empty"
-                  : data.meta.org_contact_phone}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Store id:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.id}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Store reg. number:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_regNo}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Description:</p>
-              <p className="p4 secondary-disabled w-9/12">
-                {data.meta.org_desc}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Registered by:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.name}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Registrant&apos;s email:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">{data.email}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">
-                Registrant&apos;s phone:
-              </p>
-              <p className="p4 secondary-disabled w-9/12">{data.phone}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Registered on:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.created_at}</p>
-            </div>
-          </>
-        )}
-        {name === "customer" && (
-          <>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Name:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.name}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Email:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.email}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Phone number:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.phone}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Id:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.id}</p>
-            </div>
-            <div className="flex items-center gap-2 py-2">
-              <p className="header__4 ink w-3/12 self-start">Registered on:</p>
-              <p className="p4 secondary-disabled w-9/12">{data.created_at}</p>
-            </div>
-          </>
-        )} */}
+        
       </section>
     </main>
   );
