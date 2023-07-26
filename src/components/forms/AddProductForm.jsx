@@ -23,19 +23,24 @@ function cleanString(dirtyString) {
 }
 
 const AddProductForm = ({ edit = false, data = {}, close }) => {
-  const editProduct = productSlice.getState().editProduct;
-  const createProduct = productSlice.getState().createProduct;
   const [countryCode, setCountryCode] = useState("");
   const [stateCode, setStateCode] = useState("");
   const [success, setSuccess] = useState(false);
+  const [imgArray, setImgArray] = useState([]);
   // const [successData, setSuccessData] = useState([]);
   const [failed, setFailed] = useState(false);
+
+  //product id
   const prodId = edit ? data?.id : "";
 
+  //states from store
+  const createProduct = productSlice.getState().createProduct;
+  const editProduct = productSlice.getState().editProduct;
   const getCountry = miscSlice((state) => state.getCountry);
   const getState = miscSlice((state) => state.getState);
   const getCity = miscSlice((state) => state.getCity);
 
+  //formik initialvalues divided into sections based on components
   const nameValues = {
     name: edit ? data.name : "",
     moq: edit ? data.moq : "",
@@ -82,12 +87,14 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     inTheBox: "",
   };
 
+  //combined formik initialvalues
   const combinedInitialValues = {
     ...nameValues,
     ...specValues,
     ...otherValues,
   };
 
+  //yup for form validation
   const AddProductSchema = Yup.object().shape({
     name: Yup.string().required(),
     moq: Yup.number().required(),
@@ -128,6 +135,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     images: Yup.array(),
   });
 
+  //data for countries
   const { data: countries, isLoading: countryLoading } = useQuery(
     "getCountry",
     async () => {
@@ -135,6 +143,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       return response;
     }
   );
+  //data for stats
   const { data: states, isLoading: stateLoading } = useQuery(
     ["getStateQuery", countryCode],
     async () => {
@@ -145,6 +154,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       enabled: countryCode !== "",
     }
   );
+  //data for cities
   const { data: cities, isLoading: cityLoading } = useQuery(
     ["getCityQuery", stateCode],
     async () => {
@@ -155,6 +165,8 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       enabled: stateCode !== "",
     }
   );
+
+  //add product post function using react-query
   const addMutation = useMutation((data) => createProduct(data), {
     onSuccess: (data) => {
       // if (data?.status === true) {
@@ -169,6 +181,8 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       console.log(error);
     },
   });
+
+  //edit product post function using react-query
   const editMutation = useMutation((data) => editProduct(prodId, data), {
     onSuccess: (data) => {
       if (data.status) {
@@ -183,8 +197,8 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     },
   });
 
+  //formik onSubmit function handler
   const handleSubmit = (values, { setSubmitting }) => {
-    // console.log(values);
     const formData = {
       name: values.name,
       description: values.description,
@@ -219,7 +233,9 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       product_condition: values.condition,
       product_training: "",
       adult_children: values.adultOrChild,
+      images: [...imgArray],
     };
+    
     console.log(formData);
     if (edit) {
       editMutation.mutate(formData);
@@ -253,6 +269,8 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
                 errors={errors}
                 handleChange={handleChange}
                 edit={edit}
+                imgArray={imgArray}
+                setImgArray={setImgArray}
               />
               <ProductSpecForm
                 values={values}

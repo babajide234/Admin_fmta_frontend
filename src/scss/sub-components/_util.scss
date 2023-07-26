@@ -181,6 +181,18 @@
 .imagePicker {
   &__form {
     margin: 10px 0;
+    display: flex;
+    gap: 30px;
+
+    @include responsive(xs) {
+      gap: 10px;
+    }
+    @include responsive(sm) {
+      gap: 10px;
+    }
+    @include responsive(md) {
+      gap: 20px;
+    }
   }
   &__input {
     display: none;
@@ -194,6 +206,34 @@
     border: 2px dashed #bababa;
     border-radius: 1rem;
     position: relative;
+
+    @include responsive(xs) {
+      width: 100px;
+      height: 104px;
+    }
+    @include responsive(sm) {
+      width: 100px;
+      height: 104px;
+    }
+    @include responsive(md) {
+      width: 104px;
+      height: 104px;
+    }
+
+    svg {
+      @include responsive(xs) {
+        width: 64px;
+        height: 64px;
+      }
+      @include responsive(sm) {
+        width: 64px;
+        height: 64px;
+      }
+      @include responsive(md) {
+        width: 64px;
+        height: 64px;
+      }
+    }
   }
   &__p-previewer {
     position: absolute;
@@ -204,14 +244,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
     & img {
       width: 95%;
       height: 220px;
       border-radius: 1rem;
       object-fit: cover;
+
+      @include responsive(xs) {
+        height: 98px;
+      }
+      @include responsive(sm) {
+        height: 98px;
+      }
+      @include responsive(md) {
+        height: 98px;
+      }
     }
   }
 }
+
 .w-60 {
   width: 60%;
 }

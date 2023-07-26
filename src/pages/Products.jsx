@@ -14,6 +14,12 @@ import CurrencyFormat from "react-currency-format";
 import Actions from "../components/common/Actions";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
 import Details from "../components/Product/Details";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 const Products = () => {
   const [open, setOpen] = useState(false);
@@ -63,7 +69,7 @@ const Products = () => {
       ),
       cell: ({ row }) => {
         return (
-          <div className="text-left header__5 secondary-disabled">
+          <div className="text-left header__4 secondary-disabled">
             {row.getValue("name")}
           </div>
         );
@@ -73,15 +79,87 @@ const Products = () => {
       accessorKey: "price",
       header: () => <div className="text-left header__4 secondary">Price</div>,
       cell: ({ row }) => {
-        const currency = row.original.currency;
+        const data = row.original;
         return (
-          <CurrencyFormat
-            value={row.getValue("price")}
-            displayType={"text"}
-            thousandSeparator={true}
-            prefix={currency === "NGN" ? "₦" : "$"}
-            className="text-left p5 secondary-disabled"
-          />
+          <>
+            <div className="flex items-center gap-2 mb-2">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="header__5 secondary">
+                    C.P
+                  </TooltipTrigger>
+                  <TooltipContent className="backg-accent">
+                    <p className="p4 secondary">Cost Price</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
+              <CurrencyFormat
+                value={row.getValue("price")}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦"}
+                className="text-left p5 secondary-disabled"
+              />
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="header__5 secondary">
+                    S.P
+                  </TooltipTrigger>
+                  <TooltipContent className="backg-accent">
+                    <p className="p4 secondary">Selling Price</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              <CurrencyFormat
+                value={data.price_with_markup}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦"}
+                className="text-left p5 secondary-disabled"
+              />
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="header__5 secondary">
+                    VAT
+                  </TooltipTrigger>
+                  <TooltipContent className="backg-accent">
+                    <p className="p4 secondary">Value Added Tax</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              <CurrencyFormat
+                value={data.vat}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦"}
+                className="text-left p5 secondary-disabled"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger className="header__5 secondary">
+                    T.P
+                  </TooltipTrigger>
+                  <TooltipContent className="backg-accent">
+                    <p className="p4 secondary">Total Price</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              <CurrencyFormat
+                value={data.total_price}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦"}
+                className="text-left p5 secondary-disabled"
+              />
+            </div>
+          </>
         );
       },
     },
