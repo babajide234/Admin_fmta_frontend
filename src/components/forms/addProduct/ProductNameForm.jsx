@@ -13,9 +13,21 @@ import CatSelect from "../../cat-subcat/CatSelect";
 import SubCatSelect from "../../cat-subcat/SubCatSelect";
 import roleSlice from "../../../store/roleSlice";
 import { useQuery } from "react-query";
+import { Field } from "formik";
+import ImagePicker from "../../ImagePicker/index";
 
-const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
+const ProductNameForm = ({
+  values,
+  touched,
+  errors,
+  handleChange,
+  edit,
+  imgArray,
+  setImgArray,
+}) => {
   const [role, setRole] = useState("");
+  const [isChecked, setChecked] = useState(false);
+
   const getUsersByRole = roleSlice.getState().getUsersByRole;
 
   const { data, isLoading } = useQuery(
@@ -26,6 +38,17 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
     }
   );
 
+  const handleCheckbox = (e) => {
+    setChecked(e.target.checked);
+  };
+
+  const handleImageChange = (url) => {
+    if (imgArray.length <= 3) {
+      setImgArray((Prev) => [...Prev, url]);
+    } else {
+      return;
+    }
+  };
   return (
     <section>
       <DashHeader small={true} text={"Description"} />
@@ -227,6 +250,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
             onChange={handleChange}
           />
         </div>
+
         <div className="input-container">
           <TextAreaIcon
             inputName={"description"}
@@ -237,6 +261,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
             iconRight={<Edit />}
           />
         </div>
+
         <div className="input-container">
           <CustomSelectButton
             name="condition"
@@ -263,6 +288,7 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
             </option>
           </CustomSelectButton>
         </div>
+
         <div className="input-container">
           <InputIcons
             inputName={"videoLink"}
@@ -274,6 +300,33 @@ const ProductNameForm = ({ values, touched, errors, handleChange, edit }) => {
             onChange={handleChange}
           />
         </div>
+
+        <div className="input-container flex items-center gap-4 align-middle">
+          <Field
+            type="checkbox"
+            name="imageCheckBox"
+            id="imageCheckBox"
+            checked={isChecked}
+            onClick={handleCheckbox}
+          />
+          <label htmlFor="imageCheckBox" className="p4 secondary">
+            Add product images (optional)
+          </label>
+        </div>
+
+        {isChecked && (
+          <section className="flex gap-4 items-center flex-wrap">
+            <ImagePicker
+              onChange={(imageData) => handleImageChange(imageData)}
+            />
+            <ImagePicker
+              onChange={(imageData) => handleImageChange(imageData)}
+            />
+            <ImagePicker
+              onChange={(imageData) => handleImageChange(imageData)}
+            />
+          </section>
+        )}
       </div>
     </section>
   );
@@ -285,6 +338,8 @@ ProductNameForm.propTypes = {
   touched: PropTypes.any,
   handleChange: PropTypes.any,
   edit: PropTypes.bool,
+  imgArray: PropTypes.array,
+  setImgArray: PropTypes.func,
 };
 
 export default ProductNameForm;

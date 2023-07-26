@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { instance } from "../util/request";
+import { instance, uploadinstance } from "../util/request";
 
 const initialState = {
   coountry: null,
@@ -11,11 +11,7 @@ const miscSlice = create((set) => ({
   ...initialState,
   imgUpload: async (image) => {
     try {
-      const response = await instance.post("misc/upload-image", image, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await uploadinstance.post("misc/upload-image", image);
       return response;
     } catch (error) {
       return error;
