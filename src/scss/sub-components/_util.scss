@@ -309,6 +309,9 @@
 .backg-error{
   background-color: $error;
 }
+.border-error{
+  border: 1px solid $error;
+}
 .svg-active {
   svg {
     color: $secondary;

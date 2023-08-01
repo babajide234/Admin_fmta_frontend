@@ -270,7 +270,8 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
                 handleChange={handleChange}
                 edit={edit}
                 imgArray={imgArray}
-                setImgArray={setImgArray}
+                setImgArray={setImgArray}                
+                setFieldValue={setFieldValue}
               />
               <ProductSpecForm
                 values={values}
@@ -294,7 +295,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
                 setFieldValue={setFieldValue}
               />
             </div>
-            <div className="btn-container">
+            <div className="btn-container py-6">
               <Buttons
                 type={"submit"}
                 color={"primary"}
