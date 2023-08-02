@@ -140,12 +140,12 @@ const ProductSpecForm = ({
 
         <div className="input-container">
           <InputIcons
-            inputName={"productSize"}
+            inputName={"productSizes"}
             type={"text"}
             placeholder={"Product size (Enter sizes seperated by comma(,))"}
             iconRight={<Edit />}
-            value={values.productSize}
-            err={errors.productSize && touched.productSize}
+            value={values.productSizes}
+            err={errors.productSizes && touched.productSizes}
             onChange={handleChange}
           />
         </div>

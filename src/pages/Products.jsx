@@ -20,12 +20,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import SuccessModal from "../components/Modal/SucessModal";
+import FailedModal from "../components/Modal/FailedModal";
 
 const Products = () => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [details, setDetails] = useState(false);
   const [prod, setProd] = useState({});
+  const [success, setSuccess] = useState(false);
+  const [failed, setFailed] = useState(false);
   const getProducts = productSlice.getState().getProducts;
   const activateProduct = productSlice.getState().activateProduct;
   const deactivateProduct = productSlice.getState().deactivateProduct;
@@ -288,9 +292,25 @@ const Products = () => {
   return (
     <>
       {edit && (
-        <DashAddProduct goBack={() => setEdit(!edit)} edit={edit} data={prod} />
+        <DashAddProduct
+          goBack={() => setEdit(!edit)}
+          edit={edit}
+          data={prod}
+          success={success}
+          setSuccess={setSuccess}
+          failed={failed}
+          setFailed={setFailed}
+        />
       )}
-      {open && <DashAddProduct goBack={() => setOpen(!open)} />}
+      {open && (
+        <DashAddProduct
+          goBack={() => setOpen(!open)}
+          success={success}
+          setSuccess={setSuccess}
+          failed={failed}
+          setFailed={setFailed}
+        />
+      )}
       {details && <Details data={prod} goBack={() => setDetails(!details)} />}
       {!edit && !open && !details && (
         <div className="dashboardProduct__div-container">
@@ -312,6 +332,24 @@ const Products = () => {
           </div>
           <Table getData={getProducts} columns={columns} filter={"name"} />
         </div>
+      )}
+      {success && (
+        <SuccessModal
+          open={success}
+          close={() => setSuccess(!success)}
+          loading={true}
+          text={`${edit ? "Product edited " : "Product created "}`}
+        ></SuccessModal>
+      )}
+
+      {failed && (
+        <FailedModal
+          open={failed}
+          close={() => setFailed(!failed)}
+          loading={true}
+          header={"failed"}
+          text={`${edit ? "Product edit failed" : "Create product failed "}`}
+        ></FailedModal>
       )}
     </>
   );

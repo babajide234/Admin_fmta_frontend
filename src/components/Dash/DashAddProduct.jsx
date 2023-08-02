@@ -5,7 +5,15 @@ import GoBack from "../GoBack";
 import PropTypes from "prop-types";
 // import DashHeader from "./DashHeader";
 
-const DashAddProduct = ({ goBack, edit = false, data = {} }) => {
+const DashAddProduct = ({
+  goBack,
+  edit = false,
+  data = {},
+  success,
+  setSuccess,
+  failed,
+  setFailed,
+}) => {
   // console.log(data);
   return (
     <main className="dashAddProduct">
@@ -15,7 +23,15 @@ const DashAddProduct = ({ goBack, edit = false, data = {} }) => {
           {edit ? "Edit Product" : "Add a Product"}
         </h2>
       </header>
-      <AddProductForm edit={edit} data={data} close={goBack} />
+      <AddProductForm
+        edit={edit}
+        data={data}
+        close={goBack}
+        success={success}
+        setSuccess={setSuccess}
+        failed={failed}
+        setFailed={setFailed}
+      />
     </main>
   );
 };
@@ -24,5 +40,9 @@ DashAddProduct.propTypes = {
   goBack: PropTypes.func,
   edit: PropTypes.bool,
   data: PropTypes.any,
+  success: PropTypes.bool,
+  setSuccess: PropTypes.func,
+  failed: PropTypes.bool,
+  setFailed: PropTypes.func,
 };
 export default DashAddProduct;

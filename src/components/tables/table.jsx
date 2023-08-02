@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "./Datable";
 import PropTypes from "prop-types";
+// import { useQuery } from "react-query";
 
 const Table = ({ columns, getData, filter }) => {
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ const Table = ({ columns, getData, filter }) => {
     fetchData();
   }, [getData]);
 
+  
   return (
     <div className="container mx-auto py-5">
       <DataTable columns={columns} data={data} filter={filter} />

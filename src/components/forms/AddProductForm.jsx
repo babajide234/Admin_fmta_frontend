@@ -12,7 +12,6 @@ import { useMutation, useQuery } from "react-query";
 import productSlice from "../../store/productStore";
 import miscSlice from "../../store/miscSlice";
 import { getNameByIsoCode } from "../../util/util";
-import SuccessModal from "../Modal/SucessModal";
 
 function cleanString(dirtyString) {
   const parser = new DOMParser();
@@ -22,13 +21,20 @@ function cleanString(dirtyString) {
   return cleanedString;
 }
 
-const AddProductForm = ({ edit = false, data = {}, close }) => {
+const AddProductForm = ({
+  edit = false,
+  data = {},
+  close,
+  success,
+  setSuccess,
+  failed,
+  setFailed,
+}) => {
   const [countryCode, setCountryCode] = useState("");
   const [stateCode, setStateCode] = useState("");
-  const [success, setSuccess] = useState(false);
+
   const [imgArray, setImgArray] = useState([]);
   // const [successData, setSuccessData] = useState([]);
-  const [failed, setFailed] = useState(false);
 
   //product id
   const prodId = edit ? data?.id : "";
@@ -62,7 +68,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     width: "",
     height: "",
     adultOrChild: "",
-    productSize: "",
+    productSizes: "",
     productWeight: "",
     productColor: "",
     modelNum: "",
@@ -102,7 +108,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     category: Yup.string().required(),
     subCategory: Yup.string().required(),
     brand: Yup.string().required(),
-    price: Yup.number().required(),
+    price: Yup.string().required(),
     currency: Yup.string().required(),
     condition: Yup.string().required(),
     discount: Yup.number(),
@@ -112,9 +118,9 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     width: Yup.number().required(),
     height: Yup.number().required(),
     adultOrChild: Yup.string().required(),
-    productSize: Yup.string().required(),
+    productSizes: Yup.string(),
     productWeight: Yup.number().required(),
-    productColor: Yup.string(),
+    productColor: Yup.string().required(),
     modelNum: Yup.string(),
     imported: Yup.string().required(),
     country: Yup.string(),
@@ -127,7 +133,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     warranty: Yup.string(),
     description: Yup.string().required(),
     madeIn: Yup.string().required(),
-    manufacturedDate: Yup.date().required(),
+    manufacturedDate: Yup.date(),
     expiryDate: Yup.date(),
     inTheBox: Yup.string().required(),
     userRole: Yup.string(),
@@ -169,12 +175,11 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
   //add product post function using react-query
   const addMutation = useMutation((data) => createProduct(data), {
     onSuccess: (data) => {
-      // if (data?.status === true) {
-      //   setSuccessData(data?.data);
-      //   setSuccess(!success);
-      // } else {
-      //   setFailed(!failed);
-      // }
+      if (data?.status) {
+        setSuccess(!success);
+      } else {
+        setFailed(!failed);
+      }
       console.log(data);
     },
     onError: (error) => {
@@ -185,7 +190,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
   //edit product post function using react-query
   const editMutation = useMutation((data) => editProduct(prodId, data), {
     onSuccess: (data) => {
-      if (data.status) {
+      if (data?.status) {
         setSuccess(!success);
       } else {
         setFailed(!failed);
@@ -214,7 +219,8 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       brand: values.brand,
       featured: true,
       in_the_box: values.inTheBox,
-      size: values.productSize,
+      size: values.size,
+      sizes: values.productSizes,
       weight: values.productWeight,
       color: values.productColor,
       model_number: values.modelNum,
@@ -238,7 +244,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       adult_children: values.adultOrChild,
       images: [...imgArray],
     };
-
+    // console.log(formData);
     if (edit) {
       editMutation.mutate(formData);
       // editProduct(prodId, formData);
@@ -246,7 +252,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       addMutation.mutate(formData);
     }
     setSubmitting(false);
-    resetForm()
+    resetForm();
     close();
   };
   return (
@@ -310,25 +316,6 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
           </Form>
         )}
       </Formik>
-
-      {success && (
-        <SuccessModal
-          open={success}
-          close={() => setSuccess(!success)}
-          loading={true}
-          text={`${edit ? "Product edited " : "Product created "}`}
-        ></SuccessModal>
-      )}
-
-      {failed && (
-        <SuccessModal
-          open={failed}
-          close={() => setFailed(!failed)}
-          loading={true}
-          header={"failed"}
-          text={`${edit ? "Product edit failed" : "Create product failed "}`}
-        ></SuccessModal>
-      )}
     </>
   );
 };
@@ -337,5 +324,9 @@ AddProductForm.propTypes = {
   data: PropTypes.object,
   edit: PropTypes.bool,
   close: PropTypes.func,
+  success: PropTypes.bool,
+  setSuccess: PropTypes.func,
+  failed: PropTypes.bool,
+  setFailed: PropTypes.func,
 };
 export default AddProductForm;

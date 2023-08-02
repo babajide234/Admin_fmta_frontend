@@ -179,20 +179,19 @@ const ProductNameForm = ({
               onChange={handleChange}
               err={errors.size && touched.size}
               label={"Value"}
+              defaultValue={"option1"}
             >
-              <option value="" selected disabled>
+              <option value="option1" disabled>
                 Size
               </option>
-              {UNITS.map((option) => (
-                <>
-                  <option
-                    key={option.id}
-                    value={option.name}
-                    className="py-4 text-md hover:bg-lightPrimary"
-                  >
-                    {option.name}
-                  </option>
-                </>
+              {UNITS.map((option, index) => (
+                <option
+                  key={index}
+                  value={option.name}
+                  className="py-4 text-md hover:bg-lightPrimary"
+                >
+                  {option.name}
+                </option>
               ))}
             </CustomSelectButton>
           </div>
@@ -202,7 +201,7 @@ const ProductNameForm = ({
           <div>
             <InputIcons
               inputName={"price"}
-              type={"number"}
+              type={"text"}
               placeholder={"Product Price"}
               iconRight={<Edit />}
               value={values.price}
