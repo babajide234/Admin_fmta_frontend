@@ -267,7 +267,7 @@
 .w-60 {
   width: 60%;
 }
-.accent{
+.accent {
   color: $accent;
 }
 .secondary {
@@ -306,10 +306,10 @@
 .backg-disable {
   background-color: $secondary-disabled;
 }
-.backg-error{
+.backg-error {
   background-color: $error;
 }
-.border-error{
+.border-error {
   border: 1px solid $error;
 }
 .svg-active {
@@ -327,4 +327,18 @@
       stroke: $secondary-disabled;
     }
   }
+}
+.no-scroll {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+//STYLE FOR REACT-QUILL
+.ql-toolbar.ql-snow {
+  border-radius: 8px 8px 0 0;
+}
+.ql-container.ql-snow {
+  border-radius: 0 0 8px 8px;
 }

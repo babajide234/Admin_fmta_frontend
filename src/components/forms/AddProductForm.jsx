@@ -117,7 +117,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
     productColor: Yup.string(),
     modelNum: Yup.string(),
     imported: Yup.string().required(),
-    country: Yup.string().required(),
+    country: Yup.string(),
     city: Yup.string(),
     state: Yup.string(),
     postal: Yup.number(),
@@ -198,7 +198,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
   });
 
   //formik onSubmit function handler
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values, { resetForm, setSubmitting }) => {
     const formData = {
       name: values.name,
       description: values.description,
@@ -225,7 +225,10 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       product_shipped_city: values.city,
       product_shipped_state: getNameByIsoCode(values.state, states),
       product_shipped_postal: values.postal,
-      product_shipped_country: getNameByIsoCode(values.country, countries),
+      product_shipped_country:
+        values.imported === "No"
+          ? "Nigeria"
+          : getNameByIsoCode(values.country, countries),
       product_shipped_hsc: values.hsc,
       product_manufacture: values.manufacturedDate,
       product_expiry: values.expiryDate,
@@ -235,8 +238,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       adult_children: values.adultOrChild,
       images: [...imgArray],
     };
-    
-    console.log(formData);
+
     if (edit) {
       editMutation.mutate(formData);
       // editProduct(prodId, formData);
@@ -244,6 +246,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
       addMutation.mutate(formData);
     }
     setSubmitting(false);
+    resetForm()
     close();
   };
   return (
@@ -270,7 +273,7 @@ const AddProductForm = ({ edit = false, data = {}, close }) => {
                 handleChange={handleChange}
                 edit={edit}
                 imgArray={imgArray}
-                setImgArray={setImgArray}                
+                setImgArray={setImgArray}
                 setFieldValue={setFieldValue}
               />
               <ProductSpecForm

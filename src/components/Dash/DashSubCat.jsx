@@ -86,25 +86,29 @@ const DashSubCat = ({
           />
         ) : (
           <div className="dashSubCat__div-table">
-            {subCategoryData?.map((row, index) => (
-              <div
-                className="dashSubCat__div-table-item grid grid-cols-7 py-2"
-                key={row.id}
-              >
-                <div className="p4 col-span-1 text-left">{index + 1}</div>
-                <div className="p4 col-span-5 text-left">{row.name}</div>
-                <div className="p4 col-span-1">
-                  <Actions>
-                    <DropdownMenuItem className="dropdown-options p4 secondary ">
-                      Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="dropdown-options p4 secondary ">
-                      Delete
-                    </DropdownMenuItem>
-                  </Actions>
+            {subCategoryData?.length === 0 ? (
+              <p className="p3 secondary text-center mt-6">No subcategory</p>
+            ) : (
+              subCategoryData?.map((row, index) => (
+                <div
+                  className="dashSubCat__div-table-item grid grid-cols-7 py-2"
+                  key={row.id}
+                >
+                  <div className="p4 col-span-1 text-left">{index + 1}</div>
+                  <div className="p4 col-span-5 text-left">{row.name}</div>
+                  <div className="p4 col-span-1">
+                    <Actions>
+                      <DropdownMenuItem className="dropdown-options p4 secondary ">
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="dropdown-options p4 secondary ">
+                        Delete
+                      </DropdownMenuItem>
+                    </Actions>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         )}
       </div>
