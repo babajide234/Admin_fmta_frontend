@@ -30,68 +30,166 @@
       text-align: left;
       color: $ink;
       width: 60%;
-      
     }
-   
   }
   &__card {
     background: $accent;
-    gap: 32px;
-    border-radius: 32px;
-    @include flex($jc: center, $ai: center);
-    margin: 20px 0;
+    gap: 2rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    margin: 1.25rem 0;
+
+    @include responsive(xs) {
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    @include responsive(dm) {
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    @include responsive(md) {
+      align-items: flex-start;
+    }
     &-primary {
       color: $primary;
-    }
-    &-big {
-      padding: 48px;
-    }
-    &-small {
-      padding: 24px 32px;
     }
     &-secondary {
       color: $secondary;
     }
+    &-big {
+      padding: 3rem;
+      @include responsive(xs) {
+        padding: 40px 24px;
+      }
+      @include responsive(sm) {
+        padding: 40px 24px;
+      }
+      @include responsive(md) {
+        padding: 40px 24px;
+      }
+    }
+    &-small {
+      padding: 1.5rem 2rem;
+      @include responsive(xs) {
+        padding: 40px 24px;
+      }
+      @include responsive(sm) {
+        padding: 40px 24px;
+      }
+      @include responsive(md) {
+        padding: 40px;
+      }
+    }
     &-icon {
       flex: 1;
       //margin-right: 10px;
+
+      svg {
+        width: 144px;
+        height: 144px;
+
+        @include responsive(xs) {
+          width: 40px;
+          height: 40px;
+        }
+        @include responsive(sm) {
+          width: 40px;
+          height: 40px;
+        }
+        // @include responsive(md) {
+        //   width: 64px  !important;
+        //   height: 64px !important;
+        // }
+      }
+      &-small {
+        @include responsive(md) {
+          flex: 4 !important;
+
+          svg {
+            width: 100px !important;
+            height: 100px !important;
+          }
+        }
+      }
+    }
+    &-right {
+      flex: 8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 2rem;
+
+      @include responsive(xs) {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      @include responsive(sm) {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      @include responsive(md) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
     }
     &-title {
       flex: 7;
     }
     &-text1 {
-      font-family: $ff-secondary-hv;
-      font-style: normal;
-      font-weight: 900;
-      font-size: 28px;
-      line-height: 38px;
-      letter-spacing: 1px;
+      @include responsive(xs) {
+        font-size: 14px !important;
+        line-height: 20px !important;
+      }
+      @include responsive(sm) {
+        font-size: 14px !important;
+        line-height: 20px !important;
+      }
+      @include responsive(md) {
+        font-size: 20px !important;
+        line-height: 30px !important;
+      }
     }
     &-text2 {
-      font-family: $ff-primary;
-      font-size: 1rem;
-      font-weight: 500;
-      line-height: 29px;
-      letter-spacing: 0.5px;
-      text-align: left;
-      color: $ink;
-      margin-top: 7px;
+      margin-top: 0.4375rem;
       //height: 60px;
+      @include responsive(xs) {
+        font-size: 13px !important;
+        line-height: 26px !important;
+      }
+      @include responsive(sm) {
+        font-size: 13px !important;
+        line-height: 26px !important;
+      }
+      @include responsive(md) {
+        font-size: 16px !important;
+        line-height: 26px !important;
+      }
     }
     &-text1-small {
-      font-family: $ff-primary;
-      font-style: normal;
-      font-weight: $fw-light;
-      font-size: 1rem;
-      line-height: 29px;
-      letter-spacing: 0.5px;
+      @include responsive(md) {
+        font-size: 24px !important;
+        line-height: 30px !important;
+      }
     }
     &-btn {
       flex: 3;
       width: 100%;
     }
     &-settings {
-      height: 142px;
+      height: 8.875rem;
+
+      @include responsive(xs) {
+        height: inherit;
+      }
+      @include responsive(sm) {
+        height: inherit;
+      }
+      @include responsive(md) {
+        height: 228px;
+      }
     }
   }
   &__header {
@@ -153,7 +251,7 @@
 .hospitalBuy {
   &-content {
     margin-top: 70px;
-   display: flex;
+    display: flex;
   }
   &__p {
     &-text {
@@ -180,7 +278,7 @@
       height: 268px;
       display: flex;
       align-items: center;
-      flex: .5;
+      flex: 0.5;
       margin-inline: 20px;
     }
   }

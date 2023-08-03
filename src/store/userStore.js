@@ -81,6 +81,17 @@ const userSlice = create(
           console.log(error);
         }
       },
+      changePassword: async (data) => {
+        try {
+          loaderSlice.setState({ loader: true });
+          const response = await instance.post("password/change", data);
+          return response.data;
+        } catch (error) {
+          return error;
+        } finally {
+          loaderSlice.setState({ loader: false });
+        }
+      },
       editProfile: async (formdata) => {
         try {
           const response = await instance.post("profile", formdata);
