@@ -29,7 +29,7 @@ const Sidebar = () => {
               return props.isActive ? "active-link" : "";
             }}
           >
-            <div className={`hospitalSideNav__ul-listItem `}>
+            <div className={`hospitalSideNav__ul-listItem`}>
               {item.icon === "Home" && <Home />}
               {item.icon === "Box" && <Box />}
               {item.icon === "User" && <User />}
@@ -41,9 +41,11 @@ const Sidebar = () => {
           </NavLink>
         ))}
         <DropdownMenu>
-          <DropdownMenuTrigger className="hospitalSideNav__ul-listItem w-full">
+          <DropdownMenuTrigger className="hospitalSideNav__ul-listItem ">
             <Shopping_cart />
-            <span className="hospitalSideNav__ul-span w-full">Product menu</span>
+            <span className="hospitalSideNav__ul-span w-full">
+              Product menu
+            </span>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="backg-neutral w-[260px] rounded-[32px] border-[1px]">
             <DropdownMenuLabel className="pl-6 header__4 secondary">

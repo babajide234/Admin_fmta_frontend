@@ -29,6 +29,7 @@ const AddProductForm = ({
   setSuccess,
   failed,
   setFailed,
+  // prod,
 }) => {
   const [countryCode, setCountryCode] = useState("");
   const [stateCode, setStateCode] = useState("");
@@ -48,49 +49,97 @@ const AddProductForm = ({
 
   //formik initialvalues divided into sections based on components
   const nameValues = {
-    name: edit ? data.name : "",
-    moq: edit ? data.moq : "",
-    size: "",
-    category: edit ? data.category_id : "",
-    subCategory: edit ? data.subcategory_id : "",
-    brand: "",
-    price: edit ? data.price : "",
-    currency: edit ? data.currency : "",
-    discount: "",
+    name: edit ? data?.name : "",
+    moq: edit ? data?.moq : "",
+    size: edit
+      ? data?.details.quantity_size
+        ? data?.details.quantity_size
+        : ""
+      : "",
+    category: edit ? data?.category.id : "",
+    subCategory: edit ? data?.subcategory_id : "",
+    brand: edit ? (data?.details.brand ? data?.details.brand : "") : "",
+    price: edit ? data?.price : "",
+    currency: edit ? data?.currency : "",
+    discount: edit
+      ? data?.details.discount
+        ? data?.details.discount
+        : ""
+      : "",
     userRole: "",
-    userId: edit ? data.user_id : "",
+    userId: edit ? data?.user_id : "",
   };
 
   const specValues = {
-    stockQuantity: edit ? data.quantity_in_stock : "",
+    stockQuantity: edit ? data?.quantity_in_stock : "",
     stockSize: "",
     length: "",
     width: "",
     height: "",
     adultOrChild: "",
     productSizes: "",
-    productWeight: "",
-    productColor: "",
-    modelNum: "",
+    productWeight: edit
+      ? data?.details.weight
+        ? data?.details.weight
+        : ""
+      : "",
+    productColor: edit ? (data?.details.color ? data?.details.color : "") : "",
+    modelNum: edit
+      ? data?.details.model_number
+        ? data?.details.model_number
+        : ""
+      : "",
     imported: "",
-    country: "",
+    country: edit
+      ? data?.details.product_shipped_country
+        ? data?.details.product_shipped_country
+        : ""
+      : "",
     state: "",
     city: "",
     postal: "",
-    address: "",
+    address: edit
+      ? data?.details.product_shipped_address
+        ? data?.details.product_shipped_address
+        : ""
+      : "",
     hsc: "",
     videoLink: "",
-    condition: "",
-    warranty: "",
+    condition: edit
+      ? data?.details.product_condition
+        ? data?.details.product_condition
+        : ""
+      : "",
+    warranty: edit
+      ? data?.details.product_warranty
+        ? data?.details.product_warranty
+        : ""
+      : "",
     images: [],
   };
 
   const otherValues = {
-    description: edit ? cleanString(data.description) : "",
-    madeIn: "",
-    manufacturedDate: "",
+    description: edit
+      ? data?.description
+        ? cleanString(data?.description)
+        : ""
+      : "",
+    madeIn: edit
+      ? data?.product_shipped_country
+        ? data?.product_shipped_country
+        : ""
+      : "",
+    manufacturedDate: edit
+      ? data?.details.product_manufacture
+        ? data?.details.product_manufacture
+        : ""
+      : "",
     expiryDate: "",
-    inTheBox: "",
+    inTheBox: edit
+      ? data?.details.in_the_box
+        ? data?.details.in_the_box
+        : ""
+      : "",
   };
 
   //combined formik initialvalues
@@ -281,6 +330,7 @@ const AddProductForm = ({
                 imgArray={imgArray}
                 setImgArray={setImgArray}
                 setFieldValue={setFieldValue}
+                imageArr={data?.image_url}
               />
               <ProductSpecForm
                 values={values}

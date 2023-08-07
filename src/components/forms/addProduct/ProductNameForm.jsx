@@ -14,6 +14,7 @@ import { Field } from "formik";
 import ImagePicker from "../../ImagePicker/index";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
 const ProductNameForm = ({
   values,
   touched,
@@ -23,6 +24,7 @@ const ProductNameForm = ({
   imgArray,
   setImgArray,
   setFieldValue,
+  imageArr,
 }) => {
   const [role, setRole] = useState("");
   const [isChecked, setChecked] = useState(false);
@@ -48,6 +50,7 @@ const ProductNameForm = ({
       return;
     }
   };
+  console.log(imageArr);
   return (
     <section>
       <DashHeader small={true} text={"Description"} />
@@ -329,12 +332,18 @@ const ProductNameForm = ({
           <section className="flex gap-4 items-center flex-wrap">
             <ImagePicker
               onChange={(imageData) => handleImageChange(imageData)}
+              edit={edit}
+              data={imageArr[0] ? imageArr[0] : { imageArr }}
             />
             <ImagePicker
               onChange={(imageData) => handleImageChange(imageData)}
+              edit={edit}
+              data={imageArr[1] ? imageArr[1] : ""}
             />
             <ImagePicker
               onChange={(imageData) => handleImageChange(imageData)}
+              edit={edit}
+              data={imageArr[2] ? imageArr[2] : ""}
             />
           </section>
         )}
@@ -352,6 +361,7 @@ ProductNameForm.propTypes = {
   imgArray: PropTypes.array,
   setImgArray: PropTypes.func,
   setFieldValue: PropTypes.func,
+  imageArr: PropTypes.any,
 };
 
 export default ProductNameForm;

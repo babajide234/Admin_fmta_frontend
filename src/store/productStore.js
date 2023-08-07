@@ -6,6 +6,7 @@ const initialState = {
   category: null,
   subCategory: null,
   products: null,
+  product: null,
 };
 const productSlice = create((set, get) => ({
   ...initialState,
@@ -34,6 +35,18 @@ const productSlice = create((set, get) => ({
       return response.data.data;
     } catch (error) {
       return error;
+    }
+  },
+  getProductById: async (id) => {
+    try {
+      loaderSlice.setState({ loader: true });
+      const response = await instance.get(`products/${id}`);
+      set((state) => ({ ...state, product: response.data.data }));
+      return response.data;
+    } catch (error) {
+      return error;
+    } finally {
+      loaderSlice.setState({ loader: false });
     }
   },
   editProduct: async (id, data) => {
