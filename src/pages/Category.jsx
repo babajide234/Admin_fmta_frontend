@@ -51,11 +51,13 @@ const Category = () => {
             </div>
             <div>
               <BorderContainer variant="outline">
-                <DashSubCat
-                  variant="outline"
-                  subCategoryData={subCatData}
-                  subCatLoading={subCatLoading}
-                />
+                <div className="dashCategories__scroll">
+                  <DashSubCat
+                    variant="outline"
+                    subCategoryData={subCatData}
+                    subCatLoading={subCatLoading}
+                  />
+                </div>
               </BorderContainer>
             </div>
           </div>

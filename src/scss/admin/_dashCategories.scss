@@ -1,4 +1,8 @@
 .dashCategories {
+  &__scroll {
+    overflow-y: scroll;
+    max-height: 483px;
+  }
 }
 .dashCat {
   &__div {
@@ -24,4 +28,5 @@
     }
   }
 }
+
 

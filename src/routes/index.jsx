@@ -8,6 +8,8 @@ import Category from "../pages/Category";
 import Markup from "../pages/Markup";
 import Orders from "../pages/Orders";
 import User from "../pages/User";
+import Account from "../pages/Account";
+import Profile from "../components/Profile";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <User />,
+      },
+      {
+        path: "/account",
+        element: <Account />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

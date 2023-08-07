@@ -1,10 +1,7 @@
 //eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import DashHeader from "../../Dash/DashHeader";
-import InputIcons, {
-  CustomSelectButton,
-  TextAreaIcon,
-} from "../../common/InputIcons";
+import InputIcons, { CustomSelectButton } from "../../common/InputIcons";
 import { ReactComponent as Edit } from "../../../assets/main/icon/edit-2.svg";
 import { UNITS, USERROLE } from "../../../util/util";
 
@@ -15,7 +12,8 @@ import roleSlice from "../../../store/roleSlice";
 import { useQuery } from "react-query";
 import { Field } from "formik";
 import ImagePicker from "../../ImagePicker/index";
-
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 const ProductNameForm = ({
   values,
   touched,
@@ -24,6 +22,7 @@ const ProductNameForm = ({
   edit,
   imgArray,
   setImgArray,
+  setFieldValue,
 }) => {
   const [role, setRole] = useState("");
   const [isChecked, setChecked] = useState(false);
@@ -180,20 +179,19 @@ const ProductNameForm = ({
               onChange={handleChange}
               err={errors.size && touched.size}
               label={"Value"}
+              defaultValue={"option1"}
             >
-              <option value="" selected disabled>
+              <option value="option1" disabled>
                 Size
               </option>
-              {UNITS.map((option) => (
-                <>
-                  <option
-                    key={option.id}
-                    value={option.name}
-                    className="py-4 text-md hover:bg-lightPrimary"
-                  >
-                    {option.name}
-                  </option>
-                </>
+              {UNITS.map((option, index) => (
+                <option
+                  key={index}
+                  value={option.name}
+                  className="py-4 text-md hover:bg-lightPrimary"
+                >
+                  {option.name}
+                </option>
               ))}
             </CustomSelectButton>
           </div>
@@ -203,7 +201,7 @@ const ProductNameForm = ({
           <div>
             <InputIcons
               inputName={"price"}
-              type={"number"}
+              type={"text"}
               placeholder={"Product Price"}
               iconRight={<Edit />}
               value={values.price}
@@ -252,17 +250,30 @@ const ProductNameForm = ({
         </div>
 
         <div className="input-container">
-          <TextAreaIcon
+          {/* <TextAreaIcon
             inputName={"description"}
             value={values.description}
             placeholder={"Product Description"}
             onChange={handleChange}
             err={errors.description && touched.description}
             iconRight={<Edit />}
+          /> */}
+          {errors.description && touched.description && (
+            <div className="error">***</div>
+          )}
+          <ReactQuill
+            name="description"
+            placeholder="Product Description (required)"
+            value={values.description}
+            onChange={(content) => setFieldValue("description", content)}
+            style={{
+              height: "120px",
+              // border: touched.inTheBox && errors.inTheBox ? "1px solid red" : "",
+            }}
           />
         </div>
 
-        <div className="input-container">
+        <div className="input-container mt-11">
           <CustomSelectButton
             name="condition"
             value={values.condition}
@@ -340,6 +351,7 @@ ProductNameForm.propTypes = {
   edit: PropTypes.bool,
   imgArray: PropTypes.array,
   setImgArray: PropTypes.func,
+  setFieldValue: PropTypes.func,
 };
 
 export default ProductNameForm;

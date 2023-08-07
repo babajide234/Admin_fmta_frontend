@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { FieldArray, Form, Formik } from "formik";
+import {  Form, Formik } from "formik";
 import InputIcons, {
   CustomSelectButton,
   TextAreaIcon,

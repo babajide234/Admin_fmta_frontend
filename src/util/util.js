@@ -5,11 +5,6 @@ export const SIDEBARMENU = [
     icon: "Home",
   },
   {
-    name: "Products",
-    url: "/products",
-    icon: "Shopping_cart",
-  },
-  {
     name: "Orders",
     url: "/orders",
     icon: "Box",
@@ -20,14 +15,9 @@ export const SIDEBARMENU = [
     icon: "User",
   },
   {
-    name: "Categories",
-    url: "/categories",
-    icon: "List",
-  },
-  {
-    name: "Markup",
-    url: "/markup",
-    icon: "Plus",
+    name: "Account",
+    url: "/account",
+    icon: "UserGear",
   },
 ];
 
@@ -114,7 +104,20 @@ export const USERROLE = [
     guard_name: "web",
   },
 ];
-
+export const CardDetail3 = [
+  {
+    text: "Profile Settings",
+    subText: "Make changes to your personal account.",
+    to: "/profile",
+    btn: "Edit your profile",
+  },
+  {
+    text: "My organization",
+    subText: "See and make changes to your organization information.",
+    to: "/",
+    btn: "Make changes",
+  },
+];
 export const getNameByIsoCode = (isoCode = "", array = [{}]) => {
   if (array === null || array.length === 0) {
     return "";

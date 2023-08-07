@@ -13,11 +13,13 @@
       text-align: left;
       transition: all 0.25s ease-in-out;
       @include flex($jc: flex-start, $ai: center);
+      gap: 10px;
 
       &:hover {
         cursor: pointer;
         background: rgba(241, 246, 255, 0.6);
         border-radius: 48px;
+        height: 100%;
       }
 
       & span {
@@ -31,8 +33,7 @@
         color: $secondary-disabled;
         transform: capitalize;
         position: relative;
-        height: 100%;
-        margin-left: 10px;
+        // margin-left: 10px;
         //transition: all 0.55s ease-out;
 
         &:active {

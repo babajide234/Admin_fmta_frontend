@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const BorderContainer = ({ variant = "outline", width, children }) => {
+const BorderContainer = ({ variant = "outline", width, children, ...rest}) => {
   const variants = {
     outline: {
       color: "#001973",
@@ -26,7 +26,7 @@ const BorderContainer = ({ variant = "outline", width, children }) => {
     
   };
   return (
-    <div className="borderContainer box" style={styles}>
+    <div className="borderContainer box" style={styles} {...rest}>
       {children}
     </div>
   );

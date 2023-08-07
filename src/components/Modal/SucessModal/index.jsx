@@ -13,8 +13,8 @@ const SuccessModal = ({ open, close, loading, header, text, children }) => {
         </div>
 
         <div className="modal__div-success">
-          <p className="modal__p-success">{header ? header : "Success!"}</p>
-          <p className="modal__p-text">{text}</p>
+          <p className="modal__p-success capitalize">{header ? header : "Success!"}</p>
+          <p className="modal__p-text capitalize">{text}</p>
         </div>
         {children}
       </div>
