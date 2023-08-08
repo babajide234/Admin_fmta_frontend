@@ -10,6 +10,7 @@ import Orders from "../pages/Orders";
 import User from "../pages/User";
 import Account from "../pages/Account";
 import Profile from "../components/Profile";
+import Org from "../pages/Org";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/organization",
+        element: <Org />,
       },
     ],
   },
