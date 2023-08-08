@@ -3,15 +3,18 @@ import React, { useState } from "react";
 import DashHeader from "../components/Dash/DashHeader";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
-import { TextAreaIcon } from "../components/common/InputIcons";
+import InputIcons, { TextAreaIcon } from "../components/common/InputIcons";
 import { ReactComponent as Edit } from "../assets/main/icon/edit-2.svg";
-import { Warning } from "phosphor-react";
+import { ReactComponent as User } from "../assets/main/icon/user.svg";
+import { EnvelopeSimple, Warning } from "phosphor-react";
 import GoBack from "../components/GoBack";
 import { Buttons } from "../components/buttons/Buttons";
 import LinkTo from "../components/LinkTo";
 import Modal from "../components/Modal/Modal";
+import * as Yup from "yup";
 
 const Org = () => {
+  const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [step, setStep] = useState(1);
   const deleteHandler = () => {
@@ -128,7 +131,7 @@ const Org = () => {
             </li>
           </ul>
           <div className="hospitalOrg__div-add">
-            <LinkTo to={"/dashboard/team"}>Add a new team-mate</LinkTo>
+            <LinkTo onClick={() => setOpen(!open)}>Add a new team-mate</LinkTo>
           </div>
         </div>
       </section>
@@ -145,9 +148,16 @@ const Org = () => {
           </Buttons>
         </div>
       </div>
-      <Modal open={deleteOpen} close={deleteHandler}>
-        {renderStep()}
-      </Modal>
+      {deleteOpen && (
+        <Modal open={deleteOpen} close={deleteHandler}>
+          {renderStep()}
+        </Modal>
+      )}
+      {open && (
+        <Modal open={open} close={() => setOpen(!open)} loading={true}>
+          <DashboardTeam />
+        </Modal>
+      )}
     </main>
   );
 };
@@ -279,6 +289,82 @@ export const DashboardFinalDelete = ({
   );
 };
 
+export const DashboardTeam = () => {
+  const initialValues = {
+    teamName: "",
+    email: "",
+  };
+
+  const teamSchema = Yup.object().shape({
+    teamName: Yup.string().required(),
+    email: Yup.string().email().required(),
+  });
+  const onSubmit = (values, {  setSubmitting }) => {
+    console.log(values);
+    setSubmitting(false);
+  };
+  return (
+    <main className="hospitalHome hospitalTeam">
+      <DashHeader
+        text="Add a team-mate"
+        subText="Invite a team-mate to join your organization. No need for them to
+          register. Just enter their name and email below, we'll send them their
+          login information."
+      />
+      <section className="">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={teamSchema}
+          onSubmit={onSubmit}
+        >
+          {({ values, errors, touched, handleChange, submitForm }) => (
+            <form>
+              <div className="input-container">
+                <InputIcons
+                  type={"text"}
+                  inputName={"teamName"}
+                  iconLeft={<User />}
+                  iconRight={<Edit />}
+                  placeholder={"Enter their name"}
+                  value={values.teamName}
+                  onChange={handleChange}
+                  err={errors.teamName && touched.teamName}
+                />
+              </div>
+              <div className="input-container">
+                <InputIcons
+                  type={"email"}
+                  inputName={"email"}
+                  iconLeft={<EnvelopeSimple />}
+                  iconRight={<Edit />}
+                  placeholder={"Enter their email"}
+                  value={values.email}
+                  onChange={handleChange}
+                  err={errors.email && touched.email}
+                />
+              </div>
+              <div className="btn_container">
+                <div className="w-full">
+                  <Buttons
+                    color="primary"
+                    type="submit"
+                    disable={errors.teamName || errors.email}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      submitForm();
+                    }}
+                  >
+                    Send Invite
+                  </Buttons>
+                </div>
+              </div>
+            </form>
+          )}
+        </Formik>
+      </section>
+    </main>
+  );
+};
 DashboardDeleteAccount.propTypes = {
   close: PropTypes.func,
   text: PropTypes.string,

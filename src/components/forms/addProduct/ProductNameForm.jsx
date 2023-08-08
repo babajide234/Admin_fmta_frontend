@@ -324,7 +324,7 @@ const ProductNameForm = ({
             onClick={handleCheckbox}
           />
           <label htmlFor="imageCheckBox" className="p4 secondary">
-            Add product images (optional)
+            {edit ? "Edit" : "Add"} product images (optional)
           </label>
         </div>
 
