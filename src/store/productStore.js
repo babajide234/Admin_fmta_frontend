@@ -6,7 +6,7 @@ const initialState = {
   category: null,
   subCategory: null,
   products: null,
-  product: null,
+  product:null
 };
 const productSlice = create((set, get) => ({
   ...initialState,
@@ -42,7 +42,7 @@ const productSlice = create((set, get) => ({
       loaderSlice.setState({ loader: true });
       const response = await instance.get(`products/${id}`);
       set((state) => ({ ...state, product: response.data.data }));
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return error;
     } finally {

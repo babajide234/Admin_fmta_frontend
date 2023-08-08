@@ -34,9 +34,8 @@ const Products = () => {
   const activateProduct = productSlice.getState().activateProduct;
   const deactivateProduct = productSlice.getState().deactivateProduct;
   const getProductById = productSlice((state) => state.getProductById);
-  const handleEditClick = () => {
-    setEdit(true);
-  };
+
+
   const handleOpenClick = () => {
     setOpen(true);
   };
@@ -253,11 +252,7 @@ const Products = () => {
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
-                //plan to comment out the setstate func bellow
-                setProd(product);
-                //setting zustand product state instead
-                getProductById(product.id);
-                handleEditClick();
+                handleEdit(productId);
               }}
             >
               Edit
@@ -292,6 +287,10 @@ const Products = () => {
     },
   ];
 
+  const handleEdit = (id) => {
+    setEdit(true);
+    getProductById(id);
+  }
   return (
     <>
       {edit && (

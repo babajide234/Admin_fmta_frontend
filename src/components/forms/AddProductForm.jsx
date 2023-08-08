@@ -7,19 +7,19 @@ import OtherDetailsForm from "./addProduct/OtherDetailsForm";
 import { Buttons } from "../buttons/Buttons";
 import * as Yup from "yup";
 import PropTypes from "prop-types";
-import sanitizeHtml from "sanitize-html";
+// import sanitizeHtml from "sanitize-html";
 import { useMutation, useQuery } from "react-query";
 import productSlice from "../../store/productStore";
 import miscSlice from "../../store/miscSlice";
 import { getNameByIsoCode } from "../../util/util";
 
-function cleanString(dirtyString) {
-  const parser = new DOMParser();
-  const decodedString = parser.parseFromString(dirtyString, "text/html")
-    .documentElement.textContent;
-  const cleanedString = sanitizeHtml(decodedString);
-  return cleanedString;
-}
+// function cleanString(dirtyString) {
+//   const parser = new DOMParser();
+//   const decodedString = parser.parseFromString(dirtyString, "text/html")
+//     .documentElement.textContent;
+//   const cleanedString = sanitizeHtml(decodedString);
+//   return cleanedString;
+// }
 
 const AddProductForm = ({
   edit = false,
@@ -46,6 +46,8 @@ const AddProductForm = ({
   const getCountry = miscSlice((state) => state.getCountry);
   const getState = miscSlice((state) => state.getState);
   const getCity = miscSlice((state) => state.getCity);
+
+
 
   //formik initialvalues divided into sections based on components
   const nameValues = {
@@ -119,11 +121,7 @@ const AddProductForm = ({
   };
 
   const otherValues = {
-    description: edit
-      ? data?.description
-        ? cleanString(data?.description)
-        : ""
-      : "",
+    description: edit ? (data?.description ? data?.description : "") : "",
     madeIn: edit
       ? data?.product_shipped_country
         ? data?.product_shipped_country
@@ -190,7 +188,7 @@ const AddProductForm = ({
     images: Yup.array(),
   });
 
-  //data for countries
+  //ap call for countries
   const { data: countries, isLoading: countryLoading } = useQuery(
     "getCountry",
     async () => {
@@ -198,7 +196,7 @@ const AddProductForm = ({
       return response;
     }
   );
-  //data for stats
+  //ap call for states
   const { data: states, isLoading: stateLoading } = useQuery(
     ["getStateQuery", countryCode],
     async () => {
@@ -209,7 +207,7 @@ const AddProductForm = ({
       enabled: countryCode !== "",
     }
   );
-  //data for cities
+  //ap call for cities
   const { data: cities, isLoading: cityLoading } = useQuery(
     ["getCityQuery", stateCode],
     async () => {
@@ -300,14 +298,19 @@ const AddProductForm = ({
     } else {
       addMutation.mutate(formData);
     }
+
+    //formik func
     setSubmitting(false);
     resetForm();
     close();
   };
+
+
   return (
     <>
       <Formik
         initialValues={combinedInitialValues}
+        enableReinitialize={true}
         validationSchema={AddProductSchema}
         onSubmit={handleSubmit}
       >
@@ -330,7 +333,7 @@ const AddProductForm = ({
                 imgArray={imgArray}
                 setImgArray={setImgArray}
                 setFieldValue={setFieldValue}
-                imageArr={data?.image_url}
+                editProdImg={data?.image_url}
               />
               <ProductSpecForm
                 values={values}

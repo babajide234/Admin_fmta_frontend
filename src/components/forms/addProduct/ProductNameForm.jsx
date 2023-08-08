@@ -24,10 +24,10 @@ const ProductNameForm = ({
   imgArray,
   setImgArray,
   setFieldValue,
-  imageArr,
+  editProdImg,
 }) => {
   const [role, setRole] = useState("");
-  const [isChecked, setChecked] = useState(false);
+  const [isChecked, setChecked] = useState(edit ? true : false);
 
   const getUsersByRole = roleSlice.getState().getUsersByRole;
 
@@ -50,7 +50,7 @@ const ProductNameForm = ({
       return;
     }
   };
-  console.log(imageArr);
+
   return (
     <section>
       <DashHeader small={true} text={"Description"} />
@@ -270,7 +270,7 @@ const ProductNameForm = ({
             value={values.description}
             onChange={(content) => setFieldValue("description", content)}
             style={{
-              height: "120px",
+              height: "180px",
               // border: touched.inTheBox && errors.inTheBox ? "1px solid red" : "",
             }}
           />
@@ -329,22 +329,50 @@ const ProductNameForm = ({
         </div>
 
         {isChecked && (
+          // <section className="flex gap-4 items-center flex-wrap">
+          //   <ImagePicker
+          //     onChange={(imageData) => handleImageChange(imageData)}
+          //     edit={edit}
+          //     editImage={
+          //       typeof editProdImg === "string"
+          //         ? editProdImg
+          //         : editProdImg?.[0] ?? null
+          //     }
+          //   />
+          //   <ImagePicker
+          //     onChange={(imageData) => handleImageChange(imageData)}
+          //     edit={edit}
+          //     editImage={
+          //       typeof editProdImg === "string"
+          //         ? editProdImg
+          //         : editProdImg?.[1] ?? null
+          //     }
+          //   />
+          //   <ImagePicker
+          //     onChange={(imageData) => handleImageChange(imageData)}
+          //     edit={edit}
+          //     editImage={
+          //       typeof editProdImg === "string"
+          //         ? editProdImg
+          //         : editProdImg?.[2] ?? null
+          //     }
+          //   />
+          // </section>
+
+          //mapped add imagePicker or edit imagePicker
           <section className="flex gap-4 items-center flex-wrap">
-            <ImagePicker
-              onChange={(imageData) => handleImageChange(imageData)}
-              edit={edit}
-              data={imageArr[0] ? imageArr[0] : { imageArr }}
-            />
-            <ImagePicker
-              onChange={(imageData) => handleImageChange(imageData)}
-              edit={edit}
-              data={imageArr[1] ? imageArr[1] : ""}
-            />
-            <ImagePicker
-              onChange={(imageData) => handleImageChange(imageData)}
-              edit={edit}
-              data={imageArr[2] ? imageArr[2] : ""}
-            />
+            {[0, 1, 2].map((index) => (
+              <ImagePicker
+                key={index}
+                onChange={(imageData) => handleImageChange(imageData)}
+                edit={edit}
+                editImage={
+                  typeof editProdImg === "string"
+                    ? editProdImg
+                    : editProdImg?.[index] ?? null
+                }
+              />
+            ))}
           </section>
         )}
       </div>
@@ -361,7 +389,7 @@ ProductNameForm.propTypes = {
   imgArray: PropTypes.array,
   setImgArray: PropTypes.func,
   setFieldValue: PropTypes.func,
-  imageArr: PropTypes.any,
+  editProdImg: PropTypes.any,
 };
 
 export default ProductNameForm;

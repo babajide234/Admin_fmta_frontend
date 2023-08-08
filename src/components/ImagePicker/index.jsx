@@ -6,9 +6,11 @@ import PropTypes from "prop-types";
 
 const imageMimeType = /image\/(png|jpg|jpeg)/i;
 
-const ImagePicker = ({ onChange, edit, data }) => {
+const ImagePicker = ({ onChange, edit, editImage }) => {
   const [file, setFile] = useState(null);
-  const [fileDataURL, setFileDataURL] = useState(null);
+  const [fileDataURL, setFileDataURL] = useState(
+    edit ? (editImage ? editImage : null) : null
+  );
   const fileInputRef = useRef(null);
   const imgUpload = miscSlice((state) => state.imgUpload);
   const maxSize = 1024 * 1024 * 3;
@@ -34,13 +36,6 @@ const ImagePicker = ({ onChange, edit, data }) => {
       return;
     }
     setFile(file);
-    // imgUpload({image: file})
-    //   .then((response) => {
-    //     onChange(response);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   };
 
   //function to upload img to api and return url string
@@ -108,9 +103,9 @@ const ImagePicker = ({ onChange, edit, data }) => {
             style={{ display: "none" }}
           />
 
-          {fileDataURL || edit ? (
+          {fileDataURL ? (
             <p className="imagePicker__p-previewer">
-              {<img src={fileDataURL ? fileDataURL : data} alt="preview" />}
+              {<img src={fileDataURL} alt="preview" />}
             </p>
           ) : null}
         </label>
@@ -122,6 +117,6 @@ const ImagePicker = ({ onChange, edit, data }) => {
 ImagePicker.propTypes = {
   onChange: PropTypes.func,
   edit: PropTypes.bool,
-  data: PropTypes.string,
+  editImage: PropTypes.string,
 };
 export default ImagePicker;

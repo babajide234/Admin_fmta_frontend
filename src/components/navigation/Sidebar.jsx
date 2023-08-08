@@ -41,7 +41,7 @@ const Sidebar = () => {
           </NavLink>
         ))}
         <DropdownMenu>
-          <DropdownMenuTrigger className="hospitalSideNav__ul-listItem ">
+          <DropdownMenuTrigger className="hospitalSideNav__ul-listItem w-full">
             <Shopping_cart />
             <span className="hospitalSideNav__ul-span w-full">
               Product menu

@@ -4,8 +4,7 @@ import AddProductForm from "../forms/AddProductForm";
 import GoBack from "../GoBack";
 import PropTypes from "prop-types";
 import productSlice from "../../store/productStore";
-// import { useQuery } from "react-query";
-// import DashHeader from "./DashHeader";
+
 
 const DashAddProduct = ({
   goBack,
@@ -19,17 +18,17 @@ const DashAddProduct = ({
   // console.log(data);
   const product = productSlice((state) => state.product);
 
-  // const { data: product, isLoading } = useQuery(
-  //   ["getProductById", data?.id],
-  //   getProductById(data?.id),
-  //   {
-  //     enabled: data.id !== "",
-  //   }
-  // );
+
 
   return (
     <main className="dashAddProduct">
-      <GoBack onClick={goBack}>Go back</GoBack>
+      <GoBack
+        onClick={() => {
+          goBack();
+        }}
+      >
+        Go back
+      </GoBack>
       <header className="dashAddProduct__header">
         <h2 className="header__2 secondary">
           {edit ? "Edit Product" : "Add a Product"}
