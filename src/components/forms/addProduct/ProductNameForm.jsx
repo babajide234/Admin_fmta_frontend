@@ -27,7 +27,7 @@ const ProductNameForm = ({
   editProdImg,
 }) => {
   const [role, setRole] = useState("");
-  const [isChecked, setChecked] = useState(edit ? true : false);
+  const [isChecked, setChecked] = useState(false);
 
   const getUsersByRole = roleSlice.getState().getUsersByRole;
 
