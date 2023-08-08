@@ -22,9 +22,12 @@ import {
 } from "../ui/tooltip";
 import SuccessModal from "../components/Modal/SucessModal";
 import FailedModal from "../components/Modal/FailedModal";
+import Modal from "../components/Modal/Modal";
+import ChangePrice from "../components/Product/ChangePrice";
 
 const Products = () => {
-  const [open, setOpen] = useState(false);
+  const [add, setAdd] = useState(false);
+  const [openPrice, setOpenPrice] = useState(false);
   const [edit, setEdit] = useState(false);
   const [details, setDetails] = useState(false);
   const [prod, setProd] = useState({});
@@ -35,9 +38,8 @@ const Products = () => {
   const deactivateProduct = productSlice.getState().deactivateProduct;
   const getProductById = productSlice((state) => state.getProductById);
 
-
-  const handleOpenClick = () => {
-    setOpen(true);
+  const handleAdd = () => {
+    setAdd(true);
   };
   const columns = [
     {
@@ -260,6 +262,14 @@ const Products = () => {
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
+                handlePrice(productId);
+              }}
+            >
+              Change price
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
                 if (status === "1") {
                   deactivateProduct(productId);
                 } else {
@@ -267,7 +277,7 @@ const Products = () => {
                 }
               }}
             >
-              {status === "1" ? "Deactivate" : "Approve"}
+              {status === "1" ? "Disapprove" : "Approve"}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
@@ -290,7 +300,13 @@ const Products = () => {
   const handleEdit = (id) => {
     setEdit(true);
     getProductById(id);
-  }
+  };
+
+  const handlePrice = (id) => {
+    setOpenPrice(!openPrice);
+    getProductById(id);
+  };
+
   return (
     <>
       {edit && (
@@ -304,9 +320,9 @@ const Products = () => {
           setFailed={setFailed}
         />
       )}
-      {open && (
+      {add && (
         <DashAddProduct
-          goBack={() => setOpen(!open)}
+          goBack={() => setAdd(!add)}
           success={success}
           setSuccess={setSuccess}
           failed={failed}
@@ -314,7 +330,7 @@ const Products = () => {
         />
       )}
       {details && <Details data={prod} goBack={() => setDetails(!details)} />}
-      {!edit && !open && !details && (
+      {!edit && !add && !details && (
         <div className="dashboardProduct__div-container">
           <div className="dashboardProduct__div-header flex justify-between items-center">
             <DashHeader text="Products" />
@@ -324,7 +340,7 @@ const Products = () => {
                   color={"secondary"}
                   type={"btn"}
                   style={{ whiteSpace: "nowrap" }}
-                  onClick={handleOpenClick}
+                  onClick={handleAdd}
                 >
                   <Box style={iconStyle} />
                   Add a product
@@ -335,6 +351,15 @@ const Products = () => {
           <Table getData={getProducts} columns={columns} filter={"name"} />
         </div>
       )}
+      {openPrice && (
+        <Modal
+          open={openPrice}
+          close={() => setOpenPrice(!openPrice)}
+          loading={true}
+        >
+          <ChangePrice close={() => setOpenPrice(!openPrice)} />
+        </Modal>
+      )}
       {success && (
         <SuccessModal
           open={success}
@@ -343,7 +368,6 @@ const Products = () => {
           text={`${edit ? "Product edited " : "Product created "}`}
         ></SuccessModal>
       )}
-
       {failed && (
         <FailedModal
           open={failed}
