@@ -7,15 +7,17 @@ import InputIcons, { CustomSelectButton } from "../common/InputIcons";
 import { Buttons } from "../buttons/Buttons";
 import * as Yup from "yup";
 import { ReactComponent as Edit } from "../../assets/main/icon/edit-2.svg";
-import { Coins } from "lucide-react";
 import PropTypes from "prop-types";
+import { useMutation } from "react-query";
+import { CurrencyDollar, CurrencyNgn } from "phosphor-react";
 
-const ChangePrice = ({ close }) => {
+const ChangePrice = ({ close, success, failed, setSuccess, setFailed }) => {
   const product = productSlice((state) => state.product);
+  const changePrice = productSlice((state) => state.changePrice);
   const intiialValues = {
-    oldPrice: product?.price ?? "",
+    oldPrice: product?.price.original_price ?? "",
     newPrice: "",
-    currency: product?.currency ?? "",
+    currency: product?.currency ?? "NGN",
   };
 
   const PriceSchema = Yup.object().shape({
@@ -24,8 +26,27 @@ const ChangePrice = ({ close }) => {
     currency: Yup.string().required(),
   });
 
+  const priceMutation = useMutation(
+    (formData) => changePrice(product?.id, formData),
+    {
+      onSuccess: (data) => {
+        if (data?.status) {
+          setSuccess(!success);
+        } else {
+          setFailed(!failed);
+        }
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
   const onSubmit = (values, { setSubmitting }) => {
-    console.log(values);
+    const formData = {
+      price: values.newPrice,
+      currency: values.currency,
+    };
+    priceMutation.mutate(formData);
     setSubmitting(false);
     close();
   };
@@ -47,12 +68,18 @@ const ChangePrice = ({ close }) => {
                   inputName={"oldPrice"}
                   type={"text"}
                   iconRight={<Edit />}
-                  iconLeft={<Coins />}
+                  iconLeft={
+                    product?.currency == "NGN" ? (
+                      <CurrencyNgn />
+                    ) : (
+                      <CurrencyDollar />
+                    )
+                  }
                   placeholder={"Old price"}
                   value={values.oldPrice}
                   onChange={handleChange}
                   err={errors.oldPrice && touched.oldPrice}
-                  disabled
+                  disable={true}
                 />
               </div>
               <div className="input-container">
@@ -60,13 +87,20 @@ const ChangePrice = ({ close }) => {
                   inputName={"newPrice"}
                   type={"text"}
                   iconRight={<Edit />}
-                  iconLeft={<Coins />}
+                  iconLeft={
+                    product?.currency == "NGN" ? (
+                      <CurrencyNgn />
+                    ) : (
+                      <CurrencyDollar />
+                    )
+                  }
                   placeholder={"New price"}
                   value={values.newPrice}
                   onChange={handleChange}
                   err={errors.newPrice && touched.newPrice}
                 />
               </div>
+
               <div className="input-container">
                 <CustomSelectButton
                   name={"currency"}
@@ -74,26 +108,27 @@ const ChangePrice = ({ close }) => {
                   value={values.currency}
                   onChange={handleChange}
                   err={errors.currency && touched.currency}
-                  defaultValue={"option1"}
+                  //   disable={true}
                 >
-                  <option value="option1"  disabled>
+                  <option value="option1" disabled hidden>
                     Select currency
                   </option>
-
-                  <option
+                  {/* <option
                     value={"USD"}
                     className="py-4 text-md hover:bg-lightPrimary"
                   >
                     USD
-                  </option>
+                  </option> */}
                   <option
-                    value={"NGN"}
-                    className="py-4 text-md hover:bg-lightPrimary"
+                    value={product?.currency}
+                    className="py-4 text-md hover:bg-lightPrimary "
+                    selected
                   >
-                    NGN
+                    {product?.currency}
                   </option>
                 </CustomSelectButton>
               </div>
+
               <div className="btn_container">
                 <div className="w-full">
                   <Buttons
@@ -124,5 +159,9 @@ const ChangePrice = ({ close }) => {
 
 ChangePrice.propTypes = {
   close: PropTypes.func,
+  success: PropTypes.bool,
+  failed: PropTypes.bool,
+  setSuccess: PropTypes.func,
+  setFailed: PropTypes.func,
 };
 export default ChangePrice;

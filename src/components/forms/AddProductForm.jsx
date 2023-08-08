@@ -47,8 +47,6 @@ const AddProductForm = ({
   const getState = miscSlice((state) => state.getState);
   const getCity = miscSlice((state) => state.getCity);
 
-
-
   //formik initialvalues divided into sections based on components
   const nameValues = {
     name: edit ? data?.name : "",
@@ -61,7 +59,7 @@ const AddProductForm = ({
     category: edit ? data?.category.id : "",
     subCategory: edit ? data?.subcategory_id : "",
     brand: edit ? (data?.details.brand ? data?.details.brand : "") : "",
-    price: edit ? data?.price : "",
+    price: edit ? data?.price.original_price : "",
     currency: edit ? data?.currency : "",
     discount: edit
       ? data?.details.discount
@@ -304,7 +302,6 @@ const AddProductForm = ({
     resetForm();
     close();
   };
-
 
   return (
     <>
