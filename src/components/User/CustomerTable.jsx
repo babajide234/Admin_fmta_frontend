@@ -7,9 +7,15 @@ import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import roleSlice from "../../store/roleSlice";
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 
 const CustomerTable = ({ setData, setOpen, setName }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
+
+  const { data: customerData, isLoading } = useQuery("getCustomer", () =>
+    getUsersByRole("customer")
+  );
+
   const userColumn = [
     {
       id: "select",
@@ -107,9 +113,10 @@ const CustomerTable = ({ setData, setOpen, setName }) => {
   return (
     <div className="dashUser__div-table">
       <Table
-        getData={() => getUsersByRole("customer")}
         columns={userColumn}
         filter={"name"}
+        data={customerData}
+        isLoading={isLoading}
       />
     </div>
   );

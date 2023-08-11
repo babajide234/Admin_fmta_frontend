@@ -8,9 +8,15 @@ import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 
 const ManufacturerTable = ({ setData, setName, setOpen }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
+
+  const { data: manufacturerData, isLoading } = useQuery(
+    "getManufacturer",
+    () => getUsersByRole("manufacturer")
+  );
   const manufacturerColumn = [
     {
       id: "select",
@@ -180,9 +186,10 @@ const ManufacturerTable = ({ setData, setName, setOpen }) => {
   return (
     <div className="dashUser__div-table">
       <Table
-        getData={() => getUsersByRole("manufacturer")}
         columns={manufacturerColumn}
         filter={"name"}
+        data={manufacturerData}
+        isLoading={isLoading}
       />
     </div>
   );
