@@ -24,6 +24,8 @@ import SuccessModal from "../components/Modal/SucessModal";
 import FailedModal from "../components/Modal/FailedModal";
 import Modal from "../components/Modal/Modal";
 import ChangePrice from "../components/Product/ChangePrice";
+import { useQuery } from "react-query";
+// import { useLoaderData } from "react-router-dom";
 
 const Products = () => {
   const [add, setAdd] = useState(false);
@@ -39,6 +41,10 @@ const Products = () => {
   const activateProduct = productSlice.getState().activateProduct;
   const deactivateProduct = productSlice.getState().deactivateProduct;
   const getProductById = productSlice((state) => state.getProductById);
+
+  // nearest ancestor loader
+  // const loaderData = useLoaderData();
+  // console.log(loaderData);
 
   const handleAdd = () => {
     setAdd(true);
@@ -334,6 +340,12 @@ const Products = () => {
     setDetails(!details);
     getProductById(id);
   };
+
+  //get all products api call
+  const { data: productData, isLoading } = useQuery("getProduct", () =>
+    getProducts()
+  );
+
   return (
     <>
       {edit && (
@@ -375,7 +387,12 @@ const Products = () => {
               </div>
             </div>
           </div>
-          <Table getData={getProducts} columns={columns} filter={"name"} />
+          <Table
+            columns={columns}
+            filter={"name"}
+            data={productData}
+            isLoading={isLoading}
+          />
         </div>
       )}
       {openPrice && (

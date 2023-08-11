@@ -4,19 +4,7 @@ import DataTable from "./Datable";
 import PropTypes from "prop-types";
 // import { useQuery } from "react-query";
 
-const Table = ({ columns, getData, filter }) => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await getData();
-      setData(result);
-    }
-
-    fetchData();
-  }, [getData]);
-
-  
+const Table = ({ columns, filter, data = [] }) => {
   return (
     <div className="container mx-auto py-5">
       <DataTable columns={columns} data={data} filter={filter} />
@@ -28,6 +16,7 @@ Table.propTypes = {
   columns: PropTypes.any,
   getData: PropTypes.any,
   filter: PropTypes.string,
+  data: PropTypes.array,
 };
 
 export default Table;
