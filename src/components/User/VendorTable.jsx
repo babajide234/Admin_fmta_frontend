@@ -8,9 +8,13 @@ import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 
 const VendorTable = ({ setData, setName, setOpen }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
+  const { data: vendorData, isLoading } = useQuery("getRetailer", () =>
+    getUsersByRole("retailer")
+  );
 
   const vendorColumn = [
     {
@@ -52,7 +56,6 @@ const VendorTable = ({ setData, setName, setOpen }) => {
         );
       },
     },
-
     {
       accessorKey: "name",
       header: ({ column }) => (
@@ -72,7 +75,6 @@ const VendorTable = ({ setData, setName, setOpen }) => {
         );
       },
     },
-
     {
       accessorKey: "email",
       header: () => (
@@ -86,7 +88,6 @@ const VendorTable = ({ setData, setName, setOpen }) => {
         </div>
       ),
     },
-
     {
       accessorKey: "phone",
       header: () => (
@@ -184,9 +185,10 @@ const VendorTable = ({ setData, setName, setOpen }) => {
   return (
     <div className="dashUser__div-table">
       <Table
-        getData={() => getUsersByRole("retailer")}
         columns={vendorColumn}
         filter={"name"}
+        data={vendorData}
+        isLoading={isLoading}
       />
     </div>
   );

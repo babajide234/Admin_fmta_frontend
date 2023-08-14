@@ -10,6 +10,10 @@ import Orders from "../pages/Orders";
 import User from "../pages/User";
 import Account from "../pages/Account";
 import Profile from "../components/Profile";
+import Org from "../pages/Org";
+// import productSlice from "../store/productStore";
+
+// const getProducts = productSlice.getState().getProducts;
 
 const router = createBrowserRouter([
   {
@@ -23,6 +27,9 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+        // loader() {
+        //   return getProducts();
+        // },
       },
       {
         path: "/categories",
@@ -47,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/organization",
+        element: <Org />,
       },
     ],
   },

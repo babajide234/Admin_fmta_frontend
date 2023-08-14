@@ -19,14 +19,16 @@ const Details = ({ data, goBack }) => {
   const [subCat, setSubCat] = useState([]);
   const getCategoryName = productSlice.getState().getCategoryName;
   const getSubCategory = productSlice.getState().getSubCategory;
+  const product = productSlice((state) => state.product);
 
+  //redundant code
   useEffect(() => {
     const fetchData = async () => {
       try {
         const catResponse = await getCategoryName();
         setCat(catResponse.data);
 
-        const subCatResponse = await getSubCategory(data.category_id);
+        const subCatResponse = await getSubCategory(data?.category_id);
         setSubCat(subCatResponse.data);
       } catch (error) {
         console.log(error);
@@ -44,88 +46,120 @@ const Details = ({ data, goBack }) => {
       <section className="productDetails__section-body">
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Product Name:</p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.name}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            {product?.name}
+          </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Product id:</p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.id}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            {product?.id}
+          </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Category:</p>
           <p className="p4 secondary-disabled w-9/12 self-start">
-            {getNameById(data.category_id, cat)}
+            {product?.category.name}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Sub-category:</p>
           <p className="p4 secondary-disabled w-9/12 self-start">
-            {getNameById(data.subcategory_id, subCat)}
+            {getNameById(product?.subcategory_id, subCat)}
           </p>
         </div>
+
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Price:</p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.price}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            {product?.currency === "USD" ? "$" : "₦"}
+            {product?.price.original_price}
+          </p>
         </div>
+
         <div className="flex items-center gap-2 py-2">
-          <p className="header__4 ink w-3/12 self-start">Currency:</p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.currency}</p>
+          <p className="header__4 ink w-3/12 self-start">Markup price:</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            ₦{product?.markup_price}
+          </p>
         </div>
+
+        <div className="flex items-center gap-2 py-2">
+          <p className="header__4 ink w-3/12 self-start">V.A.T:</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            ₦{product?.vat}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 py-2">
+          <p className="header__4 ink w-3/12 self-start">Total price:</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            ₦{product?.price_total}
+          </p>
+        </div>
+
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">
             Minimum Order Quantity:
           </p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.moq}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            {product?.moq}
+          </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Quantity in Stock:</p>
           <p className="p4 secondary-disabled w-9/12 self-start">
-            {data.quantity_in_stock}
+            {data?.quantity_in_stock}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Status:</p>
           <p className="p4 secondary-disabled w-9/12 self-start">
-            {data.status === "1" ? "Approved" : "Pending"}
+            {data?.status === "1" ? "Approved" : "Pending"}
           </p>
         </div>
         <div className="flex  items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Description:</p>
           <p className="p4 secondary-disabled w-9/12 self-start">
-            {cleanString(data.description)}
+            {cleanString(product?.description)}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">Created at:</p>
           <p className="p4 secondary-disabled w-9/12 self-start">
-            {formatDateTime(data.created_at)}
+            {formatDateTime(data?.created_at)}
           </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">
             Retailer&apos;s name:
           </p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.user.name}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            {data?.user.name}
+          </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">
             Retailer&apos;s email:
           </p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.user.email}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            {data?.user.email}
+          </p>
         </div>
         <div className="flex items-center gap-2 py-2">
           <p className="header__4 ink w-3/12 self-start">
             Retailer&apos;s phone:
           </p>
-          <p className="p4 secondary-disabled w-9/12 self-start">{data.user.phone}</p>
+          <p className="p4 secondary-disabled w-9/12 self-start">
+            {data?.user.phone}
+          </p>
         </div>
-
-        
       </section>
     </main>
   );
 };
 Details.propTypes = {
-  data: PropTypes.any,
   goBack: PropTypes.func,
+  data: PropTypes.object,
 };
 export default Details;

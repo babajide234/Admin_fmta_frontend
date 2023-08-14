@@ -68,7 +68,16 @@
     background: $neutral-white;
     transition: 0.15s all ease;
   }
-
+  &__disabled {
+    background: $accent;
+    border: 1.5px solid #19b8ed;
+    color: $neutral-white;
+    box-shadow: 0px 4px 50px rgba(0, 25, 115, 0.12);
+    opacity: 0.3;
+  }
+  &__custom-disable {
+    opacity: 0.3;
+  }
   input:focus + .inputIcon__label,
   input:not(:placeholder-shown) + .inputIcon__label {
     transform: translate(5px, -24px);

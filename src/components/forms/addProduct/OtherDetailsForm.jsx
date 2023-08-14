@@ -21,7 +21,9 @@ const OtherDetailsForm = ({
 }) => {
   const getCountry = miscSlice((state) => state.getCountry);
 
-  const { data, isLoading } = useQuery("getCountries", () => getCountry());
+  const { data: countries, isLoading } = useQuery("getCountries", () =>
+    getCountry()
+  );
 
   return (
     <section className="otherDetailForm">
@@ -38,16 +40,15 @@ const OtherDetailsForm = ({
           <option value="option1" hidden>
             Made In
           </option>
-          {data &&
-            data?.map((option, index) => (
-              <option
-                key={index}
-                value={option.name}
-                className="py-4 text-md hover:bg-lightPrimary"
-              >
-                {option.name}
-              </option>
-            ))}
+          {countries?.map((option, index) => (
+            <option
+              key={index}
+              value={option.name}
+              className="py-4 text-md hover:bg-lightPrimary"
+            >
+              {option.name}
+            </option>
+          ))}
         </CustomSelectButton>
       </div>
       <div className="input-container grid-2">
@@ -76,14 +77,16 @@ const OtherDetailsForm = ({
       </div>
 
       <div className={`input-container `}>
-        {touched.inTheBox && errors.inTheBox && <div className="error">***</div>}
+        {touched.inTheBox && errors.inTheBox && (
+          <div className="error">***</div>
+        )}
         <ReactQuill
           name="inTheBox"
           placeholder="What's in the box (required)"
           value={values.inTheBox}
           onChange={(content) => setFieldValue("inTheBox", content)}
           style={{
-            height: "120px",
+            height: "180px",
             // border: touched.inTheBox && errors.inTheBox ? "1px solid red" : "",
           }}
         />

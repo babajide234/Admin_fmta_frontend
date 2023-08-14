@@ -12,51 +12,48 @@ import CurrencyFormat from "react-currency-format";
 import Actions from "../components/common/Actions";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
 
-async function getData() {
-  // Fetch data from your API here.
-  return [
-    {
-      orderId: "FM-10611",
-      created: "2021-01-05 11:50:10",
-      payment: "Paid",
-      customer: "Jude Joshua",
-      total: 1120,
-      status: "Delivery Done",
-    },
-    {
-      orderId: "FM-10611",
-      created: "2021-04-07 11:50:10",
-      payment: "Pending",
-      customer: "Jude Joshua",
-      total: 1120,
-      status: "Awaiting Confirmation",
-    },
-    {
-      orderId: "FM-10611",
-      created: "2023-07-19 16:47:47",
-      payment: "Paid",
-      customer: "Jude Joe",
-      total: 1120,
-      status: "Delivery Done",
-    },
-    {
-      orderId: "FM-10611",
-      created: "2021-07-19 16:47:47",
-      payment: "pending",
-      customer: "Jude Joshua",
-      total: 1120,
-      status: "Awaiting Confirmation",
-    },
-    {
-      orderId: "FM-10611",
-      created: "2021-01-07 11:50:10",
-      payment: "Paid",
-      customer: "JPrincess Uzoukwu",
-      total: 1120,
-      status: "Awaiting Confirmation",
-    },
-  ];
-}
+const data = [
+  {
+    orderId: "FM-10611",
+    created: "2021-01-05 11:50:10",
+    payment: "Paid",
+    customer: "Jude Joshua",
+    total: 1120,
+    status: "Delivery Done",
+  },
+  {
+    orderId: "FM-10611",
+    created: "2021-04-07 11:50:10",
+    payment: "Pending",
+    customer: "Jude Joshua",
+    total: 1120,
+    status: "Awaiting Confirmation",
+  },
+  {
+    orderId: "FM-10611",
+    created: "2023-07-19 16:47:47",
+    payment: "Paid",
+    customer: "Jude Joe",
+    total: 1120,
+    status: "Delivery Done",
+  },
+  {
+    orderId: "FM-10611",
+    created: "2021-07-19 16:47:47",
+    payment: "pending",
+    customer: "Jude Joshua",
+    total: 1120,
+    status: "Awaiting Confirmation",
+  },
+  {
+    orderId: "FM-10611",
+    created: "2021-01-07 11:50:10",
+    payment: "Paid",
+    customer: "JPrincess Uzoukwu",
+    total: 1120,
+    status: "Awaiting Confirmation",
+  },
+];
 
 const Orders = () => {
   const [open, setOpen] = useState(false);
@@ -226,7 +223,7 @@ const Orders = () => {
                 </div>
               </div>
             </div>
-            <Table columns={orderColumn} getData={getData} filter={"orderId"} />
+            <Table columns={orderColumn} data={data} filter={"orderId"} />
           </>
         )}
       </div>

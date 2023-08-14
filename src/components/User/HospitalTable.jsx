@@ -8,9 +8,13 @@ import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import { formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 
 const HospitalTable = ({ setData, setName, setOpen }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
+  const { data: hospitalData, isLoading } = useQuery("getHospital", () =>
+    getUsersByRole("hospital")
+  );
   const hospitalColumn = [
     {
       id: "select",
@@ -133,9 +137,10 @@ const HospitalTable = ({ setData, setName, setOpen }) => {
   return (
     <div className="dashUser__div-table">
       <Table
-        getData={() => getUsersByRole("hospital")}
         columns={hospitalColumn}
         filter={"name"}
+        data={hospitalData}
+        isLoading={isLoading}
       />
     </div>
   );

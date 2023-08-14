@@ -4,9 +4,14 @@
     padding: 20px 30px;
     margin-top: 70px;
     list-style: none;
-    border: 1px solid #d5ecf4;
     border-radius: 32px;
+    border: 1px solid #d5ecf4;
 
+    &-accent {
+    }
+    &-secondary {
+      border: 1px solid $secondary;
+    }
     &-listItem {
       margin: 10px 0;
       padding: 15px 0 15px 35px;
@@ -40,7 +45,7 @@
           color: $neutral-white;
         }
       }
-      svg{
+      svg {
         color: $secondary-disabled;
         width: 16px;
         height: 17px;

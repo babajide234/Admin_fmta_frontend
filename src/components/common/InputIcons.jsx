@@ -14,6 +14,7 @@ const InputIcons = ({
   pad,
   type,
   placeholder,
+  disable,
   err,
   ...rest
 }) => {
@@ -21,7 +22,7 @@ const InputIcons = ({
     <div
       className={`inputIcon ${
         err ? "inputIcon__error" : "inputIcon__default"
-      } `}
+      } ${disable && "inputIcon__disabled"} `}
       style={{ paddingBottom: pad }}
     >
       {iconLeft && (
@@ -40,6 +41,7 @@ const InputIcons = ({
         type={type}
         placeholder={placeholder}
         className="p-500 secondary inputIcon__span-center"
+        disabled={disable}
         {...rest}
       />
 
@@ -63,15 +65,7 @@ const InputIcons = ({
     </div>
   );
 };
-InputIcons.propTypes = {
-  inputName: PropTypes.string,
-  iconLeft: PropTypes.any,
-  iconRight: PropTypes.any,
-  pad: PropTypes.string,
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  err: PropTypes.bool,
-};
+
 export default InputIcons;
 
 export const CustomSelectButton = ({
@@ -85,9 +79,9 @@ export const CustomSelectButton = ({
 }) => {
   return (
     <div
-      className={`inputIcon ${
+      className={` inputIcon ${
         err ? "inputIcon__error" : "inputIcon__default"
-      } `}
+      }`}
     >
       {iconLeft && (
         <span
@@ -104,7 +98,9 @@ export const CustomSelectButton = ({
           <select
             {...field}
             {...rest}
-            className="inputIcon-select appearance-none bg-transparent block w-full px-4  rounded-md focus:outline-none font-medium text-inherit p-500 secondary capitalize"
+            className={
+              "inputIcon-select appearance-none bg-transparent block w-full px-4  rounded-md focus:outline-none font-medium text-inherit p-500 secondary capitalize"
+            }
           >
             {children}
           </select>
@@ -137,14 +133,6 @@ export const CustomSelectButton = ({
     </div>
   );
 };
-CustomSelectButton.propTypes = {
-  name: PropTypes.string,
-  label: PropTypes.string,
-  iconLeft: PropTypes.any,
-  err: PropTypes.bool,
-  loading: PropTypes.bool,
-  children: PropTypes.any,
-};
 
 export const TextAreaIcon = ({
   inputName,
@@ -176,13 +164,6 @@ export const TextAreaIcon = ({
       {iconRight && <span className="textArea__span-right">{iconRight}</span>}
     </div>
   );
-};
-TextAreaIcon.propTypes = {
-  inputName: PropTypes.string,
-  iconLeft: PropTypes.any,
-  iconRight: PropTypes.any,
-  placeholder: PropTypes.string,
-  err: PropTypes.bool,
 };
 
 export const DatePickerField = ({
@@ -235,6 +216,7 @@ export const DatePickerField = ({
     </div>
   );
 };
+
 DatePickerField.propTypes = {
   inputName: PropTypes.string,
   iconLeft: PropTypes.any,
@@ -243,4 +225,30 @@ DatePickerField.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   err: PropTypes.bool,
+};
+InputIcons.propTypes = {
+  inputName: PropTypes.string,
+  iconLeft: PropTypes.any,
+  iconRight: PropTypes.any,
+  pad: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  err: PropTypes.bool,
+  disable: PropTypes.bool,
+};
+TextAreaIcon.propTypes = {
+  inputName: PropTypes.string,
+  iconLeft: PropTypes.any,
+  iconRight: PropTypes.any,
+  placeholder: PropTypes.string,
+  err: PropTypes.bool,
+};
+CustomSelectButton.propTypes = {
+  name: PropTypes.string,
+  label: PropTypes.string,
+  iconLeft: PropTypes.any,
+  err: PropTypes.bool,
+  loading: PropTypes.bool,
+  children: PropTypes.any,
+  disable: PropTypes.bool,
 };

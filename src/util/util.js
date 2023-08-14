@@ -114,7 +114,7 @@ export const CardDetail3 = [
   {
     text: "My organization",
     subText: "See and make changes to your organization information.",
-    to: "/",
+    to: "/organization",
     btn: "Make changes",
   },
 ];

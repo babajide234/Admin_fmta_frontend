@@ -12,7 +12,7 @@ import {
 import { Button } from "../../ui/button";
 import PropTypes from "prop-types";
 
-const Actions = ({children }) => {
+const Actions = ({ children }) => {
   return (
     <>
       <DropdownMenu>

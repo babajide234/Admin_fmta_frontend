@@ -14,6 +14,7 @@ import { Field } from "formik";
 import ImagePicker from "../../ImagePicker/index";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
 const ProductNameForm = ({
   values,
   touched,
@@ -23,6 +24,7 @@ const ProductNameForm = ({
   imgArray,
   setImgArray,
   setFieldValue,
+  editProdImg,
 }) => {
   const [role, setRole] = useState("");
   const [isChecked, setChecked] = useState(false);
@@ -48,6 +50,7 @@ const ProductNameForm = ({
       return;
     }
   };
+
   return (
     <section>
       <DashHeader small={true} text={"Description"} />
@@ -267,7 +270,7 @@ const ProductNameForm = ({
             value={values.description}
             onChange={(content) => setFieldValue("description", content)}
             style={{
-              height: "120px",
+              height: "180px",
               // border: touched.inTheBox && errors.inTheBox ? "1px solid red" : "",
             }}
           />
@@ -321,21 +324,55 @@ const ProductNameForm = ({
             onClick={handleCheckbox}
           />
           <label htmlFor="imageCheckBox" className="p4 secondary">
-            Add product images (optional)
+            {edit ? "Edit" : "Add"} product images (optional)
           </label>
         </div>
 
         {isChecked && (
+          // <section className="flex gap-4 items-center flex-wrap">
+          //   <ImagePicker
+          //     onChange={(imageData) => handleImageChange(imageData)}
+          //     edit={edit}
+          //     editImage={
+          //       typeof editProdImg === "string"
+          //         ? editProdImg
+          //         : editProdImg?.[0] ?? null
+          //     }
+          //   />
+          //   <ImagePicker
+          //     onChange={(imageData) => handleImageChange(imageData)}
+          //     edit={edit}
+          //     editImage={
+          //       typeof editProdImg === "string"
+          //         ? editProdImg
+          //         : editProdImg?.[1] ?? null
+          //     }
+          //   />
+          //   <ImagePicker
+          //     onChange={(imageData) => handleImageChange(imageData)}
+          //     edit={edit}
+          //     editImage={
+          //       typeof editProdImg === "string"
+          //         ? editProdImg
+          //         : editProdImg?.[2] ?? null
+          //     }
+          //   />
+          // </section>
+
+          //mapped add imagePicker or edit imagePicker
           <section className="flex gap-4 items-center flex-wrap">
-            <ImagePicker
-              onChange={(imageData) => handleImageChange(imageData)}
-            />
-            <ImagePicker
-              onChange={(imageData) => handleImageChange(imageData)}
-            />
-            <ImagePicker
-              onChange={(imageData) => handleImageChange(imageData)}
-            />
+            {[0, 1, 2].map((index) => (
+              <ImagePicker
+                key={index}
+                onChange={(imageData) => handleImageChange(imageData)}
+                edit={edit}
+                editImage={
+                  typeof editProdImg === "string"
+                    ? editProdImg
+                    : editProdImg?.[index] ?? null
+                }
+              />
+            ))}
           </section>
         )}
       </div>
@@ -352,6 +389,7 @@ ProductNameForm.propTypes = {
   imgArray: PropTypes.array,
   setImgArray: PropTypes.func,
   setFieldValue: PropTypes.func,
+  editProdImg: PropTypes.any,
 };
 
 export default ProductNameForm;

@@ -22,23 +22,32 @@ import {
 } from "../ui/tooltip";
 import SuccessModal from "../components/Modal/SucessModal";
 import FailedModal from "../components/Modal/FailedModal";
+import Modal from "../components/Modal/Modal";
+import ChangePrice from "../components/Product/ChangePrice";
+import { useQuery } from "react-query";
+// import { useLoaderData } from "react-router-dom";
 
 const Products = () => {
-  const [open, setOpen] = useState(false);
+  const [add, setAdd] = useState(false);
+  const [openPrice, setOpenPrice] = useState(false);
   const [edit, setEdit] = useState(false);
   const [details, setDetails] = useState(false);
+  const [successPrice, setSuccessPrice] = useState(false);
+  const [failedPrice, setFailedPrice] = useState(false);
   const [prod, setProd] = useState({});
   const [success, setSuccess] = useState(false);
   const [failed, setFailed] = useState(false);
   const getProducts = productSlice.getState().getProducts;
   const activateProduct = productSlice.getState().activateProduct;
   const deactivateProduct = productSlice.getState().deactivateProduct;
+  const getProductById = productSlice((state) => state.getProductById);
 
-  const handleEditClick = () => {
-    setEdit(true);
-  };
-  const handleOpenClick = () => {
-    setOpen(true);
+  // nearest ancestor loader
+  // const loaderData = useLoaderData();
+  // console.log(loaderData);
+
+  const handleAdd = () => {
+    setAdd(true);
   };
   const columns = [
     {
@@ -84,84 +93,106 @@ const Products = () => {
       header: () => <div className="text-left header__4 secondary">Price</div>,
       cell: ({ row }) => {
         const data = row.original;
+        const price = data?.price;
+        const currency = data.currency;
         return (
           <>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2">
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger className="header__5 secondary">
-                    C.P
+                  <TooltipTrigger className="flex gap-2 items-start">
+                    <span className="header__5 secondary">C.P</span>
+                    <CurrencyFormat
+                      value={price.original_price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={currency === "USD" ? "$" : "₦"}
+                      className="text-left p5 secondary-disabled"
+                    />
                   </TooltipTrigger>
                   <TooltipContent className="backg-accent">
-                    <p className="p4 secondary">Cost Price</p>
+                    <p className="p4 secondary">Cost Price ({currency})</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-
-              <CurrencyFormat
-                value={row.getValue("price")}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"₦"}
-                className="text-left p5 secondary-disabled"
-              />
             </div>
-            <div className="flex items-center gap-2 mb-2">
+            {price.converted_price && (
+              <div className="mb-2">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger className="flex gap-2 items-start">
+                      <span className="header__5 secondary">C.P.C</span>
+                      <CurrencyFormat
+                        value={price.converted_price}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"₦"}
+                        className="text-left p5 secondary-disabled"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent className="backg-accent">
+                      <p className="p4 secondary">Cost Price Converted (NGN)</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            )}
+            <div className=" mb-2">
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger className="header__5 secondary">
-                    S.P
+                  <TooltipTrigger className="flex gap-2 items-start">
+                    <span className="header__5 secondary">S.P</span>
+                    <CurrencyFormat
+                      value={data.price_with_markup}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦"}
+                      className="text-left p5 secondary-disabled"
+                    />
                   </TooltipTrigger>
                   <TooltipContent className="backg-accent">
-                    <p className="p4 secondary">Selling Price</p>
+                    <p className="p4 secondary">Selling Price (NGN)</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-              <CurrencyFormat
-                value={data.price_with_markup}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"₦"}
-                className="text-left p5 secondary-disabled"
-              />
             </div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2">
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger className="header__5 secondary">
-                    VAT
+                  <TooltipTrigger className="flex gap-2 items-start">
+                    <span className="header__5 secondary">VAT</span>
+                    <CurrencyFormat
+                      value={data.vat}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦"}
+                      className="text-left p5 secondary-disabled"
+                    />
                   </TooltipTrigger>
                   <TooltipContent className="backg-accent">
-                    <p className="p4 secondary">Value Added Tax</p>
+                    <p className="p4 secondary">Value Added Tax (NGN)</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-              <CurrencyFormat
-                value={data.vat}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"₦"}
-                className="text-left p5 secondary-disabled"
-              />
             </div>
-            <div className="flex items-center gap-2">
+            <div>
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger className="header__5 secondary">
-                    T.P
+                  <TooltipTrigger className="flex gap-2 items-start">
+                    <span className="header__5 secondary">T.P</span>
+                    <CurrencyFormat
+                      value={data.total_price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦"}
+                      className="text-left p5 secondary-disabled"
+                    />
                   </TooltipTrigger>
                   <TooltipContent className="backg-accent">
-                    <p className="p4 secondary">Total Price</p>
+                    <p className="p4 secondary">Total Price (NGN)</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-              <CurrencyFormat
-                value={data.total_price}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"₦"}
-                className="text-left p5 secondary-disabled"
-              />
             </div>
           </>
         );
@@ -244,20 +275,26 @@ const Products = () => {
     {
       id: "actions",
       cell: ({ row }) => {
-        const action = row.original;
         const product = row.original;
         const productId = row.original.id;
         const status = row.original.status;
         return (
-          <Actions action={action}>
+          <Actions>
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
-                setProd(product);
-                handleEditClick();
+                handleEdit(productId);
               }}
             >
               Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="dropdown-options p4 tertiary"
+              onClick={() => {
+                handlePrice(productId);
+              }}
+            >
+              Change price
             </DropdownMenuItem>
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
@@ -269,13 +306,13 @@ const Products = () => {
                 }
               }}
             >
-              {status === "1" ? "Deactivate" : "Approve"}
+              {status === "1" ? "Disapprove" : "Approve"}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
                 setProd(product);
-                setDetails(!details);
+                handleDetails(productId);
               }}
             >
               Details
@@ -289,22 +326,42 @@ const Products = () => {
     },
   ];
 
+  const handleEdit = (id) => {
+    setEdit(true);
+    getProductById(id);
+  };
+
+  const handlePrice = (id) => {
+    setOpenPrice(!openPrice);
+    getProductById(id);
+  };
+
+  const handleDetails = (id) => {
+    setDetails(!details);
+    getProductById(id);
+  };
+
+  //get all products api call
+  const { data: productData, isLoading } = useQuery("getProduct", () =>
+    getProducts()
+  );
+
   return (
     <>
       {edit && (
         <DashAddProduct
           goBack={() => setEdit(!edit)}
           edit={edit}
-          data={prod}
+          prod={prod}
           success={success}
           setSuccess={setSuccess}
           failed={failed}
           setFailed={setFailed}
         />
       )}
-      {open && (
+      {add && (
         <DashAddProduct
-          goBack={() => setOpen(!open)}
+          goBack={() => setAdd(!add)}
           success={success}
           setSuccess={setSuccess}
           failed={failed}
@@ -312,7 +369,7 @@ const Products = () => {
         />
       )}
       {details && <Details data={prod} goBack={() => setDetails(!details)} />}
-      {!edit && !open && !details && (
+      {!edit && !add && !details && (
         <div className="dashboardProduct__div-container">
           <div className="dashboardProduct__div-header flex justify-between items-center">
             <DashHeader text="Products" />
@@ -322,7 +379,7 @@ const Products = () => {
                   color={"secondary"}
                   type={"btn"}
                   style={{ whiteSpace: "nowrap" }}
-                  onClick={handleOpenClick}
+                  onClick={handleAdd}
                 >
                   <Box style={iconStyle} />
                   Add a product
@@ -330,8 +387,28 @@ const Products = () => {
               </div>
             </div>
           </div>
-          <Table getData={getProducts} columns={columns} filter={"name"} />
+          <Table
+            columns={columns}
+            filter={"name"}
+            data={productData}
+            isLoading={isLoading}
+          />
         </div>
+      )}
+      {openPrice && (
+        <Modal
+          open={openPrice}
+          close={() => setOpenPrice(!openPrice)}
+          loading={true}
+        >
+          <ChangePrice
+            close={() => setOpenPrice(!openPrice)}
+            success={successPrice}
+            failed={failedPrice}
+            setSuccess={setSuccessPrice}
+            setFailed={setFailedPrice}
+          />
+        </Modal>
       )}
       {success && (
         <SuccessModal
@@ -341,14 +418,32 @@ const Products = () => {
           text={`${edit ? "Product edited " : "Product created "}`}
         ></SuccessModal>
       )}
-
       {failed && (
         <FailedModal
           open={failed}
           close={() => setFailed(!failed)}
+          icon={true}
           loading={true}
           header={"failed"}
           text={`${edit ? "Product edit failed" : "Create product failed "}`}
+        ></FailedModal>
+      )}
+      {successPrice && (
+        <SuccessModal
+          open={successPrice}
+          close={() => setSuccessPrice(!successPrice)}
+          loading={true}
+          text={"Price updated successfully!"}
+        ></SuccessModal>
+      )}
+      {failedPrice && (
+        <FailedModal
+          open={failedPrice}
+          close={() => setFailedPrice(!failedPrice)}
+          icon={true}
+          loading={true}
+          header={"failed"}
+          text={"Price update failed!"}
         ></FailedModal>
       )}
     </>
