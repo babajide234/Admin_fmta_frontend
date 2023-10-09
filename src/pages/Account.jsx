@@ -5,7 +5,7 @@ import AccountCard from "../components/Card/AccountCard";
 import { CardDetail3 } from "../util/util";
 import { ReactComponent as Profile3 } from "../assets/main/icon/profile3.svg";
 
-import { ReactComponent as Building } from "../assets/main/icon/building.svg";
+// import { ReactComponent as Building } from "../assets/main/icon/building.svg";
 
 const Account = () => {
   return (
@@ -28,7 +28,7 @@ const Account = () => {
           settings={true}
         />
 
-        <AccountCard
+        {/* <AccountCard
           icon={<Building />}
           text={CardDetail3[1].text}
           subText={CardDetail3[1].subText}
@@ -39,7 +39,7 @@ const Account = () => {
           pad="small"
           small={true}
           settings={true}
-        />
+        /> */}
       </section>
     </main>
   );

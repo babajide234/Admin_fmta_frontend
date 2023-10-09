@@ -14,7 +14,7 @@ import { DropdownMenuItem } from "../ui/dropdown-menu";
 
 const data = [
   {
-    orderId: "FM-10611",
+    orderId: "FM0611",
     created: "2021-01-05 11:50:10",
     payment: "Paid",
     customer: "Jude Joshua",
@@ -22,7 +22,7 @@ const data = [
     status: "Delivery Done",
   },
   {
-    orderId: "FM-10611",
+    orderId: "FM0631",
     created: "2021-04-07 11:50:10",
     payment: "Pending",
     customer: "Jude Joshua",
@@ -30,7 +30,7 @@ const data = [
     status: "Awaiting Confirmation",
   },
   {
-    orderId: "FM-10611",
+    orderId: "FM06141",
     created: "2023-07-19 16:47:47",
     payment: "Paid",
     customer: "Jude Joe",
@@ -38,7 +38,7 @@ const data = [
     status: "Delivery Done",
   },
   {
-    orderId: "FM-10611",
+    orderId: "FM0612",
     created: "2021-07-19 16:47:47",
     payment: "pending",
     customer: "Jude Joshua",
@@ -46,7 +46,7 @@ const data = [
     status: "Awaiting Confirmation",
   },
   {
-    orderId: "FM-10611",
+    orderId: "FM0610",
     created: "2021-01-07 11:50:10",
     payment: "Paid",
     customer: "JPrincess Uzoukwu",
@@ -202,6 +202,7 @@ const Orders = () => {
 
   return (
     <main className="dashOrders">
+      
       <div className="dashOrders__div-container">
         {open ? (
           <DashCreateOrder goBack={clickHandler} />

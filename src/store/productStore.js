@@ -7,12 +7,27 @@ const initialState = {
   subCategory: null,
   products: null,
   product: null,
+  result: null,
 };
 const productSlice = create((set, get) => ({
   ...initialState,
+  search: async (query, limit) => {
+    try {
+      const li = limit == undefined ? "" : limit;
+      const response = await instance.get(
+        `products/search?q=${query}&limit=${li}`
+      );
+      set((state) => ({ ...state, result: response.data.data }));
+      return response.data;
+    } catch (error) {
+      set((state) => ({ ...state, result: null }));
+      return error;
+    }
+  },
   getCategoryName: async () => {
     try {
       const response = await instance.get("category");
+      console.log('getCategoryName', response)
       return response.data;
     } catch (error) {
       console.log(error);

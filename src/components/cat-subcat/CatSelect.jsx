@@ -14,7 +14,7 @@ const CatSelect = ({ errors, values, touched, handleChange }) => {
     "getCategoryName",
     async () => {
       const response = await getCategoryName();
-      return response.data;
+      return response;
     }
   );
 
