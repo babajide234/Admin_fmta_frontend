@@ -11,53 +11,56 @@ import { formatDateTime } from "../util/util";
 import CurrencyFormat from "react-currency-format";
 import Actions from "../components/common/Actions";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
+import { ListBullets } from "phosphor-react";
+import { useQuery } from "react-query";
+import orderSlice from "../store/orderStore";
 
-const data = [
-  {
-    orderId: "FM0611",
-    created: "2021-01-05 11:50:10",
-    payment: "Paid",
-    customer: "Jude Joshua",
-    total: 1120,
-    status: "Delivery Done",
-  },
-  {
-    orderId: "FM0631",
-    created: "2021-04-07 11:50:10",
-    payment: "Pending",
-    customer: "Jude Joshua",
-    total: 1120,
-    status: "Awaiting Confirmation",
-  },
-  {
-    orderId: "FM06141",
-    created: "2023-07-19 16:47:47",
-    payment: "Paid",
-    customer: "Jude Joe",
-    total: 1120,
-    status: "Delivery Done",
-  },
-  {
-    orderId: "FM0612",
-    created: "2021-07-19 16:47:47",
-    payment: "pending",
-    customer: "Jude Joshua",
-    total: 1120,
-    status: "Awaiting Confirmation",
-  },
-  {
-    orderId: "FM0610",
-    created: "2021-01-07 11:50:10",
-    payment: "Paid",
-    customer: "JPrincess Uzoukwu",
-    total: 1120,
-    status: "Awaiting Confirmation",
-  },
-];
+// const data = [
+//   {
+//     orderId: "FM0611",
+//     created: "2021-01-05 11:50:10",
+//     payment: "Paid",
+//     customer: "Jude Joshua",
+//     total: 1120,
+//     status: "Delivery Done",
+//   },
+//   {
+//     orderId: "FM0631",
+//     created: "2021-04-07 11:50:10",
+//     payment: "Pending",
+//     customer: "Jude Joshua",
+//     total: 1120,
+//     status: "Awaiting Confirmation",
+//   },
+//   {
+//     orderId: "FM06141",
+//     created: "2023-07-19 16:47:47",
+//     payment: "Paid",
+//     customer: "Jude Joe",
+//     total: 1120,
+//     status: "Delivery Done",
+//   },
+//   {
+//     orderId: "FM0612",
+//     created: "2021-07-19 16:47:47",
+//     payment: "pending",
+//     customer: "Jude Joshua",
+//     total: 1120,
+//     status: "Awaiting Confirmation",
+//   },
+//   {
+//     orderId: "FM0610",
+//     created: "2021-01-07 11:50:10",
+//     payment: "Paid",
+//     customer: "JPrincess Uzoukwu",
+//     total: 1120,
+//     status: "Awaiting Confirmation",
+//   },
+// ];
 
 const Orders = () => {
   const [open, setOpen] = useState(false);
-
+  const getOrders = orderSlice.getState().getOrders
   const clickHandler = () => {
     setOpen(() => !open);
   };
@@ -75,9 +78,11 @@ const Orders = () => {
         </div>
       ),
       cell: ({ row }) => {
+        const data = row.original
+        const orderId = data.order_number
         return (
-          <div className="text-left p5 secondary-disabled">
-            {row.getValue("orderId")}
+          <div className="text-left p4 secondary">
+            {orderId}
           </div>
         );
       },
@@ -94,32 +99,37 @@ const Orders = () => {
         </div>
       ),
       cell: ({ row }) => {
-        const date = formatDateTime(row.getValue("created"));
+        const data = row.original;
+        const created = data.created_at
+        const date = formatDateTime(created);
+
         return <div className="text-left p5 secondary-disabled">{date}</div>;
       },
     },
-    {
-      accessorKey: "customer",
-      header: () => (
-        <div className="text-left header__4 secondary capitalize">customer</div>
-      ),
-      cell: ({ row }) => {
-        return (
-          <div className="text-left p5 secondary capitalize">
-            {row.getValue("customer")}
-          </div>
-        );
-      },
-    },
+    // {
+    //   accessorKey: "customer",
+    //   header: () => (
+    //     <div className="text-left header__4 secondary capitalize">customer</div>
+    //   ),
+    //   cell: ({ row }) => {
+    //     return (
+    //       <div className="text-left p5 secondary capitalize">
+    //         {row.getValue("customer")}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       accessorKey: "total",
       header: () => (
         <div className="text-left header__4 secondary capitalize">total</div>
       ),
       cell: ({ row }) => {
+        const data = row.original
+        const amount = data.payment.amount
         return (
           <CurrencyFormat
-            value={row.getValue("total")}
+            value={amount}
             displayType={"text"}
             thousandSeparator={true}
             prefix={"₦"}
@@ -140,15 +150,16 @@ const Orders = () => {
         </div>
       ),
       cell: ({ row }) => {
+        const data = row.original
+        const status = data.payment.status
         return (
           <div
-            className={`text-center p5 secondary-disabled column-approved capitalize ${
-              row.getValue("payment").toLowerCase() === "paid"
-                ? "column-approved-primary"
-                : "column-approved-disable"
-            }`}
+            className={`text-center p5 secondary-disabled column-approved capitalize ${status.toLowerCase() === "paid"
+              ? "column-approved-primary"
+              : "column-approved-disable"
+              }`}
           >
-            {row.getValue("payment")}
+            {status}
           </div>
         );
       },
@@ -165,15 +176,16 @@ const Orders = () => {
         </div>
       ),
       cell: ({ row }) => {
+        const data = row.original
+        const status = data.status
         return (
           <div
-            className={`text-center p5 secondary-disabled column-approved capitalize ${
-              row.getValue("status").toLowerCase() === "delivery done"
-                ? "column-approved-primary"
-                : "column-approved-disable"
-            }`}
+            className={`text-center p5 secondary-disabled column-approved capitalize ${status.toLowerCase() === "delivery done"
+              ? "column-approved-primary"
+              : "column-approved-disable"
+              }`}
           >
-            {row.getValue("status")}
+            {status}
           </div>
         );
       },
@@ -186,7 +198,7 @@ const Orders = () => {
         return (
           <Actions action={action}>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
-              View Invoice
+              View Order
             </DropdownMenuItem>
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               Mark Paid
@@ -199,10 +211,11 @@ const Orders = () => {
       },
     },
   ];
-
+  //get all orders api call
+  const { data: orderData, isLoading } = useQuery('getAllOrders', () => getOrders())
   return (
     <main className="dashOrders">
-      
+
       <div className="dashOrders__div-container">
         {open ? (
           <DashCreateOrder goBack={clickHandler} />
@@ -210,7 +223,7 @@ const Orders = () => {
           <>
             <div className="dashOrders__div-header flex justify-between items-center">
               <DashHeader text={"Orders"} />
-              <div className="dashboardProduct__btn">
+              <div className="flex flex-row gap-3 items-center">
                 <div className="dashboardProduct__btn-container">
                   <Buttons
                     color={"secondary"}
@@ -219,12 +232,23 @@ const Orders = () => {
                     onClick={clickHandler}
                   >
                     <Box style={iconStyle} />
-                    Create an Order
+                    Create order
+                  </Buttons>
+                </div>
+                <div className="dashboardProduct__btn-container">
+                  <Buttons
+                    color={"secondary"}
+                    type={"link"}
+                    style={{ whiteSpace: "nowrap" }}
+                    to={'/invoice'}
+                  >
+                    <ListBullets style={iconStyle} />
+                    Generate invoice
                   </Buttons>
                 </div>
               </div>
             </div>
-            <Table columns={orderColumn} data={data} filter={"orderId"} />
+            <Table columns={orderColumn} data={orderData} filter={"orderId"} isLoading={isLoading} />
           </>
         )}
       </div>

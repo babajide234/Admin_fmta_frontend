@@ -27,7 +27,7 @@ const productSlice = create((set, get) => ({
   getCategoryName: async () => {
     try {
       const response = await instance.get("category");
-      console.log('getCategoryName', response)
+      console.log("getCategoryName", response);
       return response.data;
     } catch (error) {
       console.log(error);

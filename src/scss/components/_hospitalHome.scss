@@ -199,6 +199,16 @@
     &-flex {
       @include flex($jc: space-between, $ai: flex-start);
     }
+    &-icon-small {
+      svg {
+        width: 48px;
+        height: 48px;
+        color: $secondary;
+        path {
+          stroke: $secondary;
+        }
+      }
+    }
   }
   &-bottom {
     min-height: 300px;

@@ -25,16 +25,6 @@ const CatSelect = ({ errors, values, touched, handleChange }) => {
     getSubCategory(id);
   };
 
-  //   const { data: subCatData, isLoading: subCatLoading } = useQuery(
-  //     ["subcat", catId],
-  //     async () => {
-  //       const response = await getSubCategory(catId);
-  //       console.log(response.data);
-
-  //       return response.data;
-  //     }
-  //   );
-
   return (
     <>
       <CustomSelectButton

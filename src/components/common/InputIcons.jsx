@@ -20,16 +20,14 @@ const InputIcons = ({
 }) => {
   return (
     <div
-      className={`inputIcon ${
-        err ? "inputIcon__error" : "inputIcon__default"
-      } ${disable && "inputIcon__disabled"} `}
+      className={`inputIcon ${err ? "inputIcon__error" : "inputIcon__default"
+        } ${disable && "inputIcon__disabled"} `}
       style={{ paddingBottom: pad }}
     >
       {iconLeft && (
         <span
-          className={`inputIcon__span-left ${
-            err ? "inputIcon__svg-error" : " "
-          }`}
+          className={`inputIcon__span-left ${err ? "inputIcon__svg-error" : " "
+            }`}
         >
           {iconLeft}
         </span>
@@ -47,17 +45,15 @@ const InputIcons = ({
 
       <label
         htmlFor={inputName}
-        className={`inputIcon__label p-500 ${
-          err ? "error" : "secondary-disabled"
-        }`}
+        className={`inputIcon__label p-500 ${err ? "error" : "secondary-disabled"
+          }`}
       >
         {placeholder}
       </label>
       {iconRight && (
         <span
-          className={`inputIcon__span-right ${
-            err ? "inputIcon__svg-error" : " "
-          }`}
+          className={`inputIcon__span-right ${err ? "inputIcon__svg-error" : " "
+            }`}
         >
           {iconRight}
         </span>
@@ -79,15 +75,13 @@ export const CustomSelectButton = ({
 }) => {
   return (
     <div
-      className={` inputIcon ${
-        err ? "inputIcon__error" : "inputIcon__default"
-      }`}
+      className={` inputIcon ${err ? "inputIcon__error" : "inputIcon__default"
+        }`}
     >
       {iconLeft && (
         <span
-          className={`inputIcon__span-left ${
-            err ? "inputIcon__svg-error" : " "
-          }`}
+          className={`inputIcon__span-left ${err ? "inputIcon__svg-error" : " "
+            }`}
         >
           {iconLeft}
         </span>
@@ -121,9 +115,8 @@ export const CustomSelectButton = ({
         </div>
       ) : (
         <div
-          className={`inputIcon__span-right inset-y-0 right-0 flex items-center px-2 pointer-events-none ${
-            err ? "inputIcon__svg-error" : " "
-          }`}
+          className={`inputIcon__span-right inset-y-0 right-0 flex items-center px-2 pointer-events-none ${err ? "inputIcon__svg-error" : " "
+            }`}
         >
           <label htmlFor={name}>
             <CaretDown size={20} color="#001973" />
@@ -155,9 +148,8 @@ export const TextAreaIcon = ({
       />
       <label
         htmlFor={inputName}
-        className={`textArea__label  p-500  ${
-          err ? "error" : "secondary-disabled"
-        }`}
+        className={`textArea__label  p-500  ${err ? "error" : "secondary-disabled"
+          }`}
       >
         {placeholder}
       </label>
@@ -177,16 +169,14 @@ export const DatePickerField = ({
 }) => {
   return (
     <div
-      className={`inputIcon ${
-        err ? "inputIcon__error" : "inputIcon__default"
-      } `}
+      className={`inputIcon ${err ? "inputIcon__error" : "inputIcon__default"
+        } `}
       style={{ paddingBottom: pad }}
     >
       {iconLeft && (
         <span
-          className={`inputIcon__span-left ${
-            err ? "inputIcon__svg-error" : " "
-          }`}
+          className={`inputIcon__span-left ${err ? "inputIcon__svg-error" : " "
+            }`}
         >
           {iconLeft}
         </span>
@@ -206,9 +196,8 @@ export const DatePickerField = ({
       </label>
       {iconRight && (
         <span
-          className={`inputIcon__span-right ${
-            err ? "inputIcon__svg-error" : " "
-          }`}
+          className={`inputIcon__span-right ${err ? "inputIcon__svg-error" : " "
+            }`}
         >
           {iconRight}
         </span>

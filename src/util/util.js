@@ -9,16 +9,12 @@ export const SIDEBARMENU = [
     url: "/orders",
     icon: "Box",
   },
-  {
-    name: "User",
-    url: "/users",
-    icon: "User",
-  },
-  {
-    name: "Account",
-    url: "/account",
-    icon: "UserGear",
-  },
+  // {
+  //   name: "User",
+  //   url: "/users",
+  //   icon: "User",
+  // },
+
 ];
 
 export const MARKUPLIST = [

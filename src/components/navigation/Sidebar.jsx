@@ -34,7 +34,6 @@ const Sidebar = () => {
               {item.icon === "Box" && <Box />}
               {item.icon === "User" && <User />}
               {item.icon === "Heart" && <Heart />}
-
               {item.icon === "UserGear" && <UserGear />}
               <span className="hospitalSideNav__ul-span">{item.name}</span>
             </div>
@@ -95,6 +94,22 @@ const Sidebar = () => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        <NavLink to={'/users'} className={(props) => {
+          return props.isActive ? "active-link" : "";
+        }}>
+          <div className={`hospitalSideNav__ul-listItem`}>
+            <User /> <span className="hospitalSideNav__ul-span">User</span>
+          </div>
+
+        </NavLink>
+        <NavLink to={'/account'} className={(props) => {
+          return props.isActive ? "active-link" : "";
+        }}>
+          <div className={`hospitalSideNav__ul-listItem`}>
+            <UserGear /> <span className="hospitalSideNav__ul-span">Account</span>
+          </div>
+
+        </NavLink>
       </>
     );
   };
