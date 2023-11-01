@@ -330,7 +330,6 @@ const Products = () => {
     setEdit(true);
     getProductById(id);
   };
-
   const handlePrice = (id) => {
     setOpenPrice(!openPrice);
     getProductById(id);

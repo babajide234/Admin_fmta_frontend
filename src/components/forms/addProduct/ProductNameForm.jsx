@@ -14,6 +14,7 @@ import { Field } from "formik";
 import ImagePicker from "../../ImagePicker/index";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import productSlice from "../../../store/productStore";
 
 const ProductNameForm = ({
   values,
@@ -28,8 +29,14 @@ const ProductNameForm = ({
 }) => {
   const [role, setRole] = useState("");
   const [isChecked, setChecked] = useState(false);
-
+  const [catId, setCatId] = useState("")
   const getUsersByRole = roleSlice.getState().getUsersByRole;
+
+  //zust state for categegory
+  const getCategoryName = productSlice((state) => state.getCategoryName)
+  const getSubCategory = productSlice(state => state.getSubCategory)
+
+
 
   const { data, isLoading } = useQuery(
     ["getUsersByRole", role],
@@ -50,6 +57,24 @@ const ProductNameForm = ({
       return;
     }
   };
+
+  const { data: catData = [], isLoading: CategoryLoading } = useQuery(
+    "getCategoryName",
+    async () => {
+      const response = await getCategoryName();
+      return response;
+    }
+  );
+
+  const { data: subCatData = [], isLoading: subCatLoading } = useQuery(
+    ["getSub", catId],
+    async () => {
+      const response = await getSubCategory(catId);
+      return response.data;
+    }, {
+    enabled: catId !== ''
+  }
+  );
 
   return (
     <section>
@@ -132,7 +157,7 @@ const ProductNameForm = ({
         </div>
 
         <div className="input-container grid-2">
-          <div className="">
+          {/* <div className="">
             <CatSelect
               values={values}
               touched={touched}
@@ -148,6 +173,59 @@ const ProductNameForm = ({
               errors={errors}
               handleChange={handleChange}
             />
+          </div> */}
+          <div className="">
+            <CustomSelectButton
+              name={"category"}
+              value={values.category}
+              onChange={(e) => {
+                handleChange(e)
+                setCatId(e.target.value)
+              }}
+              label={"Product category"}
+              loading={CategoryLoading}
+              err={errors.category && touched.category}
+            >
+              <option
+                value=""
+                disabled
+                selected
+                hidden
+              >
+                Select a category
+              </option>
+              {catData && catData?.map((option, index) => (
+                <option key={index} value={option.id} className="">
+                  {option.name}
+                </option>
+              ))}
+            </CustomSelectButton>
+          </div>
+          <div>
+            <CustomSelectButton
+              name={"subCategory"}
+              value={values.subCategory}
+              onChange={handleChange}
+              label={"Subcategory"}
+              loading={subCatLoading}
+              err={errors.subCategory && touched.subCategory} >
+              <option
+                disabled
+                selected
+                hidden
+              >
+                Select a sub-category
+              </option>
+              {subCatData && subCatData?.map((option) => (
+                <option
+                  key={option.id}
+                  value={option.id}
+                  className="py-4 text-md hover:bg-lightPrimary"
+                >
+                  {option.name}
+                </option>
+              ))}
+            </CustomSelectButton>
           </div>
         </div>
 

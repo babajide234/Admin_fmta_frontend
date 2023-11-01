@@ -20,9 +20,7 @@ const userSlice = create(
           loaderSlice.setState({ loader: true });
           const response = await loginRequest(data);
           const userData = response.data.data.details;
-          const role = response.data.data.details.roles[0].name
-            ? response.data.data.details.roles[0].name
-            : "customer";
+          const role = response.data.data.details.roles[0].name ?? "customer";
           const accessToken = response.data.data.access_token;
 
           set((state) => ({ ...state, details: userData }));

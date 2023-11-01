@@ -14,7 +14,7 @@ const CatSelect = ({ errors, values, touched, handleChange }) => {
     "getCategoryName",
     async () => {
       const response = await getCategoryName();
-      return response.data;
+      return response;
     }
   );
 
@@ -24,16 +24,6 @@ const CatSelect = ({ errors, values, touched, handleChange }) => {
     setCatId(id);
     getSubCategory(id);
   };
-
-  //   const { data: subCatData, isLoading: subCatLoading } = useQuery(
-  //     ["subcat", catId],
-  //     async () => {
-  //       const response = await getSubCategory(catId);
-  //       console.log(response.data);
-
-  //       return response.data;
-  //     }
-  //   );
 
   return (
     <>

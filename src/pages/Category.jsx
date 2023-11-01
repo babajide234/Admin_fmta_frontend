@@ -16,7 +16,7 @@ const Category = () => {
     "getCategoryName",
     async () => {
       const response = await getCategoryName();
-      return response.data;
+      return response;
     }
   );
   const handleCategoryChange = (id) => {
@@ -31,7 +31,9 @@ const Category = () => {
       console.log(response.data);
 
       return response.data;
-    }
+    }, {
+    enabled: catId !== ''
+  }
   );
   return (
     <main className="dashCategories">
