@@ -11,6 +11,7 @@ import { useQuery } from 'react-query'
 import { Buttons } from '../buttons/Buttons'
 import { ArrowsHorizontal, CurrencyNgn, Phone, Textbox } from 'phosphor-react'
 import Invoicelist from '../common/Invoicelist'
+import { generateRandomId } from '../../util/util'
 
 
 const GenerateInvoiceForm = () => {
@@ -23,7 +24,7 @@ const GenerateInvoiceForm = () => {
         invoiceeAddress: '',
         invoiceePhone: '',
         productPrice: searchPrice ?? '',
-        productName: '',
+        // productName: '',
         list: [],
 
     }
@@ -43,17 +44,12 @@ const GenerateInvoiceForm = () => {
             productName: values.productName,
             productPrice: values.productPrice,
             productQuantity: values.productQuantity,
+            id: generateRandomId()
         }
         setFieldValue('list', [...values.list, list], false);
-
-
-        // setFieldValue('productName', "");
-        // setFieldValue('productQuantity', "");
-        // setFieldValue('productPrice', "");
-        // setSearchPrice('')
-
     }
 
+   
     const { data: allProducts, isLoading } = useQuery('getAllProducts', () => getAllProducts());
 
     return (

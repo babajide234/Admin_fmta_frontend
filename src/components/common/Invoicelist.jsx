@@ -6,8 +6,9 @@ import { ArrowUpDown } from "lucide-react";
 import Actions from "./Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import Table from '../../components/tables/table'
+import { Buttons } from "../buttons/Buttons";
 
-const Invoicelist = ({ setFieldValue, submitForm, list, invoiceArray, setInvoiceArray }) => {
+const Invoicelist = ({ setFieldValue, submitForm, list }) => {
 
 
   const columns = [
@@ -100,11 +101,12 @@ const Invoicelist = ({ setFieldValue, submitForm, list, invoiceArray, setInvoice
       id: "actions",
       cell: ({ row }) => {
         const data = row.original
+        const id = data.id
         return (
           <Actions>
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
-              onClick={() => console.log('action', data)}
+              onClick={() => deleteHandler(id)}
             >
               Delete
             </DropdownMenuItem>
@@ -114,15 +116,27 @@ const Invoicelist = ({ setFieldValue, submitForm, list, invoiceArray, setInvoice
     },
   ];
 
-  useEffect(() => {
-    if (list.length > 0) {
-      setInvoiceArray(prev => [...prev, ...list])
-    }
-  }, [list, setInvoiceArray])
+  const deleteHandler = (id) => {
+    const newList = list.filter((list) => list.id !== id)
+    setFieldValue('list', [...newList])
+  }
 
   return (
-    <section className="invoiceList my-8">
+    <section className="invoiceList mt-4">
       <Table columns={columns} data={list} filter={'name'} />
+      <div className="my-8 grid grid-cols-3 gap-4 ">
+        <div className="col-span-1">
+          <Buttons
+            color={'primary'}
+            type={'btn'}
+            onClick={(e) => {
+              submitForm();
+              e.preventDefault();
+            }}>
+            Generate Invoice
+          </Buttons>
+        </div>
+      </div>
     </section>
   );
 };

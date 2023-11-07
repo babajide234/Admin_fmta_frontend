@@ -65,7 +65,8 @@ const router = createBrowserRouter([
       {
         path: '/invoice',
         element: <Invoice />
-      }
+      },
+
     ],
   },
   {
@@ -80,4 +81,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default router;
+export default router; 

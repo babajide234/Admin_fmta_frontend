@@ -14,7 +14,6 @@ export const SIDEBARMENU = [
   //   url: "/users",
   //   icon: "User",
   // },
-
 ];
 
 export const MARKUPLIST = [
@@ -129,4 +128,10 @@ export const getNameById = (id = "", array = [{}]) => {
     const foundItem = array.find((item) => item.id === id);
     return foundItem ? foundItem.name : "";
   }
+};
+
+export const generateRandomId = () => {
+  const timestamp = new Date().getTime();
+  const random = Math.floor(Math.random() * 1000000);
+  return `${timestamp}-${random}`;
 };
