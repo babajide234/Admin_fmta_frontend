@@ -1,8 +1,10 @@
 import axios from "axios";
 import userSlice from "../store/userStore";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const axiosConfig = {
-  baseURL: "https://apiv2.firstmedtrade.com/api/",
+  baseURL: BASE_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
