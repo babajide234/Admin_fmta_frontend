@@ -21,6 +21,13 @@ const DashCat = ({
   const initialValues = {
     category: "",
   };
+
+  // handel add request to category
+
+
+  // handle category edit
+
+  
   const onSubmit = (values, { setSubmitting }) => {
     console.log(values);
     setSubmitting(false);

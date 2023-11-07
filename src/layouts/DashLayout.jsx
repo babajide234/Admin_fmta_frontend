@@ -19,15 +19,17 @@ const DashLayout = () => {
   return (
     <>
       <ScrollToTop />
-      <DashboardNavbar />
-      <main className="hospitalLayout__main">
-        <div className="hospitalLayout__div-sidenav">
-          <Sidebar />
-        </div>
-        <div className="hospitalLayout__div-outlet">
+      <div className=" flex h-screen overflow-y-hidden bg-white">
+
+      <Sidebar />
+      <div className="flex flex-col flex-1 h-full overflow-hidden">
+        <DashboardNavbar />
+
+        <main className="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
           <Outlet />
-        </div>
-      </main>
+        </main>
+      </div>
+      </div>
     </>
   );
 };

@@ -9,11 +9,38 @@ export const SIDEBARMENU = [
     url: "/orders",
     icon: "Box",
   },
-  // {
-  //   name: "User",
-  //   url: "/users",
-  //   icon: "User",
-  // },
+  {
+    name: "Products",
+    url: "/orders",
+    icon: "Box",
+    children:[
+      {
+        name: "Products",
+        url: "/products",
+        icon: "Home",
+      },
+      {
+        name: "Categories",
+        url: "/categories",
+        icon: "Home",
+      },
+      {
+        name: "Markup",
+        url: "/markup",
+        icon: "Home",
+      },
+    ]
+  },
+  {
+    name: "User",
+    url: "/users",
+    icon: "User",
+  },
+  {
+    name: "Account",
+    url: "/account",
+    icon: "Account",
+  },
 
 ];
 

@@ -28,7 +28,7 @@ const productSlice = create((set, get) => ({
     try {
       const response = await instance.get("category");
       console.log("getCategoryName", response);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       console.log(error);
     }
@@ -43,10 +43,11 @@ const productSlice = create((set, get) => ({
       return err;
     }
   },
-  getProducts: async () => {
+  getProducts: async (cursor) => {
     try {
-      const response = await instance.get("products");
+      const response = await instance.get(`products?per_page=10&cursor=${cursor}`);
       set((state) => ({ ...state, products: response.data.data }));
+      console.log(response.data.data);
       return response.data.data;
     } catch (error) {
       return error;
