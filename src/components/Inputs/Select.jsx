@@ -42,6 +42,7 @@ export const CustomSelect = ({
   filterKey,
   label,
   loading,
+  valueKey
 }) => {
   const [meta] = useField(selectName);
   const [isOpen, setIsOpen] = useState(false);
@@ -149,7 +150,7 @@ export const CustomSelect = ({
                 <SelectItem
                   key={index}
                   label={option.name}
-                  value={option.id}
+                  value={option[valueKey]}
                   name={option.name}
                   handleOptionClick={handleOptionClick}
                 />
@@ -191,5 +192,6 @@ CustomSelect.propTypes = {
   children: PropTypes.node,
   label: PropTypes.any,
   loading: PropTypes.any,
+  valueKey: PropTypes.string
 }
 

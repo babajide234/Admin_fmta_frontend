@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Checkbox } from "../../ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
-import Actions from "./Actions";
+import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
-import Table from '../../components/tables/table'
-import { Buttons } from "../buttons/Buttons";
+import Table from '../tables/table'
 
-const Invoicelist = ({ setFieldValue, submitForm, list }) => {
+const Orderlist = ({ setFieldValue, list }) => {
 
 
   const columns = [
@@ -124,29 +123,16 @@ const Invoicelist = ({ setFieldValue, submitForm, list }) => {
   return (
     <section className="invoiceList mt-4">
       <Table columns={columns} data={list} filter={'name'} />
-      <div className="my-8 grid grid-cols-3 gap-4 ">
-        <div className="col-span-1">
-          <Buttons
-            color={'primary'}
-            type={'btn'}
-            onClick={(e) => {
-              submitForm();
-              e.preventDefault();
-            }}>
-            Generate Invoice
-          </Buttons>
-        </div>
-      </div>
+ 
     </section>
   );
 };
 
-Invoicelist.propTypes = {
+Orderlist.propTypes = {
   list: PropTypes.array,
   setFieldValue: PropTypes.func,
-  submitForm: PropTypes.func,
   invoiceArray: PropTypes.array,
   // setInvoiceArray: PropTypes.func
 };
 
-export default Invoicelist;
+export default Orderlist;

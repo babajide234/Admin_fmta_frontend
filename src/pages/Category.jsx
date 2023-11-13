@@ -28,8 +28,6 @@ const Category = () => {
     ["subcat", catId],
     async () => {
       const response = await getSubCategory(catId);
-      console.log(response.data);
-
       return response.data;
     }, {
     enabled: catId !== ''
@@ -58,6 +56,7 @@ const Category = () => {
                     variant="outline"
                     subCategoryData={subCatData}
                     subCatLoading={subCatLoading}
+                    catId={catId}
                   />
                 </div>
               </BorderContainer>

@@ -109,7 +109,7 @@ const LoginForm = () => {
                 onChange={handleChange}
                 err={
                   (errors.email || errors.phone) &&
-                  (touched.email || touched.phone)
+                    (touched.email || touched.phone)
                     ? true
                     : false
                 }
@@ -158,7 +158,7 @@ const LoginForm = () => {
             style={{ textTransform: 'none' }}
             disable={
               (values.email != '' || values.phone != '') &&
-              values.password != ''
+                values.password != ''
                 ? false
                 : true
             }

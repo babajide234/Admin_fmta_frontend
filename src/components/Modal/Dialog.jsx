@@ -11,9 +11,10 @@ import {
 } from "../../ui/dialog";
 import PropTypes from "prop-types";
 
-const DialogContainer = ({ trigger, title, subtitle, children }) => {
+const DialogContainer = ({ trigger, title, subtitle, open, onOpenChange, children }) => {
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px] dropdown-container box">
         <DialogHeader>
@@ -33,5 +34,7 @@ DialogContainer.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
   children: PropTypes.node,
+  open: PropTypes.bool,
+  onOpenChange: PropTypes.func
 };
 export default DialogContainer;

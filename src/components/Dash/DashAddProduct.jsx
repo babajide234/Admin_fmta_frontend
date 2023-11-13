@@ -21,7 +21,7 @@ const DashAddProduct = ({
 
 
   return (
-    <main className="dashAddProduct">
+    <main className="dashAddProduct px-[100px]">
       <GoBack
         onClick={() => {
           goBack();

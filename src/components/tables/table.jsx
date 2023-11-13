@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const Table = ({ columns, filter, data = [] }) => {
   return (
     <div className="mx-auto py-5">
-      <DataTable columns={columns} data={data.data} filter={filter} />
+      <DataTable columns={columns} data={data} filter={filter} />
     </div>
   );
 };

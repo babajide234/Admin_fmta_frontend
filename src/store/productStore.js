@@ -27,7 +27,6 @@ const productSlice = create((set, get) => ({
   getCategoryName: async () => {
     try {
       const response = await instance.get("category");
-      console.log("getCategoryName", response);
       return response.data.data;
     } catch (error) {
       console.log(error);
@@ -35,7 +34,7 @@ const productSlice = create((set, get) => ({
   },
   getSubCategory: async (id) => {
     try {
-      const response = await instance.get(`category/subcategory/${id}`);
+      const response = await instance.get(`subcategory/${id}`);
       set((state) => ({ ...state, subCategory: response.data.data }));
       return response.data;
     } catch (err) {
@@ -45,9 +44,10 @@ const productSlice = create((set, get) => ({
   },
   getProducts: async (cursor) => {
     try {
-      const response = await instance.get(`products?per_page=10&cursor=${cursor}`);
+      const response = await instance.get(
+        `products?per_page=10&cursor=${cursor}`
+      );
       set((state) => ({ ...state, products: response.data.data }));
-      console.log(response.data.data);
       return response.data.data;
     } catch (error) {
       return error;
@@ -117,6 +117,61 @@ const productSlice = create((set, get) => ({
       loaderSlice.setState({ loader: true });
       const response = await instance.post(`products/price/${id}`, data);
       console.log(response);
+      return response.data;
+    } catch (error) {
+      return error;
+    } finally {
+      loaderSlice.setState({ loader: false });
+    }
+  },
+  adminAddCategory: async (data) => {
+    try {
+      loaderSlice.setState({ loader: true });
+      const response = await instance.post("admin/category", data);
+      return response.data;
+    } catch (error) {
+      return error;
+    } finally {
+      loaderSlice.setState({ loader: false });
+    }
+  },
+  adminAddSubCategory: async (data) => {
+    try {
+      loaderSlice.setState({ loader: true });
+      const response = await instance.post("admin/subcategory", data);
+      return response.data;
+    } catch (error) {
+      return error;
+    } finally {
+      loaderSlice.setState({ loader: false });
+    }
+  },
+  adminEditCategory: async (id, data) => {
+    try {
+      loaderSlice.setState({ loader: true });
+      const response = await instance.put(`category/${id}`, data);
+      return response.data;
+    } catch (error) {
+      return error;
+    } finally {
+      loaderSlice.setState({ loader: false });
+    }
+  },
+  adminEditSubCategory: async (id, data) => {
+    try {
+      loaderSlice.setState({ loader: true });
+      const response = await instance.put(`subcategory/${id}`, data);
+      return response.data;
+    } catch (error) {
+      return error;
+    } finally {
+      loaderSlice.setState({ loader: false });
+    }
+  },
+  adminDeleteCategory: async (id) => {
+    try {
+      loaderSlice.setState({ loader: true });
+      const response = await instance.delete(`category/${id}`);
       return response.data;
     } catch (error) {
       return error;

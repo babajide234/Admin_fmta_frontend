@@ -12,7 +12,7 @@ import Account from "../pages/Account";
 import Profile from "../components/Profile";
 import Org from "../pages/Org";
 import Invite from "../pages/Invite";
-import Invoice from "../pages/Invoice";
+import Invoice from "../components/Order/Invoice";
 // import productSlice from "../store/productStore";
 
 // const getProducts = productSlice.getState().getProducts;
@@ -27,12 +27,20 @@ const router = createBrowserRouter([
         element: <DashboardHome />,
       },
       {
-        path: "/products",
-        element: <Products />,
+        path: "/account",
+        element: <Account />,
       },
       {
         path: "/categories",
         element: <Category />,
+      },
+      {
+        path: '/invite',
+        element: <Invite />
+      },
+      {
+        path: '/invoice',
+        element: <Invoice />
       },
       {
         path: "/markup",
@@ -43,28 +51,20 @@ const router = createBrowserRouter([
         element: <Orders />,
       },
       {
-        path: "/users",
-        element: <User />,
+        path: "/organization",
+        element: <Org />,
       },
       {
-        path: "/account",
-        element: <Account />,
+        path: "/products",
+        element: <Products />,
       },
       {
         path: "/profile",
         element: <Profile />,
       },
       {
-        path: "/organization",
-        element: <Org />,
-      },
-      {
-        path: '/invite',
-        element: <Invite />
-      },
-      {
-        path: '/invoice',
-        element: <Invoice />
+        path: "/users",
+        element: <User />,
       },
 
     ],

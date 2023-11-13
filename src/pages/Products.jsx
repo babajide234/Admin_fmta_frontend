@@ -263,9 +263,8 @@ const Products = () => {
         const approved = row.getValue("status") === "1" ? true : false;
         return (
           <div
-            className={`text-center p5 secondary-disabled column-approved ${
-              approved ? "column-approved-primary" : "column-approved-disable"
-            }`}
+            className={`text-center p5 secondary-disabled column-approved ${approved ? "column-approved-primary" : "column-approved-disable"
+              }`}
           >
             {approved ? "Approved" : "Pending"}
           </div>
@@ -341,7 +340,7 @@ const Products = () => {
   };
 
   //get all products api call
-  const { data: productData, isLoading } = useQuery("getProduct", () =>
+  const { data: productData = [], isLoading } = useQuery("getProduct", () =>
     getProducts()
   );
 
