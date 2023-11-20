@@ -8,10 +8,12 @@ import { DropdownMenuItem } from "../../ui/dropdown-menu";
 import roleSlice from "../../store/roleSlice";
 import PropTypes from "prop-types";
 import { useQuery } from "react-query";
+import userSlice from "../../store/userStore";
+import { adminRoles } from "../../util/util";
 
 const CustomerTable = ({ setData, setOpen, setName }) => {
   const getUsersByRole = roleSlice.getState().getUsersByRole;
-
+  const role = userSlice.getState().role
   const { data: customerData, isLoading } = useQuery("getCustomer", () =>
     getUsersByRole("customer")
   );
@@ -88,12 +90,16 @@ const CustomerTable = ({ setData, setOpen, setName }) => {
 
         return (
           <Actions action={data}>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Verify
-            </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Disable
-            </DropdownMenuItem>
+            {adminRoles.includes(role) &&
+              <>
+                <DropdownMenuItem className="dropdown-options p4 tertiary">
+                  Verify
+                </DropdownMenuItem>
+                <DropdownMenuItem className="dropdown-options p4 tertiary">
+                  Disable
+                </DropdownMenuItem>
+              </>
+            }
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {

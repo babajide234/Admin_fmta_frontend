@@ -11,7 +11,7 @@ const Category = () => {
   const [catId, setCatId] = useState("");
   const getCategoryName = productSlice.getState().getCategoryName;
   const getSubCategory = productSlice.getState().getSubCategory;
-
+ 
   const { data: catData, isLoading: catLoading } = useQuery(
     "getCategoryName",
     async () => {

@@ -16,6 +16,8 @@ import { useMutation } from "react-query";
 import productSlice from "../../store/productStore";
 import { Text } from "lucide-react";
 import FailedModal from "../Modal/FailedModal";
+import userSlice from "../../store/userStore";
+import { adminRoles } from "../../util/util";
 
 const DashCat = ({
   variant = "outline",
@@ -31,7 +33,7 @@ const DashCat = ({
   const addCat = productSlice(state => state.adminAddCategory)
   const editCat = productSlice(state => state.adminEditCategory)
   const deleteCat = productSlice(state => state.adminDeleteCategory)
-
+  const role = userSlice.getState().role
 
   const initialValues = {
     name: rowData ? rowData.name : "",
@@ -88,7 +90,7 @@ const DashCat = ({
     <div className="dashCat">
       <div className="flex justify-between items-center gap-4">
         <DashHeader text={"Categories"} small={true} variant={variant} />
-        <DialogContainer
+        {adminRoles.includes(role) && <DialogContainer
           trigger={
             <div className="btn-container w-full">
               <Buttons color={"primary"} type={"btn"} onClick={() => setEdit(false)}>
@@ -138,7 +140,7 @@ const DashCat = ({
               </Form>
             )}
           </Formik>
-        </DialogContainer>
+        </DialogContainer>}
       </div>
       <div className="dashCat__div-body">
         <header className="dashCat__div-header grid grid-cols-7 py-2">
@@ -163,20 +165,6 @@ const DashCat = ({
                 <div className="p4 col-span-5 text-left">{row.name}</div>
                 <div className="p4 col-span-1">
                   <Actions>
-                    <DropdownMenuItem className="dropdown-options p4 secondary " onClick={() => {
-                      setEdit(true);
-                      setOpen(prev => !prev);
-                      setRowData(row)
-                    }}>
-                      Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="dropdown-options p4 secondary " onClick={() => {
-                      setDeleteOpen(true)
-                      setRowData(row)
-                    }}>
-                      Delete
-                    </DropdownMenuItem>
-
                     <DropdownMenuItem
                       className="dropdown-options p4 secondary"
                       id={row.id}
@@ -186,6 +174,21 @@ const DashCat = ({
                     >
                       SubCategory
                     </DropdownMenuItem>
+                    {adminRoles.includes(role) && <>
+                      <DropdownMenuItem className="dropdown-options p4 secondary " onClick={() => {
+                        setEdit(true);
+                        setOpen(prev => !prev);
+                        setRowData(row)
+                      }}>
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="dropdown-options p4 secondary " onClick={() => {
+                        setDeleteOpen(true)
+                        setRowData(row)
+                      }}>
+                        Delete
+                      </DropdownMenuItem>
+                    </>}
                   </Actions>
                 </div>
               </div>

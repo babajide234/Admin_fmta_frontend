@@ -13,7 +13,7 @@ export const SIDEBARMENU = [
     name: "Products",
     url: "/orders",
     icon: "Box",
-    children:[
+    children: [
       {
         name: "Products",
         url: "/products",
@@ -29,7 +29,7 @@ export const SIDEBARMENU = [
         url: "/markup",
         icon: "Home",
       },
-    ]
+    ],
   },
   {
     name: "User",
@@ -41,7 +41,6 @@ export const SIDEBARMENU = [
     url: "/account",
     icon: "Account",
   },
-
 ];
 
 export const MARKUPLIST = [
@@ -163,3 +162,12 @@ export const generateRandomId = () => {
   const random = Math.floor(Math.random() * 1000000);
   return `${timestamp}-${random}`;
 };
+
+export const generalRoles = [
+  "superadmin",
+  "admin",
+  "marketing",
+  "customercare",
+  "customer",
+];
+export const adminRoles = ["superamin", "admin"];

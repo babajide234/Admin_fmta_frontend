@@ -5,12 +5,14 @@ import { ArrowUpDown } from "lucide-react";
 import { Checkbox } from "../../ui/checkbox";
 import Actions from "../common/Actions";
 import { DropdownMenuItem } from "../../ui/dropdown-menu";
-import { formatDateTime } from "../../util/util";
+import { adminRoles, formatDateTime } from "../../util/util";
 import roleSlice from "../../store/roleSlice";
 import PropTypes from "prop-types";
 import { useQuery } from "react-query";
+import userSlice from "../../store/userStore";
 
 const VendorTable = ({ setData, setName, setOpen }) => {
+  const role = userSlice.getState().role
   const getUsersByRole = roleSlice.getState().getUsersByRole;
   const { data: vendorData, isLoading } = useQuery("getRetailer", () =>
     getUsersByRole("retailer")
@@ -131,11 +133,10 @@ const VendorTable = ({ setData, setName, setOpen }) => {
       ),
       cell: ({ row }) => (
         <div
-          className={`text-center p5 secondary-disabled column-approved ${
-            row.getValue("email_verified_at")
-              ? "column-approved-primary"
-              : "column-approved-disable"
-          }`}
+          className={`text-center p5 secondary-disabled column-approved ${row.getValue("email_verified_at")
+            ? "column-approved-primary"
+            : "column-approved-disable"
+            }`}
         >
           {row.getValue("email_verified_at") ? "Verified" : "Pending"}
         </div>
@@ -160,12 +161,16 @@ const VendorTable = ({ setData, setName, setOpen }) => {
 
         return (
           <Actions action={data}>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Verify
-            </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Disable
-            </DropdownMenuItem>
+            {adminRoles.includes(role) &&
+              <>
+                <DropdownMenuItem className="dropdown-options p4 tertiary">
+                  Verify
+                </DropdownMenuItem>
+                <DropdownMenuItem className="dropdown-options p4 tertiary">
+                  Disable
+                </DropdownMenuItem>
+              </>
+            }
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {

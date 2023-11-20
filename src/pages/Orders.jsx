@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import DashHeader from "../components/Dash/DashHeader";
 import { Buttons } from "../components/buttons/Buttons";
-import { iconStyle } from "../util/util";
+import { adminRoles, iconStyle } from "../util/util";
 import Table from "../components/tables/table";
 import { ArrowUpDown } from "lucide-react";
 import { formatDateTime } from "../util/util";
@@ -12,10 +12,14 @@ import { DropdownMenuItem } from "../ui/dropdown-menu";
 import { ListBullets } from "phosphor-react";
 import { useQuery } from "react-query";
 import orderSlice from "../store/orderStore";
+import userSlice from "../store/userStore";
 
 
 const Orders = () => {
   const getOrders = orderSlice.getState().getOrders
+  const role = userSlice.getState().role
+
+  console.log('in orders role = ', role)
 
 
   const orderColumn = [
@@ -153,13 +157,17 @@ const Orders = () => {
             <DropdownMenuItem className="dropdown-options p4 tertiary">
               View Order
             </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Mark Paid
-            </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
-              Delivery Done
-            </DropdownMenuItem>
-          </Actions>
+            {adminRoles.includes(role) &&
+              <>
+                <DropdownMenuItem className="dropdown-options p4 tertiary">
+                  Mark Paid
+                </DropdownMenuItem>
+                <DropdownMenuItem className="dropdown-options p4 tertiary">
+                  Delivery Done
+                </DropdownMenuItem>
+              </>
+            }
+          </Actions >
         );
       },
     },

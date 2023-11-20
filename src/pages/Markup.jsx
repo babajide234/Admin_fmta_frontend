@@ -2,7 +2,7 @@
 import React from "react";
 import DashHeader from "../components/Dash/DashHeader";
 import BorderContainer from "../components/common/BorderContainer";
-import { MARKUPLIST } from "../util/util";
+import { MARKUPLIST, adminRoles } from "../util/util";
 import Actions from "../components/common/Actions";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import DialogContainer from "../components/Modal/Dialog";
@@ -11,8 +11,10 @@ import { Form, Formik } from "formik";
 import InputIcons from "../components/common/InputIcons";
 import { ReactComponent as Edit } from "../assets/main/icon/edit-2.svg";
 import { DialogFooter } from "../ui/dialog";
+import userSlice from "../store/userStore";
 
 const Markup = () => {
+  const role = userSlice.getState().role
   const initialValues = {
     markup: "",
   };
@@ -47,17 +49,17 @@ const Markup = () => {
                       {row.name}
                     </div>
                     <div className="p4 col-span-1 text-left">{row.value}</div>
-                    <div className="p4 col-span-1 text-left">
+                    {adminRoles.includes(role) && <div className="p4 col-span-1 text-left">
                       <Actions>
                         <DropdownMenuItem className="dropdown-options p4 secondary px-2 ">
                           Edit
                         </DropdownMenuItem>
                       </Actions>
-                    </div>
+                    </div>}
                   </div>
                 ))}
               </div>
-              <div className="dashMarkup__div-btn flex items-center justify-between gap-4">
+              {adminRoles.includes(role) && <div className="dashMarkup__div-btn flex items-center justify-between gap-4">
                 <DialogContainer
                   trigger={
                     <div className="btn-container">
@@ -102,7 +104,7 @@ const Markup = () => {
                   </Formik>
                 </DialogContainer>
                 <CreateMarkup />
-              </div>
+              </div>}
             </BorderContainer>
           </div>
         </div>

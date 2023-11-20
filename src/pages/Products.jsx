@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Table from "../components/tables/table";
 import DashHeader from "../components/Dash/DashHeader";
 import { Buttons } from "../components/buttons/Buttons";
-import { iconStyle } from "../util/util";
+import { adminRoles, iconStyle } from "../util/util";
 import { ReactComponent as Box } from "../assets/main/icon/box3.svg";
 import DashAddProduct from "../components/Dash/DashAddProduct";
 import productSlice from "../store/productStore";
@@ -25,6 +25,7 @@ import FailedModal from "../components/Modal/FailedModal";
 import Modal from "../components/Modal/Modal";
 import ChangePrice from "../components/Product/ChangePrice";
 import { useQuery } from "react-query";
+import userSlice from "../store/userStore";
 // import { useLoaderData } from "react-router-dom";
 
 const Products = () => {
@@ -42,9 +43,7 @@ const Products = () => {
   const deactivateProduct = productSlice.getState().deactivateProduct;
   const getProductById = productSlice((state) => state.getProductById);
 
-  // nearest ancestor loader
-  // const loaderData = useLoaderData();
-  // console.log(loaderData);
+  const role = userSlice.getState().role
 
   const handleAdd = () => {
     setAdd(true);
@@ -279,23 +278,24 @@ const Products = () => {
         const status = row.original.status;
         return (
           <Actions>
-            <DropdownMenuItem
+            {adminRoles.includes(role) && <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
                 handleEdit(productId);
               }}
             >
               Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
+            </DropdownMenuItem>}
+            {role !== 'marketing' && <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
                 handlePrice(productId);
               }}
             >
               Change price
-            </DropdownMenuItem>
-            <DropdownMenuItem
+            </DropdownMenuItem>}
+
+            {adminRoles.includes(role) && <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
                 if (status === "1") {
@@ -307,6 +307,7 @@ const Products = () => {
             >
               {status === "1" ? "Disapprove" : "Approve"}
             </DropdownMenuItem>
+            }
             <DropdownMenuItem
               className="dropdown-options p4 tertiary"
               onClick={() => {
@@ -316,9 +317,9 @@ const Products = () => {
             >
               Details
             </DropdownMenuItem>
-            <DropdownMenuItem className="dropdown-options p4 tertiary">
+            {adminRoles.includes(role) && <DropdownMenuItem className="dropdown-options p4 tertiary">
               Delete
-            </DropdownMenuItem>
+            </DropdownMenuItem>}
           </Actions>
         );
       },

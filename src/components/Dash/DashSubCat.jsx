@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import LoadingSpinnerComponent from "react-spinners-components";
 import { Buttons } from "../buttons/Buttons";
 import { Formik } from "formik";
-import InputIcons, { CustomSelectButton } from "../common/InputIcons";
+import InputIcons from "../common/InputIcons";
 import { DialogFooter } from "../../ui/dialog";
 import { ReactComponent as Edit } from "../../assets/main/icon/edit-2.svg";
 import DialogContainer from "../Modal/Dialog";
@@ -17,6 +17,8 @@ import { CustomSelect } from "../Inputs/Select";
 import { Text } from "lucide-react";
 import * as Yup from 'yup'
 import FailedModal from "../Modal/FailedModal";
+import userSlice from "../../store/userStore";
+import { adminRoles } from "../../util/util";
 
 
 const DashSubCat = ({
@@ -32,6 +34,7 @@ const DashSubCat = ({
   const getCategoryName = productSlice(state => state.getCategoryName)
   const addSubCat = productSlice(state => state.adminAddSubCategory)
   const editSubCat = productSlice(state => state.adminEditSubCategory)
+  const role = userSlice.getState().role
   //get req
   const { data: catData, isLoading } = useQuery('get categories', () => getCategoryName())
 
@@ -94,7 +97,7 @@ const DashSubCat = ({
     <div className="dashSubCat">
       <div className="flex justify-between items-center gap-4">
         <DashHeader small={true} text={"Sub-Categories"} variant={variant} />
-        <DialogContainer
+        {adminRoles.includes(role) && <DialogContainer
           trigger={
             <div className="btn-container w-full">
               <Buttons color={"primary"} type={"btn"} onClick={() => setEdit(false)}>
@@ -165,7 +168,7 @@ const DashSubCat = ({
               </form>
             )}
           </Formik>
-        </DialogContainer>
+        </DialogContainer>}
       </div>
       <div className="dashSubCat__div-body">
         <header className="dashSubCat__div-header grid grid-cols-7 py-2">
@@ -191,20 +194,23 @@ const DashSubCat = ({
                 >
                   <div className="p4 col-span-1 text-left">{index + 1}</div>
                   <div className="p4 col-span-5 text-left">{row.name}</div>
-                  <div className="p4 col-span-1">
-                    <Actions>
-                      <DropdownMenuItem className="dropdown-options p4 secondary" onClick={() => {
-                        setEdit(true)
-                        setOpen(prev => !prev)
-                        setRowData(row)
-                      }}>
-                        Edit
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="dropdown-options p4 secondary ">
-                        Delete
-                      </DropdownMenuItem>
-                    </Actions>
-                  </div>
+                  {adminRoles.includes(role) &&
+                    <div className="p4 col-span-1">
+                      <Actions>
+
+                        <DropdownMenuItem className="dropdown-options p4 secondary" onClick={() => {
+                          setEdit(true)
+                          setOpen(prev => !prev)
+                          setRowData(row)
+                        }}>
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="dropdown-options p4 secondary ">
+                          Delete
+                        </DropdownMenuItem>
+                      </Actions>
+                    </div>
+                  }
                 </div>
               ))
             )}

@@ -2,14 +2,16 @@
 import React from "react";
 import DashHeader from "../components/Dash/DashHeader";
 import AccountCard from "../components/Card/AccountCard";
-import { CardDetail3 } from "../util/util";
+import { CardDetail3, adminRoles } from "../util/util";
 import { ReactComponent as Profile3 } from "../assets/main/icon/profile3.svg";
 import { ReactComponent as Add } from "../assets/main/icon/add.svg";
+import userSlice from "../store/userStore";
 
 
 // import { ReactComponent as Building } from "../assets/main/icon/building.svg";
 
 const Account = () => {
+  const role = userSlice.getState().role
   return (
     <main className="account">
       <DashHeader
@@ -17,7 +19,7 @@ const Account = () => {
         subText={`Make changes to your FirstMedtrade account. `}
       />
 
-      <AccountCard
+      {adminRoles.includes(role) && <AccountCard
         icon={<Add />}
         text={'Invite'}
         subText={'Send an invite'}
@@ -28,7 +30,7 @@ const Account = () => {
         pad="small"
         small={true}
         settings={true}
-      />
+      />}
       <section className="hospitalHome__content">
         <AccountCard
           icon={<Profile3 />}
