@@ -38,9 +38,10 @@ const LoginForm = () => {
 
   const mutation = useMutation((formData) => login(formData), {
     onSuccess: (data) => {
-      if (data && data.response && data.response.status === 401) {
+      if (!data.status) {
         setFailed(true);
       } else {
+        console.log('inside login', data)
         //   setOpen(!open);
         navigate('/');
       }

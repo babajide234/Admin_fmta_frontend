@@ -19,9 +19,6 @@ const Orders = () => {
   const getOrders = orderSlice.getState().getOrders
   const role = userSlice.getState().role
 
-  console.log('in orders role = ', role)
-
-
   const orderColumn = [
     {
       accessorKey: "order_number",
