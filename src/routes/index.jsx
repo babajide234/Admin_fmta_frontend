@@ -13,6 +13,7 @@ import Profile from "../components/Profile";
 import Org from "../pages/Org";
 import Invite from "../pages/Invite";
 import Invoice from "../components/Order/Invoice";
+import Error from "../pages/Error";
 // import productSlice from "../store/productStore";
 
 // const getProducts = productSlice.getState().getProducts;
@@ -20,6 +21,7 @@ import Invoice from "../components/Order/Invoice";
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <Error />,
     element: <DashLayout />,
     children: [
       {
@@ -72,6 +74,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <AuthLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/login",

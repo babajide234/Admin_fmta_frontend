@@ -15,7 +15,6 @@ const CreateOrderStep = ({ values, errors, touched, handleChange, handleStep }) 
   const [cityCode, setCityCode] = useState("");
   const getCountry = miscSlice((state) => state.getCountry);
   const getState = miscSlice((state) => state.getState);
-  const getCity = miscSlice((state) => state.getCity);
 
 
 
@@ -32,13 +31,7 @@ const CreateOrderStep = ({ values, errors, touched, handleChange, handleStep }) 
     }
   );
 
-  const { data: cities, isLoading: citiesLoading } = useQuery(
-    ["getCities", cityCode],
-    () => getCity(cityCode),
-    {
-      enabled: cityCode !== "",
-    }
-  );
+
 
   return (
     <>
@@ -80,31 +73,7 @@ const CreateOrderStep = ({ values, errors, touched, handleChange, handleStep }) 
         />
       </div>
       <div className="input-container">
-        {/* <CustomSelectButton
-                name={"country"}
-                label={"Countries"}
-                value={values.country}
-                onChange={(e) => {
-                  setStateCode(e.target.value);
-                  handleChange(e);
-                }}
-                loading={countriesLoading}
-                err={errors.country && touched.country}
-              >
-                <option value="" disabled>
-                  Select user country
-                </option>
-                {countries &&
-                  countries?.map((option, index) => (
-                    <option
-                      key={index}
-                      value={option.isoCode}
-                      className="py-4 text-md hover:bg-lightPrimary"
-                    >
-                      {option.name}
-                    </option>
-                  ))}
-              </CustomSelectButton> */}
+       
         <CustomSelect
           options={countries}
           onChange={handleChange}
@@ -173,45 +142,15 @@ const CreateOrderStep = ({ values, errors, touched, handleChange, handleStep }) 
         />
       </div>
       <div className="input-container">
-        {/* <CustomSelectButton
-                name={"city"}
-                label={"Cities"}
-                value={values.city}
-                onChange={handleChange}
-                err={errors.city && touched.city}
-                loading={citiesLoading}
-              >
-                <option value="" disabled>
-                  Select user city
-                </option>
-                {cities &&
-                  cities?.map((option, index) => (
-                    <option
-                      key={index}
-                      value={option.isoCode}
-                      className="py-4 text-md hover:bg-lightPrimary"
-                    >
-                      {option.name}
-                    </option>
-                  ))}
-              </CustomSelectButton> */}
-        <CustomSelect
-          options={cities}
+        <InputIcons
+          inputName={"address"}
+          placeholder={"Customer address"}
+          value={values.address}
           onChange={handleChange}
-          onSelect={(name, value) => {
-            handleChange({
-              target: {
-                name: 'city',
-                value: value
-              }
-            })
-          }}
-          filterKey={"name"}
-          selectName={'city'}
-          label={'Choose your city'}
-          iconLeft={<Map />}
-          loading={citiesLoading}
-          valueKey={'isoCode'}
+          type={"text"}
+          err={errors.address && touched.address}
+          iconLeft={<User />}
+          iconRight={<Edit />}
         />
       </div>
       <div className="input-container">

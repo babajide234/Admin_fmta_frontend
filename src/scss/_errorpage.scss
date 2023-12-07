@@ -1,0 +1,143 @@
+.errorpage {
+  padding-inline: 128px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+
+  @include responsive(xs) {
+    width: 100%;
+    padding-inline: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin: 0 auto;
+  }
+  @include responsive(sm) {
+    width: 100%;
+    padding-inline: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin: 0 auto;
+  }
+  @include responsive(md) {
+    width: 95vw;
+    padding-inline: 0px;
+    // padding-bottom: 0px;
+    // margin-bottom: 0px;
+    margin: 0 auto;
+  }
+
+  &__div {
+    &-icon {
+      padding-bottom: 48px;
+      @include responsive(xs) {
+        padding-bottom: 16px;
+      }
+      @include responsive(sm) {
+        padding-bottom: 32px;
+      }
+      @include responsive(md) {
+        padding-bottom: 32px;
+      }
+      svg {
+        width: 192px;
+        height: 201px;
+        color: $secondary;
+        path {
+          stroke: $secondary;
+        }
+        @include responsive(xs) {
+          width: 100px;
+          height: 100px;
+        }
+        @include responsive(sm) {
+          width: 150px;
+          height: 150px;
+        }
+        @include responsive(md) {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    }
+
+    &-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 auto;
+      width: 60%;
+
+      @include responsive(xs) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 16px;
+        width: 100%;
+      }
+      @include responsive(sm) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        padding-top: 32px;
+        width: 100%;
+      }
+      @include responsive(md) {
+        justify-content: space-between;
+        align-items: center;
+        row-gap: 24px;
+        padding-top: 32px;
+        width: 100%;
+      }
+    }
+  }
+
+  &__link {
+    padding-block: 4px;
+    border-bottom: 2px solid $secondary;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    // @include responsive(xs) {
+    //   padding: 0px;
+    //   border: transparent;
+    // }
+  }
+
+  &__tracking {
+    width: 38ch;
+    margin: 0 auto;
+    padding-bottom: 48px;
+    &-text {
+      @include responsive(xs) {
+        width: 90%;
+        padding: 0px;
+        margin: 16px;
+        justify-content: space-around;
+        font-size: 28px;
+        line-height: 36px;
+        // padding-bottom: 16px;
+      }
+      @include responsive(sm) {
+        width: 90%;
+        padding: 0px;
+        margin: 16px;
+        justify-content: space-around;
+        padding-bottom: 16px;
+      }
+    }
+
+    &-data {
+      padding-bottom: 32px;
+      padding-top: 16px;
+
+      @include responsive(xs) {
+        padding-bottom: 0px;
+        padding-top: 8px;
+      }
+      @include responsive(sm) {
+        padding-bottom: 8px;
+        padding-top: 4px;
+      }
+    }
+  }
+}

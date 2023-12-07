@@ -42,7 +42,7 @@ const Orderlist = ({ setFieldValue, list }) => {
         </div>
       ),
       cell: ({ row }) => {
-        const name = row.original.productName
+        const name = row.original.name
         return (
           <div className="text-left header__4 secondary-disabled">
             {name}
@@ -56,7 +56,7 @@ const Orderlist = ({ setFieldValue, list }) => {
         <div className="text-left header__4 secondary capitalize">Unit Price (N)</div>
       ),
       cell: ({ row }) => {
-        const unit = row.original.productPrice
+        const unit = row.original.price
         return (
           <div className="text-left header__5 secondary-disabled capitalize">
             {unit}
@@ -68,7 +68,7 @@ const Orderlist = ({ setFieldValue, list }) => {
       accessorKey: "quantity",
       header: () => <div className="text-left header__4 secondary">Quantity</div>,
       cell: ({ row }) => {
-        const quantity = row.original.productQuantity
+        const quantity = row.original.quantity
         return (
           <div className="text-left header__4 secondary-disabled">
             {quantity}
@@ -86,8 +86,8 @@ const Orderlist = ({ setFieldValue, list }) => {
         </div>
       ),
       cell: ({ row }) => {
-        const quantity = row.original.productQuantity
-        const unit = row.original.productPrice
+        const quantity = row.original.quantity
+        const unit = row.original.price
         const total = (quantity && unit) && quantity * unit
         return (
           <div className="text-left header__4 secondary-disabled">

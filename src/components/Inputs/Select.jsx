@@ -5,12 +5,11 @@ import LoadingSpinnerComponent from "react-spinners-components";
 import { useField } from "formik";
 import PropTypes from 'prop-types'
 
-const SelectItem = ({ label, value, name, handleOptionClick }) => {
+const SelectItem = ({ label, value = '', name, handleOptionClick }) => {
   const id = `radio-${name}-${value}`;
 
   const handleClick = (e) => {
     handleOptionClick(name, value);
-    console.log('handleClick verify', name, value)
     e.preventDefault()
   };
 
@@ -93,7 +92,7 @@ export const CustomSelect = ({
             }`}
           value={selectedOption}
           type="text"
-          name={selectedOption}
+          name={selectName}
           placeholder={label}
           onChange={onChange}
 

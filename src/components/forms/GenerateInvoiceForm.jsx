@@ -5,7 +5,7 @@ import { ReactComponent as Edit } from '../../assets/main/icon/edit-2.svg'
 import { Formik } from 'formik'
 import { CustomSelect } from '../Inputs/Select'
 import productSlice from '../../store/productStore'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { Buttons } from '../buttons/Buttons'
 import { ArrowsHorizontal, CurrencyNgn, Textbox } from 'phosphor-react'
 import { generateRandomId } from '../../util/util'
@@ -14,6 +14,7 @@ import CreateOrderStep from '../Order/CreateOrderStep'
 import PropTypes from 'prop-types'
 import GoBack from '../GoBack'
 import * as Yup from 'yup'
+import orderSlice from '../../store/orderStore'
 
 const GenerateInvoiceForm = () => {
     const [searchPrice, setSearchPrice] = useState()
@@ -26,7 +27,7 @@ const GenerateInvoiceForm = () => {
         phone: '',
         country: '',
         state: '',
-        city: '',
+        address: '',
         productPrice: searchPrice ?? '',
         list: [],
 
@@ -37,8 +38,8 @@ const GenerateInvoiceForm = () => {
         phone: Yup.string().required(),
         country: Yup.string().required(),
         state: Yup.string().required(),
-        city: Yup.string().required(),
-        productPrice: Yup.string().required(),
+        address: Yup.string().required(),
+        productPrice: Yup.string(),
         list: Yup.array()
     })
 
@@ -52,9 +53,9 @@ const GenerateInvoiceForm = () => {
     }
     const handleArrayOne = (values, setFieldValue) => {
         const list = {
-            productName: values.productName,
-            productPrice: values.productPrice,
-            productQuantity: values.productQuantity,
+            name: values.productName,
+            price: values.productPrice,
+            quantity: values.productQuantity,
             id: generateRandomId()
         }
         setFieldValue('list', [...values.list, list], false);
@@ -84,7 +85,7 @@ const GenerateInvoiceForm = () => {
         handleFilter,
         handleArrayOne,
         allProducts,
-        isLoading, handleStep) => {
+        isLoading, handleStep, resetForm) => {
         switch (step) {
             case 1:
                 return <CreateOrderStep
@@ -109,7 +110,8 @@ const GenerateInvoiceForm = () => {
                     handleArrayOne={handleArrayOne}
                     allProducts={allProducts}
                     isLoading={isLoading}
-                    handleStep={handleStep} />;
+                    handleStep={handleStep}
+                    resetForm={resetForm} />;
             default:
                 null
         }
@@ -117,10 +119,10 @@ const GenerateInvoiceForm = () => {
     return (
         <section className='w-full h-full'>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={InvoiceSchema}>
-                {({ values, touched, errors, handleChange, setFieldValue, submitForm }) => (
+                {({ values, touched, errors, handleChange, setFieldValue, submitForm, resetForm }) => (
                     <form>
                         {
-                            renderStep(values, errors, touched, handleChange, setFieldValue, invoiceArray, setInvoiceArray, submitForm, handleFilter, handleArrayOne, allProducts, isLoading, handleStep)
+                            renderStep(values, errors, touched, handleChange, setFieldValue, invoiceArray, setInvoiceArray, submitForm, handleFilter, handleArrayOne, allProducts, isLoading, handleStep, resetForm)
                         }
                     </form>
                 )}
@@ -140,13 +142,38 @@ export const CreateOrderList = ({
     setFieldValue,
     invoiceArray,
     setInvoiceArray,
-    submitForm,
     handleFilter,
     handleArrayOne,
     allProducts,
     isLoading,
-    handleStep
+    handleStep, resetForm
 }) => {
+    const createInvoice = orderSlice(state => state.createInvoice)
+    
+    const InvoiceMutation = useMutation(formadata => createInvoice(formadata), {
+        onSuccess: (data) => {
+            console.log(data)
+            resetForm()
+            handleStep('back')
+        },
+        onError: (error) => {
+            console.log(error)
+        }
+    })
+
+    const printValues = () => {
+        const newValues = {
+            customer_name: values.name,
+            customer_email: values.email,
+            customer_phone: values.phone,
+            customer_state: values.state,
+            customer_address: values.address,
+            items: [...values.list],
+
+        }
+        InvoiceMutation.mutate(newValues)
+    }
+    
     return (
         <>
             <GoBack onClick={() => handleStep('back')}>Go back</GoBack>
@@ -164,9 +191,11 @@ export const CreateOrderList = ({
                                 color={'primary'}
                                 type={'btn'}
                                 onClick={(e) => {
-                                    console.log('submitForm was clicked')
-                                    submitForm();
+                                    // console.log('submitForm was clicked')
+                                    // submitForm();
+                                    printValues()
                                     e.preventDefault();
+
                                 }}>
                                 Generate Invoice
                             </Buttons>
@@ -252,5 +281,6 @@ CreateOrderList.propTypes = {
     handleArrayOne: PropTypes.any,
     allProducts: PropTypes.any,
     isLoading: PropTypes.any,
-    handleStep: PropTypes.func
+    handleStep: PropTypes.func,
+    resetForm: PropTypes.func
 }

@@ -7,7 +7,7 @@ const initialState = {
   orders: null,
 };
 
-const orderSlice = createStore((set, get) => ({
+const orderSlice = createStore((set) => ({
   ...initialState,
   getSingleOrder: async (id) => {
     try {
@@ -25,12 +25,22 @@ const orderSlice = createStore((set, get) => ({
   },
   getOrders: async () => {
     try {
-      
       const response = await instance.get("orders");
       set((state) => ({ ...state, orders: response.data }));
       return response.data.data;
     } catch (error) {
       return error;
+    }
+  },
+  createInvoice: async (data) => {
+    try {
+      loaderSlice.setState({ loader: true });
+      const response = await instance.post("invoice", data);
+      return response.data.data;
+    } catch (error) {
+      return error;
+    } finally {
+      loaderSlice.setState({ loader: false });
     }
   },
 }));
